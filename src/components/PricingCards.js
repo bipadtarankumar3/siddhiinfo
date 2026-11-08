@@ -26,7 +26,7 @@ export default function PricingCards() {
               <span className={`text-sm ${p.featured ? "text-brand-200" : "text-slate-500"}`}>from</span>
               <span className={`text-4xl font-extrabold tracking-tight ${p.featured ? "text-white" : "text-ink"}`}>{p.price}</span>
             </p>
-            <p className={`text-xs ${p.featured ? "text-brand-200" : "text-slate-500"}`}>{p.note} • one-time • + GST if applicable</p>
+            <p className={`text-xs ${p.featured ? "text-brand-200" : "text-slate-500"}`}>Starting price · one-time · GST extra if applicable</p>
 
             <dl className={`mt-6 space-y-2.5 rounded-2xl p-4 text-sm ${p.featured ? "bg-white/10" : "bg-lavender-50 ring-1 ring-lavender-200"}`}>
               {[

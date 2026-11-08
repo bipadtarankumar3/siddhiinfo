@@ -23,16 +23,16 @@ export default function Hero() {
         <div className="bg-dots absolute inset-0" />
       </div>
 
-      <div className="container-x relative grid items-center gap-14 pb-20 pt-12 sm:pt-16 lg:grid-cols-[1fr_1.12fr] lg:gap-10 lg:pb-28">
+      <div className="container-x relative grid items-center gap-14 pb-20 pt-12 sm:pt-16 xl:grid-cols-[1fr_1.12fr] xl:gap-10 lg:pb-28">
         <div>
           <p data-reveal className="glass inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-sm font-medium text-slate-200">
             <Sparkles className="size-4 text-saffron-400" aria-hidden="true" />
             Your Digital Growth Partner
           </p>
-          <h1 data-reveal style={{ "--reveal-delay": "80ms" }} className="mt-6 text-[2.5rem] font-extrabold leading-[1.06] tracking-tight text-balance sm:text-6xl lg:text-[3.4rem] xl:text-[3.7rem]">
+          <h1 data-reveal style={{ "--reveal-delay": "80ms" }} className="mt-6 text-[2.5rem] font-extrabold leading-[1.06] tracking-tight text-balance sm:text-6xl xl:text-[3.6rem] 2xl:text-[3.9rem]">
             Your Business Deserves <span className="text-gradient-light">More Than Just a Website.</span>
           </h1>
-          <p data-reveal style={{ "--reveal-delay": "160ms" }} className="mt-6 max-w-xl text-lg leading-relaxed text-slate-300">
+          <p data-reveal style={{ "--reveal-delay": "160ms" }} className="mt-6 max-w-2xl text-lg leading-relaxed text-slate-300">
             We design, develop and grow digital solutions that help Indian businesses reach more customers,
             automate operations and grow faster.
           </p>
@@ -72,7 +72,7 @@ function HeroVisual() {
     <div
       role="img"
       aria-label="A business website on a laptop, an ordering app on a phone and an analytics dashboard — the kind of solutions Siddhi Info builds"
-      className="group relative mx-auto w-full max-w-xl pb-10 pt-6 [perspective:1400px] lg:max-w-none"
+      className="group relative mx-auto w-full max-w-xl pb-10 pt-6 [perspective:1400px] sm:max-w-2xl xl:max-w-none"
     >
       <div className="relative transition-transform duration-700 ease-out group-hover:[transform:rotateY(-5deg)_rotateX(3deg)]">
         {/* glow */}
@@ -90,7 +90,7 @@ function HeroVisual() {
         </div>
 
         {/* admin dashboard card */}
-        <div className="animate-float-slow absolute -bottom-12 -left-4 z-10 w-[34%] min-w-[150px] rounded-2xl bg-white/95 p-3 text-ink shadow-2xl shadow-black/30 ring-1 ring-white/60 backdrop-blur sm:p-4">
+        <div className="animate-float-slow absolute -bottom-12 -left-4 z-10 hidden w-[34%] min-w-[150px] rounded-2xl sm:block bg-white/95 p-3 text-ink shadow-2xl shadow-black/30 ring-1 ring-white/60 backdrop-blur sm:p-4">
           <div className="flex items-center justify-between">
             <p className="text-[11px] font-semibold text-slate-500 sm:text-xs">Monthly enquiries</p>
             <span className="inline-flex items-center gap-0.5 rounded-full bg-mint-50 px-1.5 py-0.5 text-[10px] font-bold text-mint-700 sm:text-[11px]">
@@ -107,14 +107,14 @@ function HeroVisual() {
         </div>
 
         {/* floating integrations */}
-        <span aria-hidden="true" className="animate-float absolute right-[4%] top-[-2%] grid size-12 place-items-center rounded-2xl bg-white shadow-xl shadow-black/25 sm:size-14">
+        <span aria-hidden="true" className="animate-float absolute right-[2%] top-[-4%] grid size-10 place-items-center rounded-2xl bg-white shadow-xl shadow-black/25 sm:size-14">
           <WhatsAppIcon className="size-7 text-[#25D366]" />
         </span>
-        <span aria-hidden="true" className="animate-float-slow absolute left-[28%] top-[-4%] flex items-center gap-1.5 rounded-2xl bg-white px-3 py-2 shadow-xl shadow-black/25">
+        <span aria-hidden="true" className="animate-float-slow absolute left-[4%] top-[-4%] flex items-center gap-1.5 rounded-2xl bg-white px-2.5 py-1.5 sm:left-[28%] sm:px-3 sm:py-2 shadow-xl shadow-black/25">
           <span className="text-sm font-black italic tracking-tight text-[#097939]">UPI</span>
           <span className="text-[11px] font-semibold text-slate-500">₹1,250 paid</span>
         </span>
-        <span aria-hidden="true" className="animate-float absolute bottom-[-5%] left-[42%] flex items-center gap-2 rounded-2xl bg-white px-3 py-2 shadow-xl shadow-black/25">
+        <span aria-hidden="true" className="animate-float absolute bottom-[-5%] left-[42%] hidden items-center sm:flex gap-2 rounded-2xl bg-white px-3 py-2 shadow-xl shadow-black/25">
           <BrandIcon name="siGoogle" className="size-5" />
           <span className="text-[11px] font-semibold text-slate-600">Found on Google Maps</span>
         </span>

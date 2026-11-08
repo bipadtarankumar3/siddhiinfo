@@ -116,7 +116,7 @@ function ProjectDialog({ p }) {
       {/* Filled on open with a copy of the card's previews (see DialogButton) to keep the page light */}
       <div className="grid gap-8 p-5 sm:p-8 lg:grid-cols-[1fr_15rem]">
         <div data-slot="desktop" />
-        <div data-slot="mobile" className="mx-auto w-full max-w-[15rem]" />
+        <div data-slot="mobile" className="mx-auto w-full max-w-[11rem] sm:max-w-[15rem]" />
       </div>
       <div className="grid gap-8 border-t border-slate-200 bg-lavender-50 p-5 sm:p-8 md:grid-cols-3">
         <div>

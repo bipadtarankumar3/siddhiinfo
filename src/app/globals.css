@@ -70,6 +70,16 @@
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* Responsive safety net: grid/flex children may shrink below their content's
+   min-width, so long words, URLs or chips never push a page wider than the screen. */
+@layer base {
+  .grid > *, .flex > * { min-width: 0; }
+  img, svg, video { max-width: 100%; }
+  h1, h2, h3, p, li, dd, a, span { overflow-wrap: break-word; }
 }
 
 body {

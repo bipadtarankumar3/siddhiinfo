@@ -21,12 +21,12 @@ export default function Faq({ items, title = "Frequently asked questions", withS
         <h2 id="faq-title" className="section-title text-center">{title}</h2>
         <div className="mt-10 divide-y divide-slate-200 rounded-2xl border border-slate-200 bg-white">
           {items.map((f) => (
-            <details key={f.q} className="group px-6 py-5 [&_summary::-webkit-details-marker]:hidden">
-              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-left font-semibold text-ink">
+            <details key={f.q} className="group px-5 sm:px-6 [&_summary::-webkit-details-marker]:hidden">
+              <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-4 py-4 text-left font-semibold text-ink sm:py-5">
                 {f.q}
                 <ChevronDown className="size-5 shrink-0 text-slate-400 transition group-open:rotate-180" aria-hidden="true" />
               </summary>
-              <p className="mt-3 leading-relaxed text-slate-600">{f.a}</p>
+              <p className="pb-5 leading-relaxed text-slate-600">{f.a}</p>
             </details>
           ))}
         </div>

@@ -100,7 +100,7 @@ export default function ServicesPage() {
         <ul className="mt-8 flex max-w-3xl flex-wrap gap-2">
           {services.map((s) => (
             <li key={s.slug}>
-              <Link href={`/services/${s.slug}/`} className="glass inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-sm text-slate-200 transition hover:bg-white/15 hover:text-white">
+              <Link href={`/services/${s.slug}/`} className="glass inline-flex min-h-10 items-center gap-2 rounded-full px-3.5 py-2 text-sm text-slate-200 transition hover:bg-white/15 hover:text-white">
                 <Icon name={s.icon} className="size-4 text-saffron-300" /> {s.title.replace(/ (Development|Software|Solutions)$/, "")}
               </Link>
             </li>
@@ -122,7 +122,7 @@ export default function ServicesPage() {
         <ul className="container-x flex gap-2 overflow-x-auto py-3 text-sm font-semibold">
           {groups.map((g) => (
             <li key={g.id} className="shrink-0">
-              <a href={`#${g.id}`} className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-slate-600 ring-1 ring-slate-200 transition hover:bg-brand-50 hover:text-brand-700 hover:ring-brand-200">
+              <a href={`#${g.id}`} className="inline-flex min-h-10 items-center gap-2 rounded-full px-4 py-2 text-slate-600 ring-1 ring-slate-200 transition hover:bg-brand-50 hover:text-brand-700 hover:ring-brand-200">
                 <g.icon className="size-4" aria-hidden="true" /> {g.eyebrow.split("• ")[1]}
               </a>
             </li>

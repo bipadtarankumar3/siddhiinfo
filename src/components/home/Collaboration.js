@@ -15,7 +15,7 @@ const points = [
 export default function Collaboration() {
   return (
     <section className="bg-lavender-mesh relative overflow-hidden py-20 sm:py-28" aria-labelledby="partner-title">
-      <div className="container-x grid items-center gap-14 lg:grid-cols-2 lg:gap-16">
+      <div className="container-x grid items-center gap-14 xl:grid-cols-2 xl:gap-16">
         {/* photo collage */}
         <div data-reveal className="relative mx-auto w-full max-w-xl pb-16 pr-6 sm:pr-10">
           <div className="relative overflow-hidden rounded-[2rem] shadow-2xl shadow-brand-900/20">
@@ -35,12 +35,12 @@ export default function Collaboration() {
             <Image src="/images/project-discussion.webp" alt="Developer discussing project requirements with a client in an office" width={720} height={540} sizes="200px" className="h-auto w-full" />
           </div>
           {/* chat-style update card */}
-          <div className="animate-float absolute bottom-24 left-2 max-w-[15rem] rounded-2xl bg-white p-3 shadow-xl ring-1 ring-slate-100 sm:left-6">
+          <div className="animate-float absolute bottom-[4.5rem] left-2 max-w-[11.5rem] rounded-2xl bg-white p-2.5 shadow-xl ring-1 ring-slate-100 sm:bottom-24 sm:left-6 sm:max-w-[15rem] sm:p-3">
             <p className="flex items-center gap-2 text-xs font-semibold text-slate-500">
               <span className="grid size-6 place-items-center rounded-full bg-[#25D366]/15 text-[#25D366]"><WhatsAppIcon className="size-3.5" /></span>
               Project update
             </p>
-            <p className="mt-1.5 text-sm font-semibold text-ink">Homepage design is ready for your review ✨</p>
+            <p className="mt-1.5 text-xs font-semibold text-ink sm:text-sm">Homepage design is ready for your review ✨</p>
             <p className="mt-1 flex items-center justify-end gap-1 text-[11px] text-slate-400">10:42 AM <CheckCheck className="size-3.5 text-sky-500" aria-hidden="true" /></p>
           </div>
           <p className="absolute bottom-0 left-0 text-xs text-slate-400">Representative images</p>
