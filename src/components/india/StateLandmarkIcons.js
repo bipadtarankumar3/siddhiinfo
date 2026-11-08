@@ -381,22 +381,146 @@ export function PunjabIcon({ className = "size-12" }) {
   );
 }
 
-// Icon dictionary lookup helper
-export const stateIconsMap = {
-  "West Bengal": WestBengalIcon,
-  "Maharashtra": MaharashtraIcon,
-  "Delhi NCR": DelhiIcon,
-  "Gujarat": GujaratIcon,
-  "Uttar Pradesh": UttarPradeshIcon,
-  "Karnataka": KarnatakaIcon,
-  "Bihar": BiharIcon,
-  "Rajasthan": RajasthanIcon,
-  "Odisha": OdishaIcon,
-  "Tamil Nadu": TamilNaduIcon,
-  "Telangana & AP": TelanganaIcon,
-  "Punjab & Haryana": PunjabIcon,
-};
+export function KeralaIcon({ className = "size-12" }) {
+  // Alappuzha Houseboat (Kettuvallam) & Coconut Palms
+  return (
+    <svg viewBox="0 0 64 64" fill="none" className={className} aria-label="Kerala - Backwaters Houseboat">
+      <circle cx="32" cy="32" r="28" fill="#F0FDF4" />
+      {/* Backwaters Lagoon */}
+      <path d="M6 48c7 0 10-2 15-2s8 2 15 2 9-2 15-2 6 2 7 2v10H6V48z" fill="#0D9488" />
+      <path d="M6 52c6 0 9-1 14-1s9 1 15 1 8-1 15-1 8 1 8 1v6H6v-6z" fill="#042F2E" opacity="0.4" />
+      {/* Traditional Kettuvallam Curved Wooden Hull */}
+      <path d="M12 46c4 3 32 3 40 0l-2 5c-6 2-30 2-36 0l-2-5z" fill="#78350F" stroke="#451A03" strokeWidth="1" />
+      {/* Thatched Coir & Bamboo Roof Canopy */}
+      <path d="M16 46c2-10 8-14 16-14s14 4 16 14H16z" fill="#D97706" />
+      <path d="M18 46c2-8 7-12 14-12s12 4 14 12H18z" fill="#B45309" />
+      {/* Window openings */}
+      <rect x="23" y="38" width="4" height="4" rx="1" fill="#FEF3C7" />
+      <rect x="30" y="38" width="4" height="4" rx="1" fill="#FEF3C7" />
+      <rect x="37" y="38" width="4" height="4" rx="1" fill="#FEF3C7" />
+      {/* Coconut Palms in Background */}
+      <path d="M10 32c2-6 6-12 6-18" stroke="#78350F" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M16 14c-4-2-8 0-10 2" stroke="#15803D" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M16 14c2-4 6-5 9-4" stroke="#16A34A" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M16 14c-1-5 2-8 5-9" stroke="#22C55E" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  );
+}
 
-export function getStateIcon(stateName) {
-  return stateIconsMap[stateName] || WestBengalIcon;
+export function AssamIcon({ className = "size-12" }) {
+  // Kamakhya Temple & Tea Gardens
+  return (
+    <svg viewBox="0 0 64 64" fill="none" className={className} aria-label="Assam - Kamakhya & Tea Gardens">
+      <circle cx="32" cy="32" r="28" fill="#ECFDF5" />
+      {/* Brahmaputra River */}
+      <path d="M6 50c7 0 10-2 15-2s8 2 15 2 9-2 15-2 6 2 7 2v8H6v-8z" fill="#0284C7" />
+      {/* Rolling Green Tea Hills */}
+      <path d="M6 46c8-5 16-3 24 2s18 4 28-2v6H6v-6z" fill="#15803D" />
+      <path d="M12 46c6-3 12-2 18 1s14 3 22-1" stroke="#22C55E" strokeWidth="1" strokeDasharray="2 1.5" />
+      {/* Kamakhya Temple Beehive Shikhara */}
+      <path d="M25 42c0-12 3-22 7-22s7 10 7 22H25z" fill="#DC2626" stroke="#991B1B" strokeWidth="1" />
+      {/* Fluted Vertical Ribs */}
+      <line x1="29" y1="23" x2="27" y2="42" stroke="#FEF2F2" strokeWidth="1" />
+      <line x1="32" y1="20" x2="32" y2="42" stroke="#FEF2F2" strokeWidth="1.2" />
+      <line x1="35" y1="23" x2="37" y2="42" stroke="#FEF2F2" strokeWidth="1" />
+      {/* Golden Kalasa */}
+      <circle cx="32" cy="18" r="2" fill="#FBBF24" />
+      <line x1="32" y1="14" x2="32" y2="17" stroke="#EA580C" strokeWidth="1.5" />
+      {/* Two fresh tea leaves */}
+      <path d="M46 38c2-3 5-4 8-3-1 3-3 5-6 6l-2-3z" fill="#4ADE80" />
+      <path d="M48 38c-3-2-4-5-3-8 3 1 5 3 6 6l-3 2z" fill="#22C55E" />
+    </svg>
+  );
+}
+
+export function MadhyaPradeshIcon({ className = "size-12" }) {
+  // Sanchi Stupa & Torana Gateway
+  return (
+    <svg viewBox="0 0 64 64" fill="none" className={className} aria-label="Madhya Pradesh - Sanchi Stupa">
+      <circle cx="32" cy="32" r="28" fill="#FFFBEB" />
+      {/* Terrace Base */}
+      <rect x="8" y="50" width="48" height="4" rx="1" fill="#78350F" />
+      <rect x="12" y="46" width="40" height="4" fill="#B45309" />
+      {/* Great Hemispherical Stupa Dome (Anda) */}
+      <path d="M16 46c0-12 7.2-22 16-22s16 10 16 22H16z" fill="#F59E0B" stroke="#B45309" strokeWidth="1" />
+      {/* Harmika (Square railing on top) */}
+      <rect x="29" y="20" width="6" height="4" fill="#D97706" />
+      {/* Chhatri (3-Tiered Umbrella Spire) */}
+      <line x1="32" y1="12" x2="32" y2="20" stroke="#78350F" strokeWidth="1.5" />
+      <ellipse cx="32" cy="14" rx="4" ry="1.2" fill="#FDE68A" stroke="#B45309" strokeWidth="0.8" />
+      <ellipse cx="32" cy="16.5" rx="3" ry="1" fill="#FDE68A" stroke="#B45309" strokeWidth="0.8" />
+      <ellipse cx="32" cy="19" rx="2" ry="0.8" fill="#FDE68A" stroke="#B45309" strokeWidth="0.8" />
+      {/* Torana Gateway Pillar accents */}
+      <rect x="14" y="36" width="3" height="14" fill="#78350F" />
+      <rect x="47" y="36" width="3" height="14" fill="#78350F" />
+      <rect x="12" y="35" width="7" height="2" fill="#92400E" />
+      <rect x="45" y="35" width="7" height="2" fill="#92400E" />
+    </svg>
+  );
+}
+
+export function KashmirIcon({ className = "size-12" }) {
+  // Dal Lake Shikara & Snow-capped Himalayas
+  return (
+    <svg viewBox="0 0 64 64" fill="none" className={className} aria-label="Jammu & Kashmir - Dal Lake Shikara">
+      <circle cx="32" cy="32" r="28" fill="#EFF6FF" />
+      {/* Snowy Himalayan Mountain Peaks */}
+      <path d="M8 40l12-18 8 10 10-14 18 22H8z" fill="#94A3B8" />
+      <path d="M17 26.5l3-4.5 4 5-3 2.5-4-3z" fill="#FFFFFF" />
+      <path d="M35 22l3-4 4 5-3 2-4-3z" fill="#FFFFFF" />
+      {/* Dal Lake Water */}
+      <path d="M6 46c7 0 10-2 15-2s8 2 15 2 9-2 15-2 6 2 7 2v12H6V46z" fill="#38BDF8" />
+      <path d="M6 51c6 0 9-1 14-1s9 1 15 1 8-1 15-1 8 1 8 1v7H6v-7z" fill="#0284C7" opacity="0.6" />
+      {/* Wooden Shikara Boat */}
+      <path d="M12 47c6 2 28 2 38 0l2 4c-6 2-34 2-42 0l2-4z" fill="#78350F" stroke="#451A03" strokeWidth="1" />
+      {/* Pointed prow */}
+      <path d="M50 47l6-3-2 5-4-2z" fill="#9A3412" />
+      {/* Canopied floral roof */}
+      <rect x="22" y="39" width="18" height="2.5" rx="1" fill="#E11D48" />
+      <line x1="24" y1="41.5" x2="24" y2="47" stroke="#78350F" strokeWidth="1.2" />
+      <line x1="38" y1="41.5" x2="38" y2="47" stroke="#78350F" strokeWidth="1.2" />
+      {/* Chinar Leaf */}
+      <circle cx="31" cy="43" r="1.5" fill="#F97316" />
+    </svg>
+  );
+}
+
+// Static Icon Dispatcher (Satisfies React 19 static components compiler)
+export function StateLandmarkIcon({ name, className = "size-full" }) {
+  switch (name) {
+    case "West Bengal":
+      return <WestBengalIcon className={className} />;
+    case "Maharashtra":
+      return <MaharashtraIcon className={className} />;
+    case "Delhi NCR":
+      return <DelhiIcon className={className} />;
+    case "Gujarat":
+      return <GujaratIcon className={className} />;
+    case "Uttar Pradesh":
+      return <UttarPradeshIcon className={className} />;
+    case "Karnataka":
+      return <KarnatakaIcon className={className} />;
+    case "Bihar":
+      return <BiharIcon className={className} />;
+    case "Rajasthan":
+      return <RajasthanIcon className={className} />;
+    case "Odisha":
+      return <OdishaIcon className={className} />;
+    case "Tamil Nadu":
+      return <TamilNaduIcon className={className} />;
+    case "Telangana & AP":
+      return <TelanganaIcon className={className} />;
+    case "Punjab & Haryana":
+      return <PunjabIcon className={className} />;
+    case "Kerala":
+      return <KeralaIcon className={className} />;
+    case "Assam & NE":
+      return <AssamIcon className={className} />;
+    case "Madhya Pradesh":
+      return <MadhyaPradeshIcon className={className} />;
+    case "Jammu & Kashmir":
+      return <KashmirIcon className={className} />;
+    default:
+      return <WestBengalIcon className={className} />;
+  }
 }

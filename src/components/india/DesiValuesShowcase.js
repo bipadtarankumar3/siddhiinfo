@@ -16,24 +16,28 @@ export default function DesiValuesShowcase() {
 
   const values = [
     {
+      id: "bahi-khata",
       icon: BahiKhataIcon,
       badge: "बही-खाता से क्लाउड",
       title: t.heritage.bahiKhataTitle,
       desc: t.heritage.bahiKhataDesc,
     },
     {
+      id: "tarazu",
       icon: TarazuIcon,
       badge: "सच्चा तराज़ू",
       title: t.heritage.tarazuTitle,
       desc: t.heritage.tarazuDesc,
     },
     {
+      id: "soundbox",
       icon: SoundboxAlertIcon,
       badge: "तुरंत यूपीआई अलर्ट",
       title: t.heritage.soundboxTitle,
       desc: t.heritage.soundboxDesc,
     },
     {
+      id: "mohar",
       icon: DesiMoharIcon,
       badge: "पक्की मोहर",
       title: t.heritage.moharTitle,
@@ -61,7 +65,7 @@ export default function DesiValuesShowcase() {
             const Icon = v.icon;
             return (
               <div
-                key={v.title}
+                key={v.id}
                 data-reveal
                 style={{ "--reveal-delay": `${i * 70}ms` }}
                 className="card group relative flex flex-col justify-between p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl bg-white"
