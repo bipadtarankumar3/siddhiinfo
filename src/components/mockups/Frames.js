@@ -17,7 +17,7 @@ export function BrowserFrame({ url, children, className = "" }) {
         <span className="w-10" aria-hidden="true" />
       </div>
       <div className="mock-screen aspect-[16/10]">
-        <div className="mock-desktop h-full">{children}</div>
+        <div className="mock-desktop relative h-full">{children}</div>
       </div>
     </div>
   );

@@ -790,6 +790,61 @@ export function getIndustry(slug) {
   `concept: false` and add `liveUrl`) once you have permission to show them.
 */
 export const portfolio = [
+  // ---- Live projects developed by Siddhi Info ----
+  {
+    slug: "askreview",
+    concept: false,
+    category: "SaaS Platform • Reviews & Feedback",
+    name: "AskReview",
+    url: "askreview.in",
+    liveUrl: "https://askreview.in/",
+    images: { desktop: "/images/work/askreview-desktop.webp", mobile: "/images/work/askreview-mobile.webp" },
+    description: "A Google review and multi-channel feedback platform for businesses — QR code & NFC stands that let customers leave a Google review, follow on social media, record a video testimonial or send private feedback in one tap.",
+    features: ["Smart QR & NFC review stands", "Google, Facebook, Instagram & YouTube hub", "Video testimonials & private feedback", "Scratch & win rewards", "Business dashboard with Google sign-in"],
+    tech: [],
+    service: "web-application-development",
+  },
+  {
+    slug: "prizewheel",
+    concept: false,
+    category: "SaaS Platform • Customer Engagement",
+    name: "PrizeWheel",
+    url: "prizewheel.in",
+    liveUrl: "https://prizewheel.in/",
+    images: { desktop: "/images/work/prizewheel-desktop.webp", mobile: "/images/work/prizewheel-mobile.webp" },
+    description: "A gamified digital spin-the-wheel platform. Customers enter their details, spin to win discounts or gifts and receive the coupon on WhatsApp — while the business captures verified leads.",
+    features: ["Custom prize wheels & winning chances", "Lead capture before the spin", "Coupons delivered on WhatsApp", "Smart QR stands", "Business dashboard"],
+    tech: [],
+    service: "web-application-development",
+  },
+  {
+    slug: "vyaparichat",
+    concept: false,
+    category: "WhatsApp Marketing Platform",
+    name: "Vyapari Chat",
+    url: "vyaparichat.com",
+    liveUrl: "https://vyaparichat.com/",
+    images: { desktop: "/images/work/vyaparichat-desktop.webp", mobile: "/images/work/vyaparichat-mobile.webp" },
+    description: "A WhatsApp marketing panel built on the official WhatsApp Cloud API — embedded signup, team chat, chatbots, template campaigns and a white-label reseller plan.",
+    features: ["Official WhatsApp Cloud API", "Embedded signup onboarding", "Integrated team chat & agent assignment", "Chatbot & bot flow builder", "White-label reseller plans"],
+    tech: [],
+    service: "whatsapp-business-automation",
+  },
+  {
+    slug: "magicscratch",
+    concept: false,
+    category: "SaaS Platform • Rewards",
+    name: "Magic Scratch",
+    url: "magicscratch.in",
+    liveUrl: "https://magicscratch.in/",
+    images: { desktop: "/images/work/magicscratch-desktop.webp", mobile: "/images/work/magicscratch-mobile.webp" },
+    description: "A digital scratch-card rewards platform with a secure business dashboard for running scratch & win campaigns for customers.",
+    features: ["Digital scratch & win cards", "Secure business login & dashboard", "Campaign management"],
+    tech: [],
+    service: "web-application-development",
+  },
+
+  // ---- Concept demos (fictional brands) ----
   {
     slug: "business-website",
     concept: true,
@@ -886,6 +941,12 @@ export const portfolio = [
     variant: "webapp",
     service: "web-application-development",
   },
+];
+
+// Shown on the homepage: all live projects first, then a few concept demos
+export const homePortfolio = [
+  ...portfolio.filter((p) => !p.concept),
+  ...portfolio.filter((p) => ["ecommerce-store", "healthcare-website", "crm-erp-dashboard", "coaching-website"].includes(p.slug)),
 ];
 
 export const techStack = [

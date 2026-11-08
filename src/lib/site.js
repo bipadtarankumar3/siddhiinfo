@@ -32,7 +32,7 @@ export const hasRealPhone = !site.phone.includes("90000 00000");
 
 export const nav = [
   { label: "Services", href: "/services/" },
-  { label: "Our Work", href: "/#work" },
+  { label: "Our Work", href: "/work/" },
   { label: "Industries", href: "/industries/" },
   { label: "Pricing", href: "/pricing/" },
   { label: "Blog", href: "/blog/" },

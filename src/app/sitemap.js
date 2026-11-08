@@ -19,6 +19,7 @@ export default function sitemap() {
     ...services.map((s) => page(`/services/${s.slug}/`, 0.9)),
     page("/industries/", 0.8),
     ...industries.map((i) => page(`/industries/${i.slug}/`, 0.7)),
+    page("/work/", 0.8),
     page("/pricing/", 0.8),
     page("/blog/", 0.7, "weekly"),
     ...posts.map((p) => page(`/blog/${p.slug}/`, 0.6, "yearly", new Date(p.date))),
