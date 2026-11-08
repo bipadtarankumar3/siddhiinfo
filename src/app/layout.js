@@ -6,6 +6,7 @@ import WhatsAppFloat from "@/components/WhatsAppFloat";
 import JsonLd from "@/components/JsonLd";
 import RevealObserver from "@/components/RevealObserver";
 import { LanguageProvider } from "@/context/LanguageContext";
+import NamasteModal from "@/components/NamasteModal";
 import { site, absoluteUrl, hasRealPhone } from "@/lib/site";
 import { services } from "@/lib/data";
 
@@ -160,6 +161,7 @@ export default function RootLayout({ children }) {
           <Footer />
           <WhatsAppFloat />
           <RevealObserver />
+          <NamasteModal />
         </LanguageProvider>
       </body>
     </html>

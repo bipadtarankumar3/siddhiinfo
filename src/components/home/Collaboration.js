@@ -1,15 +1,55 @@
+"use client";
+
 import Image from "next/image";
-import { MessagesSquare, UserCheck, BellRing, IndianRupee, LifeBuoy, Puzzle, CheckCheck } from "lucide-react";
+import { CheckCheck } from "lucide-react";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
 import { whatsappLink } from "@/lib/site";
+import {
+  IconMessages,
+  IconUserCheck,
+  IconBell,
+  IconRupeeCollab,
+  IconLifebuoy2,
+  IconPuzzleCollab,
+} from "@/components/india/ColoredIcons";
 
 const points = [
-  { icon: MessagesSquare, title: "Direct communication with developers", text: "No middlemen — talk to the person building your project." },
-  { icon: UserCheck, title: "Dedicated project assistance", text: "One point of contact from first call to launch." },
-  { icon: BellRing, title: "Regular progress updates", text: "See your project take shape with updates on WhatsApp." },
-  { icon: IndianRupee, title: "Transparent pricing", text: "A written quote and milestone payments. No surprises." },
-  { icon: LifeBuoy, title: "Post-launch support", text: "We stay with you after go-live for fixes and updates." },
-  { icon: Puzzle, title: "Designed around your business", text: "Solutions shaped by how you actually work." },
+  {
+    id: "direct-comm",
+    Icon: IconMessages,
+    title: "Direct communication with developers",
+    text: "No middlemen — talk to the person building your project.",
+  },
+  {
+    id: "dedicated",
+    Icon: IconUserCheck,
+    title: "Dedicated project assistance",
+    text: "One point of contact from first call to launch.",
+  },
+  {
+    id: "updates",
+    Icon: IconBell,
+    title: "Regular progress updates",
+    text: "See your project take shape with updates on WhatsApp.",
+  },
+  {
+    id: "pricing",
+    Icon: IconRupeeCollab,
+    title: "Transparent pricing",
+    text: "A written quote and milestone payments. No surprises.",
+  },
+  {
+    id: "support",
+    Icon: IconLifebuoy2,
+    title: "Post-launch support",
+    text: "We stay with you after go-live for fixes and updates.",
+  },
+  {
+    id: "custom",
+    Icon: IconPuzzleCollab,
+    title: "Designed around your business",
+    text: "Solutions shaped by how you actually work.",
+  },
 ];
 
 export default function Collaboration() {
@@ -57,9 +97,14 @@ export default function Collaboration() {
           </p>
           <p data-reveal className="mt-3 font-semibold text-mint-700">आप बताइए, हम बनाएँगे — और साथ भी रहेंगे।</p>
           <ul className="mt-8 grid gap-4 sm:grid-cols-2">
-            {points.map(({ icon: I, title, text }, i) => (
-              <li key={title} data-reveal style={{ "--reveal-delay": `${i * 60}ms` }} className="flex gap-3 rounded-2xl bg-white/80 p-4 ring-1 ring-brand-100 backdrop-blur">
-                <span className="icon-tile size-10 shrink-0"><I className="size-5" aria-hidden="true" /></span>
+            {points.map(({ id, Icon, title, text }, i) => (
+              <li
+                key={id}
+                data-reveal
+                style={{ "--reveal-delay": `${i * 60}ms` }}
+                className="flex gap-3 rounded-2xl bg-white/80 p-4 ring-1 ring-brand-100 backdrop-blur group transition-all hover:shadow-md hover:-translate-y-0.5"
+              >
+                <Icon className="size-12 shrink-0 drop-shadow-sm transition-transform duration-200 group-hover:scale-110" aria-hidden="true" />
                 <span>
                   <span className="block font-bold text-ink">{title}</span>
                   <span className="mt-0.5 block text-sm leading-relaxed text-slate-600">{text}</span>

@@ -5,6 +5,8 @@ const allServices = [
     benefits: ["Mobile-first, fast on 4G", "Rank on Google", "Enquiries on WhatsApp"],
     icon: "Globe",
     title: "Business Website Development",
+    hi: "बिज़नेस वेबसाइट निर्माण",
+    bn: "ব্যবসায়িক ওয়েবসাইট তৈরি",
     short: "Fast, mobile-first websites that make customers trust you and call you.",
     metaTitle: "Website Development for Small Business in India",
     metaDescription:

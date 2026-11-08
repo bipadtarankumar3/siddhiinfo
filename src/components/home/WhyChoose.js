@@ -1,7 +1,66 @@
-import Icon from "@/components/Icon";
 import SectionHead from "@/components/SectionHead";
 import Rangoli from "@/components/india/Rangoli";
-import { reasons } from "@/lib/data";
+import {
+  IconRupee,
+  IconHeadset,
+  IconPuzzle,
+  IconMobile,
+  IconShield,
+  IconCalendar,
+  IconKey,
+  IconLifebuoy,
+} from "@/components/india/ColoredIcons";
+
+const reasons = [
+  {
+    id: "rupee",
+    Icon: IconRupee,
+    title: "Affordable & transparent pricing",
+    text: "Clear written quotes with milestone payments. No hidden charges.",
+  },
+  {
+    id: "headset",
+    Icon: IconHeadset,
+    title: "Dedicated developer support",
+    text: "Talk directly to the developer working on your project.",
+  },
+  {
+    id: "puzzle",
+    Icon: IconPuzzle,
+    title: "Custom-built solutions",
+    text: "Built around how your business works — not a one-size template.",
+  },
+  {
+    id: "mobile",
+    Icon: IconMobile,
+    title: "Mobile-first development",
+    text: "Designed for how India browses — on phones, on 4G.",
+  },
+  {
+    id: "shield",
+    Icon: IconShield,
+    title: "Secure & scalable technology",
+    text: "Modern frameworks, SSL, backups and clean code that can grow.",
+  },
+  {
+    id: "calendar",
+    Icon: IconCalendar,
+    title: "On-time delivery",
+    text: "A written timeline with regular progress updates on WhatsApp.",
+  },
+  {
+    id: "key",
+    Icon: IconKey,
+    title: "You own everything",
+    text: "Domain, website, code and data are always in your name.",
+  },
+  {
+    id: "lifebuoy",
+    Icon: IconLifebuoy,
+    title: "Long-term technical support",
+    text: "We stay with you after launch for updates, fixes and new features.",
+  },
+];
 
 function PromiseArt() {
   return (
@@ -53,17 +112,22 @@ export default function WhyChoose() {
           />
           <div data-reveal className="mt-8 rounded-[1.75rem] bg-gradient-to-br from-brand-700 via-brand-600 to-electric-500 p-6 shadow-2xl shadow-brand-900/25">
             <PromiseArt />
-            <p className="mt-2 text-center font-semibold text-white">“भरोसा, समय पर डिलीवरी और लंबा साथ।”</p>
+            <p className="mt-2 text-center font-semibold text-white">&ldquo;भरोसा, समय पर डिलीवरी और लंबा साथ।&rdquo;</p>
           </div>
         </div>
         <div className="grid gap-5 sm:grid-cols-2">
           {reasons.map((r, i) => (
-            <div key={r.title} data-reveal style={{ "--reveal-delay": `${(i % 2) * 80}ms` }} className="card card-hover card-accent bg-white/90 p-6 backdrop-blur">
-              <span className="icon-tile size-12">
-                <Icon name={r.icon} className="size-6" />
-              </span>
-              <h3 className="mt-5 text-lg font-bold text-ink">{r.title}</h3>
-              <p className="mt-1.5 text-sm leading-relaxed text-slate-600">{r.text}</p>
+            <div
+              key={r.id}
+              data-reveal
+              style={{ "--reveal-delay": `${(i % 2) * 80}ms` }}
+              className="card card-hover bg-white/90 p-6 backdrop-blur flex flex-col gap-4 group transition-all duration-200 hover:-translate-y-1 hover:shadow-xl"
+            >
+              <r.Icon className="size-14 drop-shadow-sm transition-transform duration-200 group-hover:scale-110" />
+              <div>
+                <h3 className="text-lg font-bold text-ink">{r.title}</h3>
+                <p className="mt-1.5 text-sm leading-relaxed text-slate-600">{r.text}</p>
+              </div>
             </div>
           ))}
         </div>
