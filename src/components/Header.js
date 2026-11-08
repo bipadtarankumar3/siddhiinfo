@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 import { Menu, X, ArrowRight } from "lucide-react";
 import { nav } from "@/lib/site";
 import Logo from "./Logo";
+import LanguageSwitcher from "./LanguageSwitcher";
+import { useLanguage } from "@/context/LanguageContext";
 
 // Every page starts with a dark hero, so the header is transparent with light
 // text at the top and turns solid white once the user scrolls.
@@ -13,6 +15,16 @@ export default function Header() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+  const { t } = useLanguage();
+
+  const navLabels = {
+    "/services/": t.nav.services,
+    "/work/": t.nav.work,
+    "/industries/": t.nav.industries,
+    "/pricing/": t.nav.pricing,
+    "/blog/": t.nav.blog,
+    "/about/": t.nav.about,
+  };
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -47,10 +59,11 @@ export default function Header() {
               const tone = solid
                 ? active ? "bg-brand-50 text-brand-700" : "text-slate-600 hover:text-ink"
                 : active ? "bg-white/15 text-white" : "text-slate-200 hover:text-white";
+              const label = navLabels[item.href] || item.label;
               return (
                 <li key={item.href}>
                   <Link href={item.href} className={`block rounded-xl px-4 py-2 text-sm font-medium transition ${tone}`}>
-                    {item.label}
+                    {label}
                   </Link>
                 </li>
               );
@@ -58,9 +71,10 @@ export default function Header() {
           </ul>
         </nav>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2.5">
+          <LanguageSwitcher light={!solid} />
           <Link href="/contact/" className={`btn hidden !py-2.5 sm:inline-flex ${solid ? "btn-primary" : "btn-light"}`}>
-            Free consultation <ArrowRight className="size-4" aria-hidden="true" />
+            {t.nav.freeConsultation} <ArrowRight className="size-4" aria-hidden="true" />
           </Link>
           <button
             type="button"
@@ -77,22 +91,29 @@ export default function Header() {
 
       {open && (
         <nav id="mobile-menu" aria-label="Mobile" className="border-t border-slate-200 bg-white lg:hidden">
+          <div className="container-x pt-3 pb-2 border-b border-slate-100 flex items-center justify-between">
+            <span className="text-xs font-semibold text-slate-500">भाषा / Language:</span>
+            <LanguageSwitcher compact />
+          </div>
           <ul className="container-x flex flex-col py-3">
-            {nav.map((item) => (
-              <li key={item.href}>
-                <Link href={item.href} className="block rounded-xl px-3 py-3 font-medium text-slate-700 hover:bg-brand-50 hover:text-brand-700">
-                  {item.label}
-                </Link>
-              </li>
-            ))}
+            {nav.map((item) => {
+              const label = navLabels[item.href] || item.label;
+              return (
+                <li key={item.href}>
+                  <Link href={item.href} className="block rounded-xl px-3 py-3 font-medium text-slate-700 hover:bg-brand-50 hover:text-brand-700">
+                    {label}
+                  </Link>
+                </li>
+              );
+            })}
             <li>
               <Link href="/contact/" className="block rounded-xl px-3 py-3 font-medium text-slate-700 hover:bg-brand-50 hover:text-brand-700">
-                Contact
+                {t.nav.contact}
               </Link>
             </li>
             <li className="pt-2">
               <Link href="/contact/" className="btn btn-primary w-full">
-                Free consultation <ArrowRight className="size-4" aria-hidden="true" />
+                {t.nav.freeConsultation} <ArrowRight className="size-4" aria-hidden="true" />
               </Link>
             </li>
           </ul>

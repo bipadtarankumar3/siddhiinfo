@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { ArrowRight, BadgeIndianRupee, Code2, Layers, TrendingUp, Sparkles } from "lucide-react";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
@@ -5,14 +7,17 @@ import BrandIcon from "@/components/BrandIcon";
 import { LaptopFrame, PhoneFrame } from "@/components/mockups/Frames";
 import { DesktopMock, MobileMock } from "@/components/mockups/SiteMocks";
 import { whatsappLink } from "@/lib/site";
-
-const values = [
-  { icon: BadgeIndianRupee, label: "Affordable Solutions" },
-  { icon: Code2, label: "Dedicated Developer Support" },
-  { icon: Layers, label: "Complete Digital Solutions" },
-];
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Hero() {
+  const { t, locale } = useLanguage();
+
+  const values = [
+    { icon: BadgeIndianRupee, label: t.hero.values.affordable },
+    { icon: Code2, label: t.hero.values.developerSupport },
+    { icon: Layers, label: t.hero.values.completeSolution },
+  ];
+
   return (
     <section className="bg-hero relative -mt-18 overflow-hidden pt-18 text-white">
       {/* animated gradient blobs */}
@@ -25,29 +30,47 @@ export default function Hero() {
 
       <div className="container-x relative grid items-center gap-14 pb-20 pt-12 sm:pt-16 xl:grid-cols-[1fr_1.12fr] xl:gap-10 lg:pb-28">
         <div>
-          <p data-reveal className="glass inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-sm font-medium text-slate-200">
-            <Sparkles className="size-4 text-mint-400" aria-hidden="true" />
-            Your Digital Growth Partner
-          </p>
+          <div data-reveal className="flex flex-wrap items-center gap-2">
+            <span className="glass inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-sm font-medium text-slate-200">
+              <Sparkles className="size-4 text-mint-400" aria-hidden="true" />
+              {t.hero.tagline}
+            </span>
+            <span className="rounded-full bg-amber-400/20 px-3 py-1 text-xs font-bold text-amber-300 ring-1 ring-amber-400/40">
+              लोकल से डिजिटल 🇮🇳
+            </span>
+          </div>
+
           <h1 data-reveal style={{ "--reveal-delay": "80ms" }} className="mt-6 text-[2.5rem] font-extrabold leading-[1.06] tracking-tight text-balance sm:text-6xl xl:text-[3.6rem] 2xl:text-[3.9rem]">
-            Your Business Deserves <span className="text-gradient-light">More Than Just a Website.</span>
+            {t.hero.heading} <span className="text-gradient-light">{t.hero.headingHighlight}</span>
           </h1>
+
           <p data-reveal style={{ "--reveal-delay": "160ms" }} className="mt-6 max-w-2xl text-lg leading-relaxed text-slate-300">
-            We design, develop and grow digital solutions that help Indian businesses reach more customers,
-            automate operations and grow faster.
+            {t.hero.subheading}
           </p>
-          <p data-reveal style={{ "--reveal-delay": "220ms" }} className="mt-4 text-2xl font-bold text-mint-400">
-            आपका बिज़नेस, हमारी टेक्नोलॉजी।
-          </p>
+
+          <div data-reveal style={{ "--reveal-delay": "220ms" }} className="mt-4 flex flex-wrap items-center gap-3">
+            <p className="text-2xl font-bold text-mint-400">
+              {locale === "bn" ? t.hero.bengaliSlogan : t.hero.hindiSlogan}
+            </p>
+            {locale === "en" && (
+              <span className="text-sm font-semibold text-amber-300/90">
+                (Aapka Business, Hamari Technology)
+              </span>
+            )}
+          </div>
+
           <div data-reveal style={{ "--reveal-delay": "280ms" }} className="mt-8 flex flex-wrap gap-3">
             <Link href="/contact/" className="btn btn-light">
-              Get Free Consultation <ArrowRight className="size-4" aria-hidden="true" />
+              {t.hero.ctaConsultation} <ArrowRight className="size-4" aria-hidden="true" />
             </Link>
-            <Link href="/services/" className="btn btn-glass">Explore Our Services</Link>
+            <Link href="/services/" className="btn btn-glass">
+              {t.hero.ctaServices}
+            </Link>
             <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" className="btn bg-[#25D366] text-white shadow-lg shadow-green-900/30 hover:bg-[#1fb857]">
-              <WhatsAppIcon className="size-5" /> Chat on WhatsApp
+              <WhatsAppIcon className="size-5" /> {t.hero.ctaWhatsApp}
             </a>
           </div>
+
           <ul data-reveal style={{ "--reveal-delay": "340ms" }} className="mt-9 grid gap-3 sm:grid-cols-3">
             {values.map(({ icon: I, label }) => (
               <li key={label} className="glass flex items-center gap-2.5 rounded-xl px-3 py-2.5 text-sm font-medium text-slate-200">

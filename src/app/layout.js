@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
 import JsonLd from "@/components/JsonLd";
 import RevealObserver from "@/components/RevealObserver";
+import { LanguageProvider } from "@/context/LanguageContext";
 import { site, absoluteUrl, hasRealPhone } from "@/lib/site";
 import { services } from "@/lib/data";
 
@@ -149,15 +150,17 @@ export default function RootLayout({ children }) {
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
       </head>
       <body className="flex min-h-screen flex-col font-sans">
-        <JsonLd data={orgSchema} />
-        <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-lg focus:bg-white focus:px-4 focus:py-2 focus:shadow">
-          Skip to content
-        </a>
-        <Header />
-        <main id="main" className="flex-1">{children}</main>
-        <Footer />
-        <WhatsAppFloat />
-        <RevealObserver />
+        <LanguageProvider>
+          <JsonLd data={orgSchema} />
+          <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-lg focus:bg-white focus:px-4 focus:py-2 focus:shadow">
+            Skip to content
+          </a>
+          <Header />
+          <main id="main" className="flex-1">{children}</main>
+          <Footer />
+          <WhatsAppFloat />
+          <RevealObserver />
+        </LanguageProvider>
       </body>
     </html>
   );

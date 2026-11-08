@@ -3,12 +3,13 @@ import CtaBanner from "@/components/CtaBanner";
 import Faq from "@/components/Faq";
 import JsonLd from "@/components/JsonLd";
 import PricingCards from "@/components/PricingCards";
+import DigitalDukaanHero from "@/components/home/DigitalDukaanHero";
 import { plans } from "@/lib/data";
 import { absoluteUrl, pageMeta } from "@/lib/site";
 
 export const metadata = pageMeta({
-  title: "Pricing — Affordable Website & E-commerce Packages in India",
-  description: "Transparent pricing for small business websites (from ₹7,999), business SEO websites and e-commerce stores in India. No hidden charges.",
+  title: "Pricing — Affordable Website & Online Store Packages in India",
+  description: "Transparent pricing for Indian small businesses: Digital Dukaan (from ₹4,999), websites (from ₹7,999) and e-commerce stores. No hidden charges.",
   path: "/pricing/",
 });
 
@@ -39,14 +40,15 @@ export default function PricingPage() {
         }}
       />
       <PageHero
-        eyebrow="Pricing"
-        title="Simple, honest pricing"
-        text="Fixed one-time packages for most needs. Need something different? We'll give you a custom quote within 24 hours."
+        eyebrow="Pricing / मूल्यतालिका"
+        title="Simple, honest pricing for Indian businesses"
+        text="Affordable one-time packages with 0% marketplace commission. Need something custom? We'll give you a fixed quote within 24 hours."
         crumbs={[{ label: "Pricing", href: "/pricing/" }]}
       />
-      <section className="container-x py-16 sm:py-24">
+      <section className="container-x py-16 sm:py-20">
         <PricingCards />
       </section>
+      <DigitalDukaanHero />
       <Faq items={pricingFaqs} title="Pricing questions" />
       <CtaBanner />
     </>

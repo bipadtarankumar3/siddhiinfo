@@ -94,12 +94,17 @@ export default function Footer() {
                 <li className="flex items-center gap-3"><Clock className="size-4 shrink-0 text-mint-300" aria-hidden="true" />{site.hours}</li>
               </ul>
               <Social />
-              <span className="mt-6 inline-flex items-center gap-2.5 rounded-full bg-white/[0.06] px-4 py-2 text-sm font-semibold text-white ring-1 ring-white/10">
-                <span className="flex h-3.5 w-6 flex-col overflow-hidden rounded-[3px]" aria-hidden="true">
-                  <span className="flex-1 bg-saffron-500" /><span className="flex-1 bg-white" /><span className="flex-1 bg-indiagreen" />
+              <div className="mt-6 flex flex-wrap gap-2.5">
+                <span className="inline-flex items-center gap-2.5 rounded-full bg-white/[0.06] px-4 py-2 text-xs font-semibold text-white ring-1 ring-white/10">
+                  <span className="flex h-3.5 w-6 flex-col overflow-hidden rounded-[3px]" aria-hidden="true">
+                    <span className="flex-1 bg-saffron-500" /><span className="flex-1 bg-white" /><span className="flex-1 bg-indiagreen" />
+                  </span>
+                  Proudly Made in India
                 </span>
-                Proudly Made in India
-              </span>
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-500/10 px-3.5 py-1.5 text-xs font-bold text-amber-300 ring-1 ring-amber-500/25">
+                  🇮🇳 28 States & 8 UTs
+                </span>
+              </div>
             </div>
 
             <FooterCol title="Services" className="col-span-2 sm:col-span-1 lg:col-span-3">

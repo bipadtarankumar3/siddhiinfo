@@ -3,6 +3,8 @@ import { pageMeta } from "@/lib/site";
 import PageHero from "@/components/PageHero";
 import CtaBanner from "@/components/CtaBanner";
 import Icon from "@/components/Icon";
+import DesiValuesShowcase from "@/components/india/DesiValuesShowcase";
+import PanIndiaCoverage from "@/components/india/PanIndiaCoverage";
 import { reasons } from "@/lib/data";
 
 export const metadata = pageMeta({
@@ -72,6 +74,8 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+      <DesiValuesShowcase />
+      <PanIndiaCoverage />
       <CtaBanner />
     </>
   );
