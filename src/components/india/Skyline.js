@@ -1,8 +1,8 @@
 // Stylised Indian skyline: homes, India Gate, Taj, temple shikhara, Charminar,
 // Lotus temple, Gateway of India and a modern business district. Original silhouettes.
-export default function Skyline({ className = "" }) {
+export default function Skyline({ className = "", fit = "xMidYMax meet" }) {
   return (
-    <svg viewBox="0 0 1440 170" preserveAspectRatio="xMidYMax meet" className={className} aria-hidden="true" fill="currentColor">
+    <svg viewBox="0 0 1440 170" preserveAspectRatio={fit} className={className} aria-hidden="true" fill="currentColor">
       {/* kites */}
       <g opacity="0.9">
         <path d="M250 22 l10 12 l-10 12 l-10 -12 Z" fill="#f97316" />

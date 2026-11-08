@@ -98,13 +98,16 @@ body {
   color: var(--color-ink);
 }
 
+/* Wide layout: content uses most of the screen, up to 1600px (+ padding) */
 @utility container-x {
   margin-inline: auto;
   width: 100%;
-  max-width: 80rem;
-  padding-inline: 1rem;
-  @media (width >= 40rem) { padding-inline: 1.5rem; }
-  @media (width >= 64rem) { padding-inline: 2rem; }
+  max-width: calc(100rem + 2 * var(--gutter, 1rem));
+  --gutter: 1rem;
+  padding-inline: var(--gutter);
+  @media (width >= 40rem) { --gutter: 1.5rem; }
+  @media (width >= 64rem) { --gutter: 2.5rem; }
+  @media (width >= 96rem) { --gutter: 4rem; }
 }
 
 /* ---------- Buttons ---------- */
@@ -309,6 +312,24 @@ body {
   & li { margin-top: 0.4rem; line-height: 1.7; }
   & li::marker { color: var(--color-brand-500); }
   & a { color: var(--color-brand-600); text-decoration: underline; text-underline-offset: 3px; }
+}
+
+@utility footer-title {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #fff;
+  &::after {
+    content: "";
+    height: 2px;
+    width: 1.75rem;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--color-saffron-500), transparent);
+  }
 }
 
 /* ---------- Motion ---------- */

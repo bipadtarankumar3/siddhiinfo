@@ -23,7 +23,7 @@ export default function IndustriesPage() {
         text="Every business has different problems. Find the tools that make the biggest difference for yours."
         crumbs={[{ label: "Industries", href: "/industries/" }]}
       />
-      <section className="container-x grid gap-6 py-16 sm:py-20 md:grid-cols-2 xl:grid-cols-3">
+      <section className="container-x grid gap-6 py-16 sm:py-20 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
         {industries.map((i, n) => (
           <article
             key={i.slug}
