@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Mail, Phone, MapPin, Clock } from "lucide-react";
+import BrandIcon from "./BrandIcon";
 import { site } from "@/lib/site";
 import { services, industries } from "@/lib/data";
 import Logo from "./Logo";
@@ -17,7 +18,9 @@ export default function Footer() {
           <Link href="/" aria-label="Siddhi Info home" className="inline-block">
             <Logo light size={44} />
           </Link>
-          <p className="mt-5 max-w-sm leading-relaxed text-slate-400">{site.description}</p>
+          <p className="mt-4 text-sm font-semibold text-saffron-300">{site.tagline}</p>
+          <p className="mt-3 max-w-sm leading-relaxed text-slate-400">{site.description}</p>
+          <Social />
           <ul className="mt-6 space-y-3 text-sm">
             <li className="flex items-center gap-3">
               <Phone className="size-4 text-aqua-400" aria-hidden="true" />
@@ -80,5 +83,24 @@ function FooterCol({ title, children, className = "" }) {
       <h2 className="text-sm font-semibold uppercase tracking-wider text-white">{title}</h2>
       <ul className="mt-4 space-y-2.5 text-sm">{children}</ul>
     </div>
+  );
+}
+
+const socialIcons = { facebook: "siFacebook", instagram: "siInstagram", youtube: "siYoutube", linkedin: null, x: "siX" };
+
+// Renders only the profiles filled in src/lib/site.js → site.social
+function Social() {
+  const links = Object.entries(site.social).filter(([, url]) => url);
+  if (!links.length) return null;
+  return (
+    <ul className="mt-5 flex gap-2" aria-label="Social media">
+      {links.map(([key, url]) => (
+        <li key={key}>
+          <a href={url} target="_blank" rel="noopener noreferrer" aria-label={`Siddhi Info on ${key}`} className="grid size-10 place-items-center rounded-xl bg-white/5 text-slate-300 ring-1 ring-white/10 transition hover:bg-white/10 hover:text-white">
+            {socialIcons[key] ? <BrandIcon name={socialIcons[key]} color={false} className="size-4" /> : <span className="text-xs font-bold">in</span>}
+          </a>
+        </li>
+      ))}
+    </ul>
   );
 }

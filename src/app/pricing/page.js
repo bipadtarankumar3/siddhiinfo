@@ -1,9 +1,8 @@
-import Link from "next/link";
-import { Check } from "lucide-react";
 import PageHero from "@/components/PageHero";
 import CtaBanner from "@/components/CtaBanner";
 import Faq from "@/components/Faq";
 import JsonLd from "@/components/JsonLd";
+import PricingCards from "@/components/PricingCards";
 import { plans } from "@/lib/data";
 import { absoluteUrl, pageMeta } from "@/lib/site";
 
@@ -45,42 +44,8 @@ export default function PricingPage() {
         text="Fixed one-time packages for most needs. Need something different? We'll give you a custom quote within 24 hours."
         crumbs={[{ label: "Pricing", href: "/pricing/" }]}
       />
-      <section className="container-x py-16 sm:py-20">
-        <div className="grid gap-6 lg:grid-cols-3">
-          {plans.map((p) => (
-            <div
-              key={p.name}
-              className={`card relative flex flex-col p-8 ${p.featured ? "border-brand-500 shadow-2xl shadow-brand-900/20 ring-4 ring-brand-500/15 lg:-mt-4 lg:mb-[-1rem]" : ""}`}
-            >
-              {p.featured && (
-                <span className="absolute -top-3 left-8 rounded-full bg-gradient-to-r from-brand-600 to-aqua-500 px-3 py-1 text-xs font-bold uppercase tracking-wide text-white">
-                  Most popular
-                </span>
-              )}
-              <h2 className="text-lg font-bold text-ink">{p.name}</h2>
-              <p className="mt-1 text-sm text-slate-600">{p.description}</p>
-              <p className="mt-6">
-                <span className="text-sm text-slate-500">from </span>
-                <span className="text-4xl font-extrabold tracking-tight text-ink">{p.price}</span>
-                <span className="text-sm text-slate-500"> {p.note}</span>
-              </p>
-              <ul className="mt-6 flex-1 space-y-3">
-                {p.features.map((f) => (
-                  <li key={f} className="flex gap-2.5 text-slate-700">
-                    <Check className="mt-0.5 size-5 shrink-0 text-mint-500" aria-hidden="true" /> {f}
-                  </li>
-                ))}
-              </ul>
-              <Link href="/contact/" className={`btn mt-8 w-full ${p.featured ? "btn-primary" : "btn-outline"}`}>
-                {p.cta}
-              </Link>
-            </div>
-          ))}
-        </div>
-        <p className="mt-10 text-center text-sm text-slate-500">
-          Billing software, WhatsApp API, digital marketing and custom software are quoted based on your needs.{" "}
-          <Link href="/contact/" className="font-semibold text-brand-600 hover:underline">Ask for a quote →</Link>
-        </p>
+      <section className="container-x py-16 sm:py-24">
+        <PricingCards />
       </section>
       <Faq items={pricingFaqs} title="Pricing questions" />
       <CtaBanner />

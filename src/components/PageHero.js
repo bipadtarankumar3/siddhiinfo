@@ -2,7 +2,6 @@ import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import JsonLd from "./JsonLd";
 import Network from "./Network";
-import Toran from "./india/Toran";
 import { absoluteUrl } from "@/lib/site";
 
 // crumbs: [{ label, href }] — Home is added automatically
@@ -22,10 +21,12 @@ export default function PageHero({ eyebrow, title, text, crumbs = [], children }
           })),
         }}
       />
-      <div aria-hidden="true" className="bg-dots absolute inset-0" />
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0">
+        <div className="animate-blob absolute -left-32 -top-20 size-96 rounded-full bg-brand-500/30 blur-3xl" />
+        <div className="bg-dots absolute inset-0" />
+      </div>
       <Network uid="hero-net" className="pointer-events-none absolute -right-24 top-6 hidden w-[42rem] opacity-50 lg:block" />
-      <Toran uid="page-toran" className="pointer-events-none absolute inset-x-0 top-18 opacity-90" />
-      <div className="container-x relative pb-16 pt-16 sm:pb-20 sm:pt-20">
+      <div className="container-x relative pb-16 pt-10 sm:pb-20 sm:pt-14">
         <nav aria-label="Breadcrumb">
           <ol className="flex flex-wrap items-center gap-1 text-sm text-slate-400">
             {all.map((c, i) => (

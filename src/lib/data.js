@@ -1,6 +1,8 @@
-export const services = [
+const allServices = [
   {
     slug: "website-development",
+    art: "web", accent: "indigo",
+    benefits: ["Mobile-first, fast on 4G", "Rank on Google", "Enquiries on WhatsApp"],
     icon: "Globe",
     title: "Business Website Development",
     short: "Fast, mobile-first websites that make customers trust you and call you.",
@@ -41,6 +43,8 @@ export const services = [
   },
   {
     slug: "ecommerce-store",
+    art: "ecommerce", accent: "saffron",
+    benefits: ["UPI, cards & COD", "Shiprocket delivery", "GST invoices"],
     icon: "ShoppingBag",
     title: "Online Store & E‑commerce",
     short: "Sell online with UPI, cards and COD — your own store, zero marketplace commission.",
@@ -80,7 +84,141 @@ export const services = [
     ],
   },
   {
+    slug: "web-application-development",
+    icon: "AppWindow",
+    art: "webapp",
+    accent: "blue",
+    benefits: ["Portals, dashboards & SaaS", "Secure logins & roles", "Cloud-hosted & scalable"],
+    title: "Custom Web Application Development",
+    short: "Customer portals, booking platforms and online tools that run your business in the browser.",
+    metaTitle: "Custom Web Application Development in India",
+    metaDescription:
+      "Custom web applications for Indian businesses — customer portals, booking platforms, dealer portals, admin panels and SaaS products built with React, Next.js, Node.js and Laravel.",
+    intro:
+      "When a simple website is not enough, a web application lets your customers, staff and partners log in and get work done — book, order, track, approve and pay — from any device, without installing anything.",
+    features: [
+      "Customer, dealer and staff portals",
+      "Online booking and scheduling",
+      "Role-based logins and permissions",
+      "Payment gateway & UPI integration",
+      "Reports, exports and dashboards",
+      "API integrations with your existing tools",
+      "Cloud hosting with daily backups",
+      "Built with React, Next.js, Node.js or Laravel",
+    ],
+    outcomes: [
+      "Replace manual work with one online system",
+      "Serve customers 24×7 without extra staff",
+      "Grow without changing software later",
+    ],
+    faqs: [
+      { q: "What is the difference between a website and a web application?", a: "A website mainly shows information. A web application lets people log in and do things — place orders, book slots, upload documents, track status — like a software that runs in the browser." },
+      { q: "How long does a web application take?", a: "Most small-business web apps take 4–10 weeks depending on features. We share a written plan and timeline before starting." },
+    ],
+  },
+  {
+    slug: "mobile-app-development",
+    icon: "Smartphone",
+    art: "mobile",
+    accent: "violet",
+    benefits: ["Android & iOS apps", "Push notifications", "UPI payments in-app"],
+    title: "Mobile Application Development",
+    short: "Android and iOS apps for your customers, delivery staff or field team.",
+    metaTitle: "Mobile App Development Company in India | Android & iOS",
+    metaDescription:
+      "Android and iOS app development for Indian small businesses and startups — ordering apps, booking apps, staff apps and delivery apps with UPI payments and notifications.",
+    intro:
+      "Give your regular customers an app to order again in two taps, or give your staff an app to record visits, deliveries and attendance. We build practical mobile apps that people actually use.",
+    features: [
+      "Android and iOS apps from one codebase",
+      "Customer ordering & booking apps",
+      "Staff, delivery and field-force apps",
+      "UPI & payment gateway integration",
+      "Push notifications and offers",
+      "Offline mode for weak networks",
+      "Play Store & App Store publishing",
+      "Admin panel to manage everything",
+    ],
+    outcomes: [
+      "Stay on your customer's home screen",
+      "Faster repeat orders and bookings",
+      "Real-time updates from your field team",
+    ],
+    faqs: [
+      { q: "Do I need an app or is a website enough?", a: "Most businesses should start with a mobile-friendly website. An app makes sense when customers order frequently or your staff need a tool on the move. We will tell you honestly which one you need." },
+      { q: "Will you publish the app on the Play Store?", a: "Yes. We help you create developer accounts and publish to the Google Play Store and Apple App Store in your business name." },
+    ],
+  },
+  {
+    slug: "crm-erp-software",
+    icon: "LayoutDashboard",
+    art: "crm",
+    accent: "indigo",
+    benefits: ["Leads, sales & follow-ups", "Inventory, purchase & accounts", "Owner dashboards"],
+    title: "CRM & ERP Software",
+    short: "One system for leads, customers, inventory, staff and accounts — with a clear owner dashboard.",
+    metaTitle: "CRM & ERP Software for Small Business in India",
+    metaDescription:
+      "Custom CRM and ERP software for Indian SMEs — lead management, sales follow-ups, inventory, purchase, staff and accounts in one dashboard. GST-ready and mobile-friendly.",
+    intro:
+      "If your business runs on registers, Excel sheets and WhatsApp groups, things slip through the cracks. A CRM or ERP built for your process brings leads, orders, stock, staff and money into one place you can check from your phone.",
+    features: [
+      "Lead capture from website, WhatsApp & ads",
+      "Follow-up reminders for your sales team",
+      "Quotations, orders & GST invoices",
+      "Inventory, purchase & vendor management",
+      "Staff attendance and task tracking",
+      "Owner dashboard with daily reports",
+      "Role-based access for staff",
+      "Mobile-friendly, works anywhere",
+    ],
+    outcomes: [
+      "Every lead followed up on time",
+      "Know stock, sales and dues at a glance",
+      "Less dependence on paperwork",
+    ],
+    faqs: [
+      { q: "Is ready-made CRM software not enough?", a: "Ready-made tools work for many businesses, and we will recommend one if it fits. Custom CRM/ERP makes sense when your process is unique or you are paying for many tools that don't talk to each other." },
+      { q: "Can you move my existing Excel data?", a: "Yes. We import your existing customer, product and stock data during setup." },
+    ],
+  },
+  {
+    slug: "ai-business-automation",
+    icon: "Bot",
+    art: "ai",
+    accent: "saffron",
+    benefits: ["AI chat assistants", "Auto data entry & reports", "Connect your apps"],
+    title: "AI & Business Process Automation",
+    short: "Let software handle repetitive work — replies, data entry, reports and follow-ups.",
+    metaTitle: "AI Automation & Business Process Automation for SMEs in India",
+    metaDescription:
+      "Practical AI and business process automation for Indian small businesses — AI chat assistants, automatic data entry, invoice reading, report generation and app integrations.",
+    intro:
+      "Many daily tasks — answering the same questions, copying data between sheets, sending reminders, preparing reports — can be automated. We use practical AI and automation tools to save your team hours every week.",
+    features: [
+      "AI assistant for website & WhatsApp enquiries",
+      "Automatic lead capture into your CRM or sheet",
+      "Invoice & document data extraction",
+      "Scheduled reports to your WhatsApp or email",
+      "Automatic payment & renewal reminders",
+      "Connect Google Sheets, Tally, Zoho & more",
+      "Hindi and English language support",
+      "Human hand-off when a customer needs it",
+    ],
+    outcomes: [
+      "Save hours of repetitive work every week",
+      "Faster, consistent replies to customers",
+      "Fewer manual errors",
+    ],
+    faqs: [
+      { q: "Is AI automation expensive?", a: "Not necessarily. Many automations use affordable tools and pay for themselves quickly. We start with one high-impact task and expand once you see results." },
+      { q: "Will AI reply wrongly to my customers?", a: "We set clear limits on what the assistant can answer and hand over to your team for anything else. You review and approve before going live." },
+    ],
+  },
+  {
     slug: "billing-gst-software",
+    art: "billing", accent: "emerald",
+    benefits: ["GST invoices in seconds", "Live stock & khata", "Share bills on WhatsApp"],
     icon: "ReceiptIndianRupee",
     title: "GST Billing & Inventory Software",
     short: "Simple billing, stock and accounts software made for Indian shops.",
@@ -121,6 +259,8 @@ export const services = [
   },
   {
     slug: "whatsapp-business-automation",
+    art: "whatsapp", accent: "green",
+    benefits: ["Instant auto-replies", "Broadcast offers safely", "Order & payment reminders"],
     icon: "MessageCircle",
     title: "WhatsApp Business Automation",
     short: "Auto-replies, catalogues, broadcasts and order updates on WhatsApp.",
@@ -157,6 +297,8 @@ export const services = [
   },
   {
     slug: "local-seo-google-business",
+    art: "maps", accent: "rose",
+    benefits: ["Rank on Google Maps", "More calls & walk-ins", "Genuine review growth"],
     icon: "MapPin",
     title: "Local SEO & Google Business Profile",
     short: "Show up on Google Maps when people nearby search for what you sell.",
@@ -193,6 +335,8 @@ export const services = [
   },
   {
     slug: "digital-marketing",
+    art: "marketing", accent: "violet",
+    benefits: ["Google & Meta ads", "Posts, reels & festive campaigns", "Clear ROI reports"],
     icon: "Megaphone",
     title: "Digital Marketing & Social Media",
     short: "Meta & Google ads, Instagram content and leads on a small-business budget.",
@@ -229,20 +373,22 @@ export const services = [
   },
   {
     slug: "custom-software-crm",
+    art: "custom", accent: "slate",
+    benefits: ["Built around your workflow", "You own the code", "Scales as you grow"],
     icon: "LayoutDashboard",
-    title: "Custom Software, CRM & Apps",
-    short: "Lead CRMs, booking systems, dashboards and mobile apps built for your workflow.",
-    metaTitle: "Custom Software, CRM & Mobile App Development for SMEs",
+    title: "Custom Software Solutions",
+    short: "Booking systems, management software and tools built exactly around how you work.",
+    metaTitle: "Custom Software Development Company in India for SMEs",
     metaDescription:
-      "Custom CRM, appointment booking, school management, dashboards and Android/iOS apps for Indian SMEs. Automate your workflow and grow faster.",
+      "Custom software development for Indian SMEs — booking systems, school & clinic management, dealer portals, owner dashboards and integrations. You own the code.",
     intro:
-      "When off-the-shelf tools don’t fit, we build software around how your business actually works — from lead CRMs and booking systems to staff apps and owner dashboards.",
+      "When off-the-shelf tools don’t fit, we build software around how your business actually works — booking systems, management software, portals and owner dashboards.",
     features: [
-      "Lead & sales CRM with follow-up reminders",
-      "Online appointment & booking systems",
+      "Appointment & booking systems",
       "School, coaching & clinic management",
+      "Dealer, vendor & franchise portals",
       "Owner dashboards and reports",
-      "Android & iOS mobile apps",
+      "Integrations with Tally, Zoho & Google Sheets",
       "Payment gateway & UPI integration",
       "Cloud-hosted, secure & backed up",
       "Ongoing support and improvements",
@@ -265,6 +411,8 @@ export const services = [
   },
   {
     slug: "domain-hosting-email",
+    art: "cloud", accent: "sky",
+    benefits: [".in domain & SSL", "Secure, backed-up hosting", "you@yourbrand.in email"],
     icon: "Server",
     title: "Domain, Hosting & Business Email",
     short: "Your .in domain, secure hosting and professional email like you@yourbrand.in.",
@@ -297,9 +445,28 @@ export const services = [
   },
 ];
 
+const serviceOrder = [
+  "website-development",
+  "ecommerce-store",
+  "web-application-development",
+  "mobile-app-development",
+  "crm-erp-software",
+  "billing-gst-software",
+  "whatsapp-business-automation",
+  "digital-marketing",
+  "local-seo-google-business",
+  "domain-hosting-email",
+  "ai-business-automation",
+  "custom-software-crm",
+];
+
+export const services = serviceOrder.map((slug) => allServices.find((s) => s.slug === slug));
+
 export const industries = [
   {
     slug: "retail-kirana",
+    image: "/images/industry-kirana-retail.webp",
+    imageAlt: "Shop owner standing at the counter of a busy Indian grocery store",
     icon: "Store",
     title: "Retail & Kirana Stores",
     hi: "किराना और रिटेल",
@@ -319,6 +486,8 @@ export const industries = [
   },
   {
     slug: "restaurants-cafes",
+    image: "/images/industry-restaurant.webp",
+    imageAlt: "Smiling Indian chef giving a thumbs-up",
     icon: "UtensilsCrossed",
     title: "Restaurants, Cafés & Cloud Kitchens",
     hi: "रेस्टोरेंट और कैफ़े",
@@ -338,9 +507,11 @@ export const industries = [
   },
   {
     slug: "clinics-healthcare",
+    image: "/images/industry-clinic.webp",
+    imageAlt: "Doctor checking a patient with a stethoscope in an Indian clinic",
     icon: "Stethoscope",
-    title: "Clinics, Doctors & Diagnostics",
-    hi: "क्लिनिक और डॉक्टर",
+    title: "Clinics, Hospitals & Diagnostics",
+    hi: "क्लिनिक और अस्पताल",
     short: "Online appointments, reminders and a trustworthy web presence for patients.",
     problems: [
       "Phone lines busy with appointment calls",
@@ -357,6 +528,8 @@ export const industries = [
   },
   {
     slug: "schools-coaching",
+    image: "/images/industry-school-coaching.webp",
+    imageAlt: "Indian school students working on a science project together",
     icon: "GraduationCap",
     title: "Schools & Coaching Institutes",
     hi: "स्कूल और कोचिंग",
@@ -394,7 +567,51 @@ export const industries = [
     services: ["custom-software-crm", "whatsapp-business-automation", "digital-marketing"],
   },
   {
+    slug: "ngos-csr",
+    image: "/images/industry-ngo-csr.webp",
+    imageAlt: "Volunteer serving a community meal to children in India",
+    icon: "HeartHandshake",
+    title: "NGOs & CSR Organisations",
+    hi: "NGO और CSR",
+    short: "Donation websites, volunteer management and CSR project reporting in one place.",
+    problems: [
+      "Donations collected manually with no online receipts",
+      "Beneficiary and volunteer data scattered in sheets",
+      "CSR partners ask for reports that take days to prepare",
+    ],
+    solutions: [
+      "Website with secure online donations & 80G receipts",
+      "Beneficiary, volunteer and project tracking",
+      "CSR dashboards with photo & impact reports",
+      "WhatsApp updates for donors and volunteers",
+    ],
+    services: ["website-development", "web-application-development", "crm-erp-software"],
+  },
+  {
+    slug: "startups-entrepreneurs",
+    image: "/images/industry-startup.webp",
+    imageAlt: "Young Indian startup team working together on a laptop",
+    icon: "Rocket",
+    title: "Startups & Entrepreneurs",
+    hi: "स्टार्टअप और उद्यमी",
+    short: "Launch your MVP, landing page or app quickly — and scale it when you grow.",
+    problems: [
+      "Big agencies are too expensive for an MVP",
+      "Freelancers disappear after launch",
+      "Need to launch fast and change quickly",
+    ],
+    solutions: [
+      "MVP web or mobile app in weeks",
+      "Landing pages built to convert",
+      "Scalable cloud setup from day one",
+      "Ongoing developer support as you grow",
+    ],
+    services: ["web-application-development", "mobile-app-development", "ai-business-automation"],
+  },
+  {
     slug: "real-estate",
+    image: "/images/industry-real-estate.webp",
+    imageAlt: "Modern apartment building in Kolkata",
     icon: "Building2",
     title: "Real Estate & Builders",
     hi: "रियल एस्टेट",
@@ -414,6 +631,8 @@ export const industries = [
   },
   {
     slug: "manufacturers-wholesalers",
+    image: "/images/industry-manufacturing.webp",
+    imageAlt: "Smiling factory worker operating machinery in an Indian textile unit",
     icon: "Factory",
     title: "Manufacturers, Traders & Wholesalers",
     hi: "निर्माता और होलसेलर",
@@ -456,8 +675,11 @@ export const plans = [
   {
     name: "Starter",
     price: "₹7,999",
-    note: "one-time",
-    description: "For shops and freelancers who need to get online quickly.",
+    note: "starting price",
+    bestFor: "Shops, freelancers & local service providers",
+    description: "Get your business online quickly with a professional website.",
+    delivery: "Usually live in 7–10 working days after we receive your content",
+    support: "Post-launch support included",
     features: [
       "Up to 5-page mobile website",
       "WhatsApp & click-to-call buttons",
@@ -466,14 +688,17 @@ export const plans = [
       "Free SSL • 1-year hosting",
       "Google Business Profile setup",
     ],
-    cta: "Start with Starter",
+    cta: "Get started",
   },
   {
     name: "Business",
     price: "₹19,999",
-    note: "one-time",
+    note: "starting price",
     featured: true,
-    description: "For growing businesses that want leads from Google every month.",
+    bestFor: "Growing businesses that want regular leads from Google",
+    description: "A complete, SEO-ready website that keeps bringing enquiries.",
+    delivery: "Timeline confirmed in your written quote",
+    support: "3 months of free support",
     features: [
       "Up to 12 pages + blog",
       "Full on-page & technical SEO",
@@ -481,15 +706,17 @@ export const plans = [
       "Business email setup",
       "WhatsApp auto-reply setup",
       "Analytics & Search Console",
-      "3 months of free support",
     ],
-    cta: "Choose Business",
+    cta: "Get started",
   },
   {
     name: "E‑commerce",
     price: "₹34,999",
-    note: "one-time",
-    description: "For brands and stores ready to sell online across India.",
+    note: "starting price",
+    bestFor: "Brands, stores & D2C sellers ready to sell across India",
+    description: "Your own online store with payments, shipping and GST invoices.",
+    delivery: "Timeline confirmed in your written quote",
+    support: "Post-launch support + admin training in Hindi/English",
     features: [
       "Up to 100 products",
       "UPI, cards & COD payments",
@@ -497,68 +724,191 @@ export const plans = [
       "GST invoices & coupons",
       "WhatsApp order notifications",
       "Product SEO & Google Shopping",
-      "Admin training in Hindi/English",
     ],
-    cta: "Launch my store",
+    cta: "Get started",
   },
 ];
 
 export const steps = [
-  { title: "Free consultation", text: "Tell us about your business on a call or WhatsApp. We suggest what will actually help — no jargon." },
-  { title: "Clear plan & quote", text: "A fixed price and timeline in writing. No hidden charges." },
-  { title: "Build & review", text: "We design and build, you review on your phone and request changes." },
-  { title: "Launch & grow", text: "We go live, train your team and keep supporting you after launch." },
+  { title: "Understand your business", hi: "समझना", text: "A free call or WhatsApp chat to understand your goals, customers and budget — no jargon.", icon: "MessagesSquare" },
+  { title: "Plan & design", hi: "योजना", text: "Clear scope, fixed quote and timeline in writing, then designs you can review on your phone.", icon: "PenTool" },
+  { title: "Development & integration", hi: "निर्माण", text: "Our developers build your solution and connect payments, WhatsApp, Google and other tools.", icon: "Code2" },
+  { title: "Testing & your review", hi: "जाँच", text: "We test on real phones and browsers. You review everything and request changes.", icon: "ClipboardCheck" },
+  { title: "Launch & deployment", hi: "लॉन्च", text: "We go live on your domain, set up analytics and train your team.", icon: "Rocket" },
+  { title: "Support & growth", hi: "सपोर्ट", text: "Updates, fixes and new features as your business grows — a real person on WhatsApp.", icon: "TrendingUp" },
 ];
 
 export const reasons = [
-  { icon: "IndianRupee", title: "Small-business pricing", text: "Fixed, transparent packages with EMI-friendly payment milestones." },
-  { icon: "Zap", title: "Fast delivery", text: "Most websites go live in 7–10 working days." },
-  { icon: "Languages", title: "Hindi & English support", text: "We explain everything in the language you are comfortable with." },
-  { icon: "Smartphone", title: "Mobile-first", text: "Built for how India browses — on phones, on 4G." },
-  { icon: "ShieldCheck", title: "You own everything", text: "Domain, website, code and data are always in your name." },
-  { icon: "Headphones", title: "Real support", text: "A real person on WhatsApp, not a ticket queue." },
+  { icon: "IndianRupee", title: "Affordable & transparent pricing", text: "Clear written quotes with milestone payments. No hidden charges." },
+  { icon: "Headphones", title: "Dedicated developer support", text: "Talk directly to the developer working on your project." },
+  { icon: "Puzzle", title: "Custom-built solutions", text: "Built around how your business works — not a one-size template." },
+  { icon: "Smartphone", title: "Mobile-first development", text: "Designed for how India browses — on phones, on 4G." },
+  { icon: "ShieldCheck", title: "Secure & scalable technology", text: "Modern frameworks, SSL, backups and clean code that can grow." },
+  { icon: "CalendarCheck", title: "On-time delivery", text: "A written timeline with regular progress updates on WhatsApp." },
+  { icon: "KeyRound", title: "You own everything", text: "Domain, website, code and data are always in your name." },
+  { icon: "LifeBuoy", title: "Long-term technical support", text: "We stay with you after launch for updates, fixes and new features." },
 ];
 
 export const homeFaqs = [
-  {
-    q: "I run a small shop. Do I really need a website?",
-    a: "Yes. Most customers search Google or Maps before visiting. A simple website plus an optimised Google Business Profile helps them find, trust and contact you — even outside shop hours.",
-  },
-  {
-    q: "How much does a business website cost in India?",
-    a: "Our business websites start at ₹7,999 one-time, including design, SSL and the first year of hosting. Online stores start at ₹34,999.",
-  },
-  {
-    q: "Do you work with businesses outside my city?",
-    a: "Yes. We work with businesses across India over phone, WhatsApp and video calls. Most clients never need an in-person meeting.",
-  },
-  {
-    q: "What do I need to give you to get started?",
-    a: "Your business name, logo (if you have one), services or products list, photos and contact details. We help with the writing if you need.",
-  },
-  {
-    q: "Do you offer support after the website is live?",
-    a: "Yes. Every package includes free support for a period, and affordable annual maintenance plans after that.",
-  },
+  { q: "How much does a business website cost?", a: "Business websites start at ₹7,999 (one-time) including design, SSL and the first year of hosting. SEO-focused business websites start at ₹19,999 and online stores at ₹34,999. These are starting prices — you get a fixed written quote after we understand your needs." },
+  { q: "Can you build a website for my small business?", a: "Yes. We work with kirana stores, restaurants, clinics, coaching centres, NGOs, manufacturers and startups. Even a simple 5-page website can bring you enquiries from Google and WhatsApp." },
+  { q: "Will my website work on mobile phones?", a: "Yes. Every website we build is mobile-first — designed and tested for smartphones first, and loads quickly on 4G." },
+  { q: "Can I manage my website myself?", a: "Yes. We can give you a simple admin panel to update text, photos, products and prices. Or just send changes on WhatsApp and we will do it for you." },
+  { q: "Do you provide domain and hosting?", a: "Yes. We register your .in or .com domain in your business name and set up secure hosting, SSL and business email." },
+  { q: "Can you build custom software?", a: "Yes. We build web applications, mobile apps, CRM/ERP, GST billing and automation tools designed around your workflow." },
+  { q: "Do you provide support after launch?", a: "Yes. Every project includes post-launch support, and we offer affordable maintenance plans for ongoing updates and new features." },
+  { q: "Can I pay in installments?", a: "Yes. Projects are paid in milestones — usually an advance to start and the balance on approval and launch. Larger projects can be split into more milestones." },
+  { q: "Do you work with customers outside Kolkata?", a: "Yes. We are based in Kolkata and work with businesses across India over phone, WhatsApp and video calls." },
 ];
 
 export function getService(slug) {
   return services.find((s) => s.slug === slug);
 }
 
+// Industries highlighted on the homepage (all have photography)
+export const featuredIndustries = [
+  "retail-kirana",
+  "restaurants-cafes",
+  "clinics-healthcare",
+  "schools-coaching",
+  "ngos-csr",
+  "real-estate",
+  "manufacturers-wholesalers",
+  "startups-entrepreneurs",
+];
+
 export function getIndustry(slug) {
   return industries.find((i) => i.slug === slug);
 }
 
-export const cities = [
-  "Kolkata", "Delhi NCR", "Mumbai", "Bengaluru", "Hyderabad", "Chennai", "Pune", "Ahmedabad",
-  "Jaipur", "Lucknow", "Patna", "Bhubaneswar", "Guwahati", "Ranchi", "Siliguri", "Indore",
-  "Surat", "Nagpur", "Kochi", "Chandigarh",
+
+
+/*
+  Portfolio — CONCEPT DEMOS.
+  These are illustrative demo designs showing what we can build. The brand
+  names are fictional. Replace or add real client projects here (set
+  `concept: false` and add `liveUrl`) once you have permission to show them.
+*/
+export const portfolio = [
+  {
+    slug: "business-website",
+    concept: true,
+    category: "Business Website",
+    name: "Nirmaan Interiors",
+    url: "nirmaaninteriors.in",
+    description: "A lead-generating website for an interior design studio — portfolio gallery, service pages, WhatsApp enquiries and Google Maps.",
+    features: ["Project gallery", "Service & location pages", "WhatsApp & call buttons", "Local SEO"],
+    tech: ["Next.js", "Tailwind CSS", "Google Analytics"],
+    variant: "business",
+    service: "website-development",
+  },
+  {
+    slug: "ecommerce-store",
+    concept: true,
+    category: "E-commerce Website",
+    name: "Desi Basket",
+    url: "desibasket.in",
+    description: "An online grocery and organic foods store with UPI and COD checkout, Shiprocket delivery and GST invoices.",
+    features: ["Product catalogue & search", "UPI / cards / COD", "Shiprocket shipping", "WhatsApp order updates"],
+    tech: ["Next.js", "Node.js", "Razorpay", "MongoDB"],
+    variant: "ecommerce",
+    service: "ecommerce-store",
+  },
+  {
+    slug: "restaurant-website",
+    concept: true,
+    category: "Restaurant Website",
+    name: "Spice Route Kitchen",
+    url: "spiceroutekitchen.in",
+    description: "A restaurant website with digital menu, direct online ordering, table reservations and Google reviews.",
+    features: ["QR digital menu", "Direct online ordering", "Table booking", "Google reviews widget"],
+    tech: ["Next.js", "Laravel", "MySQL"],
+    variant: "restaurant",
+    service: "website-development",
+  },
+  {
+    slug: "coaching-website",
+    concept: true,
+    category: "School & Coaching Website",
+    name: "Gyan Academy",
+    url: "gyanacademy.in",
+    description: "An admissions-focused coaching website with course pages, batch schedules, online fee payment and a student portal.",
+    features: ["Course & batch pages", "Admission enquiry CRM", "Online fee payment", "Student portal"],
+    tech: ["Next.js", "Node.js", "PostgreSQL"],
+    variant: "education",
+    service: "web-application-development",
+  },
+  {
+    slug: "healthcare-website",
+    concept: true,
+    category: "Healthcare Website",
+    name: "CarePlus Clinic",
+    url: "careplusclinic.in",
+    description: "A clinic website with doctor profiles, online appointment booking and automatic WhatsApp reminders.",
+    features: ["Doctor profiles", "Online appointments", "WhatsApp reminders", "Health blog for SEO"],
+    tech: ["Next.js", "Laravel", "MySQL", "WhatsApp API"],
+    variant: "healthcare",
+    service: "website-development",
+  },
+  {
+    slug: "ngo-csr-platform",
+    concept: true,
+    category: "NGO & CSR Management Platform",
+    name: "Seva Setu",
+    url: "sevasetu.org",
+    description: "A donation website and CSR management platform to track projects, beneficiaries, volunteers and impact reports.",
+    features: ["Online donations & receipts", "Project & beneficiary tracking", "Volunteer management", "CSR impact reports"],
+    tech: ["React", "Node.js", "PostgreSQL", "AWS"],
+    variant: "ngo",
+    service: "web-application-development",
+  },
+  {
+    slug: "crm-erp-dashboard",
+    concept: true,
+    category: "CRM & ERP Dashboard",
+    name: "VyaparDesk",
+    url: "app.vyapardesk.in",
+    description: "A CRM + ERP dashboard for a wholesale distributor — leads, orders, inventory, GST invoices and dues in one place.",
+    features: ["Lead & follow-up tracking", "Orders & GST invoices", "Inventory & dues", "Owner dashboard"],
+    tech: ["React", "Laravel", "MySQL", "Docker"],
+    variant: "dashboard",
+    service: "crm-erp-software",
+  },
+  {
+    slug: "custom-web-app",
+    concept: true,
+    category: "Custom Web Application",
+    name: "FieldPro",
+    url: "app.fieldpro.in",
+    description: "A service-booking and field-staff app for an AC repair company — bookings, technician assignment, live job status and payments.",
+    features: ["Online service booking", "Technician assignment", "Job status tracking", "UPI payment links"],
+    tech: ["Next.js", "Node.js", "MongoDB", "Docker"],
+    variant: "webapp",
+    service: "web-application-development",
+  },
 ];
 
-export const digitalIndia = [
-  { art: "upi", title: "UPI & online payments", hi: "UPI से भुगतान", text: "Accept GPay, PhonePe, Paytm and cards on your website, WhatsApp and counter." },
-  { art: "gst", title: "GST-ready billing", hi: "GST बिलिंग", text: "Proper GST invoices, HSN codes and reports your CA can file from." },
-  { art: "whatsapp", title: "WhatsApp in Hindi & English", hi: "हिंदी में बात", text: "Talk to customers in the language they prefer — automatically." },
-  { art: "maps", title: "Found on Google Maps", hi: "“पास में” सर्च", text: "Show up when nearby customers search “near me” on their phone." },
+export const techStack = [
+  { name: "React", icon: "siReact" },
+  { name: "Next.js", icon: "siNextdotjs" },
+  { name: "Node.js", icon: "siNodedotjs" },
+  { name: "PHP", icon: "siPhp" },
+  { name: "Laravel", icon: "siLaravel" },
+  { name: "PostgreSQL", icon: "siPostgresql" },
+  { name: "MySQL", icon: "siMysql" },
+  { name: "MongoDB", icon: "siMongodb" },
+  { name: "AWS", icon: null },
+  { name: "Docker", icon: "siDocker" },
+  { name: "WordPress", icon: "siWordpress" },
+  { name: "Tailwind CSS", icon: "siTailwindcss" },
+  { name: "Flutter", icon: "siFlutter" },
+  { name: "Firebase", icon: "siFirebase" },
 ];
+
+/*
+  Testimonials — add REAL client reviews only (with their permission).
+  Example:
+  { quote: "…", name: "Client name", role: "Owner", business: "Business name, City", rating: 5 }
+  While this list is empty, the homepage shows an honest "reviews coming soon" block.
+*/
+export const testimonials = [];

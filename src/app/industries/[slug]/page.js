@@ -4,6 +4,7 @@ import { ArrowRight, Check, X } from "lucide-react";
 import PageHero from "@/components/PageHero";
 import CtaBanner from "@/components/CtaBanner";
 import Icon from "@/components/Icon";
+import Image from "next/image";
 import IndustryArt from "@/components/india/IndustryArt";
 import { industries, getIndustry, getService } from "@/lib/data";
 import { pageMeta } from "@/lib/site";
@@ -41,7 +42,13 @@ export default async function IndustryPage({ params }) {
         ]}
       >
         <p className="mt-4 text-xl font-bold text-marigold-400">{i.hi}</p>
-        <IndustryArt slug={i.slug} className="pointer-events-none absolute right-8 top-1/2 hidden size-56 -translate-y-1/3 rotate-3 drop-shadow-2xl lg:block" />
+        {i.image ? (
+          <div className="absolute right-8 top-1/2 hidden w-80 -translate-y-1/3 rotate-2 overflow-hidden rounded-3xl border-4 border-white/15 shadow-2xl xl:block">
+            <Image src={i.image} alt={i.imageAlt} width={760} height={520} sizes="320px" priority className="h-auto w-full" />
+          </div>
+        ) : (
+          <IndustryArt slug={i.slug} className="pointer-events-none absolute right-8 top-1/2 hidden size-56 -translate-y-1/3 rotate-3 drop-shadow-2xl lg:block" />
+        )}
       </PageHero>
 
       <section className="container-x grid gap-6 py-16 sm:py-20 md:grid-cols-2">

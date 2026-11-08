@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { pageMeta } from "@/lib/site";
 import PageHero from "@/components/PageHero";
 import CtaBanner from "@/components/CtaBanner";
@@ -43,6 +44,9 @@ export default function AboutPage() {
           </p>
         </div>
         <div className="grid gap-5 self-start">
+          <div className="overflow-hidden rounded-3xl shadow-xl shadow-brand-900/10">
+            <Image src="/images/developer-workspace.webp" alt="Indian web developer working on a laptop at his desk" width={720} height={540} sizes="(min-width: 1024px) 560px, 100vw" className="h-auto w-full" />
+          </div>
           {values.map((v, i) => (
             <div key={v.title} className="card flex gap-5 p-6">
               <span className="grid size-10 shrink-0 place-items-center rounded-full bg-brand-600 font-bold text-white">{i + 1}</span>

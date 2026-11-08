@@ -4,7 +4,8 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
 import JsonLd from "@/components/JsonLd";
-import { site, absoluteUrl } from "@/lib/site";
+import RevealObserver from "@/components/RevealObserver";
+import { site, absoluteUrl, hasRealPhone } from "@/lib/site";
 import { services } from "@/lib/data";
 
 const jakarta = Plus_Jakarta_Sans({
@@ -24,12 +25,21 @@ const mukta = Mukta({
 export const metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: "Siddhi Info — Websites, Billing & Digital Marketing for Indian Small Businesses",
+    default: "Siddhi Info – Website & Software Development Company in India",
     template: "%s | Siddhi Info",
   },
   description: site.description,
   applicationName: site.name,
   keywords: [
+    "website development company in India",
+    "affordable website development",
+    "website developer in Kolkata",
+    "e-commerce website development India",
+    "custom software development",
+    "mobile app development India",
+    "CRM ERP software for small business",
+    "WhatsApp automation for business",
+    "digital marketing services India",
     "website development for small business India",
     "small business website India",
     "GST billing software",
@@ -52,12 +62,12 @@ export const metadata = {
     locale: "en_IN",
     url: site.url,
     siteName: site.name,
-    title: "Siddhi Info — Digital solutions for Indian small businesses",
+    title: "Siddhi Info – Your Digital Growth Partner",
     description: site.description,
   },
   twitter: {
     card: "summary_large_image",
-    title: "Siddhi Info — Digital solutions for Indian small businesses",
+    title: "Siddhi Info – Your Digital Growth Partner",
     description: site.description,
   },
   robots: {
@@ -72,7 +82,7 @@ export const metadata = {
 };
 
 export const viewport = {
-  themeColor: "#071433",
+  themeColor: "#170f44",
   width: "device-width",
   initialScale: 1,
 };
@@ -88,8 +98,10 @@ const orgSchema = {
       logo: absoluteUrl("/logo-512.png"),
       image: absoluteUrl("/opengraph-image.png"),
       description: site.description,
+      slogan: site.tagline,
       email: site.email,
-      telephone: site.phone,
+      // Only published once a real number is set in src/lib/site.js
+      ...(hasRealPhone ? { telephone: site.phone } : {}),
       priceRange: "₹₹",
       areaServed: { "@type": "Country", name: "India" },
       address: {
@@ -110,7 +122,7 @@ const orgSchema = {
       sameAs: Object.values(site.social).filter(Boolean),
       hasOfferCatalog: {
         "@type": "OfferCatalog",
-        name: "Digital services for small businesses",
+        name: "Website, software & digital marketing services",
         itemListElement: services.map((s) => ({
           "@type": "Offer",
           itemOffered: { "@type": "Service", name: s.title, url: absoluteUrl(`/services/${s.slug}/`) },
@@ -130,7 +142,11 @@ const orgSchema = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en-IN" className={`${jakarta.variable} ${mukta.variable}`}>
+    <html lang="en-IN" className={`${jakarta.variable} ${mukta.variable}`} suppressHydrationWarning>
+      <head>
+        {/* Enables scroll-reveal styles only when JS runs, so content is never hidden without it */}
+        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
+      </head>
       <body className="flex min-h-screen flex-col font-sans">
         <JsonLd data={orgSchema} />
         <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-lg focus:bg-white focus:px-4 focus:py-2 focus:shadow">
@@ -140,6 +156,7 @@ export default function RootLayout({ children }) {
         <main id="main" className="flex-1">{children}</main>
         <Footer />
         <WhatsAppFloat />
+        <RevealObserver />
       </body>
     </html>
   );

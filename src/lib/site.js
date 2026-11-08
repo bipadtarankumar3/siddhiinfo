@@ -4,9 +4,9 @@ export const site = {
   name: "Siddhi Info",
   legalName: "Siddhi Info",
   url: "https://siddhiinfo.in",
-  tagline: "Digital solutions for Indian small businesses",
+  tagline: "Your Digital Growth Partner",
   description:
-    "Siddhi Info helps Indian small businesses grow online with affordable websites, online stores, GST billing software, WhatsApp automation, local SEO and Google Business Profile setup.",
+    "Siddhi Info is your technology partner — from websites and online stores to mobile apps, CRM/ERP, GST billing, WhatsApp automation and digital marketing for Indian businesses.",
   // TODO: replace with your real contact details
   email: "info@siddhiinfo.in",
   phone: "+91 90000 00000",
@@ -27,8 +27,12 @@ export const site = {
   },
 };
 
+// true once a real phone number replaces the placeholder above
+export const hasRealPhone = !site.phone.includes("90000 00000");
+
 export const nav = [
   { label: "Services", href: "/services/" },
+  { label: "Our Work", href: "/#work" },
   { label: "Industries", href: "/industries/" },
   { label: "Pricing", href: "/pricing/" },
   { label: "Blog", href: "/blog/" },
