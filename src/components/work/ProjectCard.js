@@ -123,7 +123,7 @@ function ProjectDialog({ p }) {
           <h4 className="font-bold">{live ? "About this project" : "About this concept"}</h4>
           <p className="mt-2 text-sm leading-relaxed text-slate-600">{p.description}</p>
           {!live && (
-            <p className="mt-3 rounded-xl bg-saffron-50 p-3 text-xs text-saffron-600 ring-1 ring-saffron-100">
+            <p className="mt-3 rounded-xl bg-saffron-50 p-3 text-xs text-mint-700 ring-1 ring-saffron-100">
               This is an illustrative demo design with a fictional brand — not a client project.
             </p>
           )}

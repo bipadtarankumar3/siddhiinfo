@@ -82,7 +82,7 @@ export const metadata = {
 };
 
 export const viewport = {
-  themeColor: "#170f44",
+  themeColor: "#071a40",
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover", // lets fixed elements respect iPhone safe areas

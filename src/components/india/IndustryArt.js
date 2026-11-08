@@ -118,10 +118,10 @@ art["ngos-csr"] = (
 art["startups-entrepreneurs"] = (
   <>
     <Bg c="#f0efff" />
-    <path d="M32 8 c10 6 14 18 12 30 l-6 6 h-12 l-6 -6 c-2 -12 2 -24 12 -30 Z" fill="#5839dc" />
+    <path d="M32 8 c10 6 14 18 12 30 l-6 6 h-12 l-6 -6 c-2 -12 2 -24 12 -30 Z" fill="#1668b5" />
     <circle cx="32" cy="26" r="5" fill="#fff" />
-    <circle cx="32" cy="26" r="2.5" fill="#2f7bff" />
-    <path d="M20 38 l-8 8 l10 0 Z M44 38 l8 8 l-10 0 Z" fill="#8578f5" />
+    <circle cx="32" cy="26" r="2.5" fill="#14b8d6" />
+    <path d="M20 38 l-8 8 l10 0 Z M44 38 l8 8 l-10 0 Z" fill="#38a6e3" />
     <path d="M27 46 q5 12 10 0" fill="#f97316" />
     <path d="M30 46 q2 7 4 0" fill="#fbbf24" />
   </>

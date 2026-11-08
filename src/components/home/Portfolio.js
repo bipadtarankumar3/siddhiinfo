@@ -23,7 +23,7 @@ export default function Portfolio() {
             <BadgeCheck className="size-4 shrink-0" aria-hidden="true" /> {liveCount} live projects you can visit today
           </span>
           <span className="flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-slate-200 ring-1 ring-white/15">
-            <Info className="size-4 shrink-0 text-saffron-300" aria-hidden="true" /> Concept demos use fictional brand names
+            <Info className="size-4 shrink-0 text-mint-300" aria-hidden="true" /> Concept demos use fictional brand names
           </span>
         </div>
 

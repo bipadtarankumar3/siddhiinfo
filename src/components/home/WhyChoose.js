@@ -8,19 +8,19 @@ function PromiseArt() {
     <svg viewBox="0 0 320 240" className="w-full" aria-hidden="true">
       <defs>
         <linearGradient id="pa-shield" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#8578f5" />
-          <stop offset="1" stopColor="#2f7bff" />
+          <stop offset="0" stopColor="#38a6e3" />
+          <stop offset="1" stopColor="#14b8d6" />
         </linearGradient>
       </defs>
       <rect x="30" y="40" width="190" height="130" rx="14" fill="#fff" opacity="0.95" />
-      <rect x="30" y="40" width="190" height="22" rx="14" fill="#e3e1ff" />
-      <rect x="30" y="52" width="190" height="10" fill="#e3e1ff" />
-      {[44, 52, 60].map((x) => <circle key={x} cx={x} cy="51" r="3" fill="#a7a0fb" />)}
-      <text x="48" y="92" fontSize="13" fontFamily="monospace" fill="#5839dc">&lt;/&gt;</text>
-      <rect x="76" y="84" width="80" height="7" rx="3.5" fill="#c9c5ff" />
+      <rect x="30" y="40" width="190" height="22" rx="14" fill="#d8eefc" />
+      <rect x="30" y="52" width="190" height="10" fill="#d8eefc" />
+      {[44, 52, 60].map((x) => <circle key={x} cx={x} cy="51" r="3" fill="#7cc4ef" />)}
+      <text x="48" y="92" fontSize="13" fontFamily="monospace" fill="#1668b5">&lt;/&gt;</text>
+      <rect x="76" y="84" width="80" height="7" rx="3.5" fill="#b0dcf7" />
       <rect x="48" y="102" width="120" height="7" rx="3.5" fill="#bfdbfe" />
       <rect x="48" y="120" width="96" height="7" rx="3.5" fill="#fed7aa" />
-      <rect x="48" y="138" width="60" height="18" rx="9" fill="#5839dc" />
+      <rect x="48" y="138" width="60" height="18" rx="9" fill="#1668b5" />
       <path d="M232 46 l52 18 v40 c0 34 -24 56 -52 66 c-28 -10 -52 -32 -52 -66 v-40 Z" fill="url(#pa-shield)" />
       <path d="M210 108 l16 16 l30 -32" stroke="#fff" strokeWidth="9" fill="none" strokeLinecap="round" strokeLinejoin="round" />
       <g transform="translate(250 190)">

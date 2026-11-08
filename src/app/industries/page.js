@@ -42,7 +42,7 @@ export default function IndustriesPage() {
                   className="size-full object-cover transition duration-700 group-hover:scale-105"
                 />
               ) : (
-                <div className="grid size-full place-items-center bg-gradient-to-br from-brand-50 to-saffron-50">
+                <div className="grid size-full place-items-center bg-gradient-to-br from-brand-50 to-mint-50">
                   <IndustryArt slug={i.slug} className="size-24" />
                 </div>
               )}
@@ -50,7 +50,7 @@ export default function IndustriesPage() {
               <span className="absolute left-4 top-4 rounded-2xl bg-white/95 p-1.5 shadow-lg">
                 <IndustryArt slug={i.slug} className="size-10" />
               </span>
-              <p className="absolute bottom-3 left-5 right-5 text-sm font-semibold text-saffron-300">{i.hi}</p>
+              <p className="absolute bottom-3 left-5 right-5 text-sm font-semibold text-mint-300">{i.hi}</p>
             </div>
             <div className="flex flex-1 flex-col p-6">
               <h2 className="text-xl font-bold text-ink">
@@ -72,13 +72,13 @@ export default function IndustriesPage() {
         ))}
         <aside data-reveal className="bg-hero relative flex flex-col justify-center overflow-hidden rounded-[1.25rem] p-8 text-white md:col-span-2 sm:p-10">
           <div aria-hidden="true" className="bg-dots absolute inset-0" />
-          <div aria-hidden="true" className="animate-blob absolute -right-16 -top-16 size-64 rounded-full bg-saffron-500/25 blur-3xl" />
+          <div aria-hidden="true" className="animate-blob absolute -right-16 -top-16 size-64 rounded-full bg-mint-400/25 blur-3xl" />
           <div className="relative">
             <p className="eyebrow eyebrow-dark">Don’t see your industry?</p>
             <h2 className="mt-3 text-2xl font-extrabold tracking-tight sm:text-3xl">We work with every kind of business.</h2>
             <p className="mt-3 max-w-xl text-slate-300">
               Transport, events, agriculture, tuition, jewellery, pharma, hotels — tell us how your business works and we
-              will suggest the right digital tools. <span className="text-saffron-300">आपका बिज़नेस जो भी हो।</span>
+              will suggest the right digital tools. <span className="text-mint-300">आपका बिज़नेस जो भी हो।</span>
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <Link href="/contact/" className="btn btn-light">Talk to us <ArrowRight className="size-4" aria-hidden="true" /></Link>

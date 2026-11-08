@@ -20,7 +20,7 @@ export default function CtaBanner({
       <div data-reveal className="bg-hero relative overflow-hidden rounded-[2rem] text-white shadow-2xl shadow-brand-900/30">
         <div aria-hidden="true" className="pointer-events-none absolute inset-0">
           <div className="animate-blob absolute -left-24 -top-24 size-80 rounded-full bg-brand-500/40 blur-3xl" />
-          <div className="animate-blob-slow absolute -bottom-32 right-1/4 size-96 rounded-full bg-saffron-500/20 blur-3xl" />
+          <div className="animate-blob-slow absolute -bottom-32 right-1/4 size-96 rounded-full bg-mint-400/20 blur-3xl" />
           <div className="bg-dots absolute inset-0" />
         </div>
 
@@ -30,7 +30,7 @@ export default function CtaBanner({
             <p className="eyebrow eyebrow-dark">Start your project</p>
             <h2 className="mt-4 text-3xl font-extrabold leading-tight tracking-tight text-balance sm:text-[2.6rem]">{title}</h2>
             <p className="mt-4 text-lg text-slate-300">{text}</p>
-            <p className="mt-2 font-semibold text-saffron-300">पहली बातचीत बिल्कुल मुफ़्त है।</p>
+            <p className="mt-2 font-semibold text-mint-300">पहली बातचीत बिल्कुल मुफ़्त है।</p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link href="/contact/" className="btn btn-light">
                 Start Your Project <ArrowRight className="size-4" aria-hidden="true" />
@@ -47,12 +47,12 @@ export default function CtaBanner({
             <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-slate-300">
               <li>
                 <a href={`tel:${tel}`} className="inline-flex min-h-10 items-center gap-2 hover:text-white">
-                  <Phone className="size-4 text-saffron-300" aria-hidden="true" /> {site.phone}
+                  <Phone className="size-4 text-mint-300" aria-hidden="true" /> {site.phone}
                 </a>
               </li>
               <li>
                 <a href={`mailto:${site.email}`} className="inline-flex min-h-10 items-center gap-2 hover:text-white">
-                  <Mail className="size-4 text-saffron-300" aria-hidden="true" /> {site.email}
+                  <Mail className="size-4 text-mint-300" aria-hidden="true" /> {site.email}
                 </a>
               </li>
             </ul>
@@ -76,7 +76,7 @@ export default function CtaBanner({
                 <li key={t} className="flex gap-4 rounded-2xl bg-white/[0.06] p-4 ring-1 ring-white/10">
                   <span className="relative grid size-10 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-brand-500 to-electric-500">
                     <I className="size-5" aria-hidden="true" />
-                    <span className="absolute -right-1.5 -top-1.5 grid size-5 place-items-center rounded-full bg-saffron-500 text-[11px] font-bold ring-2 ring-[#1b1460]">{i + 1}</span>
+                    <span className="absolute -right-1.5 -top-1.5 grid size-5 place-items-center rounded-full bg-mint-600 text-[11px] font-bold ring-2 ring-[#0b2a63]">{i + 1}</span>
                   </span>
                   <span>
                     <span className="block font-semibold">{t}</span>

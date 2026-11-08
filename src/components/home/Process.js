@@ -23,10 +23,10 @@ export default function Process() {
             )}
             <span className="relative z-10 grid size-16 shrink-0 place-items-center rounded-2xl bg-white shadow-xl shadow-brand-900/10 ring-1 ring-brand-100">
               <span className="icon-tile size-12"><Icon name={s.icon} className="size-6" /></span>
-              <span className="absolute -right-2 -top-2 grid size-6 place-items-center rounded-full bg-saffron-500 text-xs font-bold text-white ring-2 ring-white">{i + 1}</span>
+              <span className="absolute -right-2 -top-2 grid size-6 place-items-center rounded-full bg-mint-600 text-xs font-bold text-white ring-2 ring-white">{i + 1}</span>
             </span>
             <div className="pt-1 xl:mt-5 xl:pt-0">
-              <p className="text-xs font-semibold text-saffron-600">{s.hi}</p>
+              <p className="text-xs font-semibold text-mint-700">{s.hi}</p>
               <h3 className="mt-0.5 font-bold text-ink">{s.title}</h3>
               <p className="mt-1.5 text-sm leading-relaxed text-slate-600">{s.text}</p>
             </div>

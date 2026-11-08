@@ -16,7 +16,7 @@ export default function PricingCards() {
             }`}
           >
             {p.featured && (
-              <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 rounded-full bg-saffron-500 px-4 py-1 text-xs font-bold uppercase tracking-wide text-white shadow-lg">
+              <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 rounded-full bg-mint-600 px-4 py-1 text-xs font-bold uppercase tracking-wide text-white shadow-lg">
                 Most popular
               </span>
             )}
@@ -35,7 +35,7 @@ export default function PricingCards() {
                 [LifeBuoy, "Support", p.support],
               ].map(([I, k, v]) => (
                 <div key={k} className="flex gap-2.5">
-                  <I className={`mt-0.5 size-4 shrink-0 ${p.featured ? "text-saffron-300" : "text-brand-600"}`} aria-hidden="true" />
+                  <I className={`mt-0.5 size-4 shrink-0 ${p.featured ? "text-mint-300" : "text-brand-600"}`} aria-hidden="true" />
                   <div>
                     <dt className={`text-xs font-semibold uppercase tracking-wide ${p.featured ? "text-brand-200" : "text-slate-500"}`}>{k}</dt>
                     <dd className={p.featured ? "text-white" : "text-slate-700"}>{v}</dd>

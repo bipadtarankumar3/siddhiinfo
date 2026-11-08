@@ -55,7 +55,7 @@ export default function Collaboration() {
             From your first discussion to the final launch, our developers work closely with you to understand your
             business, build the right solution and provide ongoing support.
           </p>
-          <p data-reveal className="mt-3 font-semibold text-saffron-600">आप बताइए, हम बनाएँगे — और साथ भी रहेंगे।</p>
+          <p data-reveal className="mt-3 font-semibold text-mint-700">आप बताइए, हम बनाएँगे — और साथ भी रहेंगे।</p>
           <ul className="mt-8 grid gap-4 sm:grid-cols-2">
             {points.map(({ icon: I, title, text }, i) => (
               <li key={title} data-reveal style={{ "--reveal-delay": `${i * 60}ms` }} className="flex gap-3 rounded-2xl bg-white/80 p-4 ring-1 ring-brand-100 backdrop-blur">

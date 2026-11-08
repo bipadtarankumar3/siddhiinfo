@@ -1,45 +1,46 @@
 @import "tailwindcss";
 
 /*
-  Siddhi Info design system
-  Primary  : deep indigo / royal purple  (brand-*)
-  Secondary: electric blue               (electric-*, aqua-* from the logo)
-  Accent   : saffron / marigold           (saffron-*, marigold-*)
-  Surfaces : white + very light lavender  (lavender-*)
-  Text     : deep navy                    (ink)
+  Siddhi Info design system — colours taken from the logo
+  Primary  : royal blue           (brand-*)
+  Secondary: cyan                 (electric-*, aqua-*)
+  Accent   : mint green           (mint-*)
+  Surfaces : white + light sky    (lavender-* = soft blue tint)
+  Text     : deep navy            (ink)
+  Saffron / marigold stay for Indian touches only (tricolour, sunset, badges).
 */
 @theme {
   --font-sans: var(--font-jakarta), var(--font-hindi), ui-sans-serif, system-ui, sans-serif;
 
   --spacing-18: 4.5rem;
 
-  --color-ink: #0b1035;
-  --color-navy: #161a4d;
+  --color-ink: #061430;
+  --color-navy: #0b2a63;
 
-  --color-brand-50: #f0efff;
-  --color-brand-100: #e3e1ff;
-  --color-brand-200: #c9c5ff;
-  --color-brand-300: #a7a0fb;
-  --color-brand-400: #8578f5;
-  --color-brand-500: #6a55ec;
-  --color-brand-600: #5839dc;
-  --color-brand-700: #482bbb;
-  --color-brand-800: #3a2496;
-  --color-brand-900: #2a1b6e;
-  --color-brand-950: #170f44;
+  --color-brand-50: #eef7ff;
+  --color-brand-100: #d8eefc;
+  --color-brand-200: #b0dcf7;
+  --color-brand-300: #7cc4ef;
+  --color-brand-400: #38a6e3;
+  --color-brand-500: #1b86d0;
+  --color-brand-600: #1668b5;
+  --color-brand-700: #144f94;
+  --color-brand-800: #133f78;
+  --color-brand-900: #0f2a6b;
+  --color-brand-950: #071a40;
 
-  --color-electric-300: #93c5fd;
-  --color-electric-400: #5aa2ff;
-  --color-electric-500: #2f7bff;
-  --color-electric-600: #1d5fe6;
+  --color-electric-300: #67e8f9;
+  --color-electric-400: #22d3ee;
+  --color-electric-500: #14b8d6;
+  --color-electric-600: #0e8fab;
 
   --color-aqua-300: #67e8f9;
   --color-aqua-400: #22d3ee;
   --color-aqua-500: #14b8d6;
 
-  --color-lavender-50: #f8f7ff;
-  --color-lavender-100: #f1eefe;
-  --color-lavender-200: #e6e1fc;
+  --color-lavender-50: #f3f9fe;
+  --color-lavender-100: #e8f3fc;
+  --color-lavender-200: #d3e8f8;
 
   --color-mint-50: #ecfdf5;
   --color-mint-100: #d1fae5;
@@ -127,9 +128,9 @@ body {
 
 @utility btn-primary {
   color: #fff;
-  background-image: linear-gradient(135deg, var(--color-brand-700), var(--color-brand-500) 55%, var(--color-electric-500));
-  box-shadow: 0 10px 30px -10px rgb(88 57 220 / 0.65), inset 0 1px 0 rgb(255 255 255 / 0.15);
-  &:hover { filter: brightness(1.12); box-shadow: 0 14px 34px -10px rgb(88 57 220 / 0.75), inset 0 1px 0 rgb(255 255 255 / 0.15); }
+  background-image: linear-gradient(135deg, var(--color-brand-800), var(--color-brand-600) 60%, var(--color-brand-500));
+  box-shadow: 0 10px 30px -10px rgb(22 104 181 / 0.65), inset 0 1px 0 rgb(255 255 255 / 0.15);
+  &:hover { filter: brightness(1.12); box-shadow: 0 14px 34px -10px rgb(22 104 181 / 0.75), inset 0 1px 0 rgb(255 255 255 / 0.15); }
 }
 
 @utility btn-light {
@@ -169,7 +170,7 @@ body {
     width: 1.5rem;
     height: 2px;
     border-radius: 2px;
-    background: linear-gradient(90deg, var(--color-brand-500), var(--color-saffron-500));
+    background: linear-gradient(90deg, var(--color-brand-500), var(--color-mint-400));
   }
 }
 
@@ -188,14 +189,14 @@ body {
 }
 
 @utility text-gradient {
-  background-image: linear-gradient(100deg, var(--color-brand-600) 0%, var(--color-electric-500) 60%, var(--color-aqua-500) 100%);
+  background-image: linear-gradient(100deg, var(--color-brand-600) 0%, var(--color-electric-500) 55%, var(--color-mint-500) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
 @utility text-gradient-light {
-  background-image: linear-gradient(100deg, #c4b5fd 0%, var(--color-electric-300) 45%, var(--color-saffron-300) 100%);
+  background-image: linear-gradient(100deg, #93c5fd 0%, var(--color-electric-300) 45%, var(--color-mint-300) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -214,7 +215,7 @@ body {
   &:hover {
     transform: translateY(-4px);
     border-color: var(--color-brand-200);
-    box-shadow: 0 24px 48px -24px rgb(42 27 110 / 0.35);
+    box-shadow: 0 24px 48px -24px rgb(15 42 107 / 0.35);
   }
 }
 
@@ -226,7 +227,7 @@ body {
     position: absolute;
     inset: 0 0 auto 0;
     height: 3px;
-    background: linear-gradient(90deg, var(--color-brand-600), var(--color-electric-500), var(--color-saffron-500));
+    background: linear-gradient(90deg, var(--color-brand-600), var(--color-electric-400), var(--color-mint-400));
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 350ms ease;
@@ -239,8 +240,8 @@ body {
   place-items: center;
   border-radius: 0.9rem;
   color: #fff;
-  background-image: linear-gradient(135deg, var(--color-brand-700) 0%, var(--color-brand-500) 55%, var(--color-electric-500) 100%);
-  box-shadow: 0 10px 24px -10px rgb(88 57 220 / 0.7), inset 0 1px 0 rgb(255 255 255 / 0.2);
+  background-image: linear-gradient(135deg, var(--color-brand-800) 0%, var(--color-brand-500) 60%, var(--color-electric-400) 100%);
+  box-shadow: 0 10px 24px -10px rgb(22 104 181 / 0.7), inset 0 1px 0 rgb(255 255 255 / 0.2);
 }
 
 @utility icon-tile-soft {
@@ -256,10 +257,10 @@ body {
 @utility bg-hero {
   background-color: var(--color-brand-950);
   background-image:
-    radial-gradient(55rem 30rem at 90% -10%, rgb(47 123 255 / 0.35), transparent 60%),
-    radial-gradient(50rem 32rem at -10% 10%, rgb(106 85 236 / 0.55), transparent 60%),
-    radial-gradient(40rem 25rem at 70% 115%, rgb(249 115 22 / 0.22), transparent 60%),
-    linear-gradient(160deg, var(--color-brand-950), var(--color-navy) 55%, #1b1460);
+    radial-gradient(55rem 30rem at 90% -10%, rgb(34 211 238 / 0.25), transparent 60%),
+    radial-gradient(50rem 32rem at -10% 10%, rgb(27 134 208 / 0.45), transparent 60%),
+    radial-gradient(40rem 25rem at 70% 115%, rgb(95 224 160 / 0.20), transparent 60%),
+    linear-gradient(160deg, var(--color-brand-950), var(--color-navy) 55%, #0c3a7a);
 }
 
 @utility bg-dots {
@@ -269,7 +270,7 @@ body {
 }
 
 @utility bg-dots-light {
-  background-image: radial-gradient(rgb(42 27 110 / 0.10) 1px, transparent 1px);
+  background-image: radial-gradient(rgb(15 42 107 / 0.10) 1px, transparent 1px);
   background-size: 22px 22px;
 }
 
@@ -300,7 +301,7 @@ body {
   &:focus {
     outline: none;
     border-color: var(--color-brand-500);
-    box-shadow: 0 0 0 4px rgb(106 85 236 / 0.15);
+    box-shadow: 0 0 0 4px rgb(27 134 208 / 0.15);
   }
 }
 
@@ -328,7 +329,7 @@ body {
     height: 2px;
     width: 1.75rem;
     border-radius: 2px;
-    background: linear-gradient(90deg, var(--color-saffron-500), transparent);
+    background: linear-gradient(90deg, var(--color-mint-400), transparent);
   }
 }
 
@@ -375,8 +376,8 @@ body {
 @utility bg-lavender-mesh {
   background-color: var(--color-lavender-50);
   background-image:
-    radial-gradient(40rem 20rem at 0% 0%, rgb(201 197 255 / 0.45), transparent 60%),
-    radial-gradient(36rem 20rem at 100% 100%, rgb(253 186 116 / 0.22), transparent 60%);
+    radial-gradient(40rem 20rem at 0% 0%, rgb(176 220 247 / 0.45), transparent 60%),
+    radial-gradient(36rem 20rem at 100% 100%, rgb(134 239 191 / 0.22), transparent 60%);
 }
 
 @keyframes float {

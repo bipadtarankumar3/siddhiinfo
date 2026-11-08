@@ -42,7 +42,7 @@ export default function WorkPage() {
             <BadgeCheck className="size-4" aria-hidden="true" /> {live.length} live projects
           </span>
           <span className="glass inline-flex items-center gap-2 rounded-full px-4 py-2 text-slate-200">
-            <Lightbulb className="size-4 text-saffron-300" aria-hidden="true" /> {concepts.length} concept demos
+            <Lightbulb className="size-4 text-mint-300" aria-hidden="true" /> {concepts.length} concept demos
           </span>
         </div>
       </PageHero>

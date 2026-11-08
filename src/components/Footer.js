@@ -19,25 +19,25 @@ export default function Footer() {
   const contacts = [
     { icon: WhatsAppIcon, label: "WhatsApp", value: "Chat with us", href: whatsappLink(), ext: true, tint: "from-[#25D366] to-[#128C7E]" },
     { icon: Phone, label: "Call us", value: site.phone, href: `tel:${tel}`, tint: "from-brand-500 to-electric-500" },
-    { icon: Mail, label: "Email", value: site.email, href: `mailto:${site.email}`, tint: "from-saffron-500 to-marigold-500" },
-    { icon: MapPin, label: "Office", value: `${site.address.city}, ${site.address.region}`, tint: "from-rose-500 to-saffron-500" },
+    { icon: Mail, label: "Email", value: site.email, href: `mailto:${site.email}`, tint: "from-electric-500 to-brand-600" },
+    { icon: MapPin, label: "Office", value: `${site.address.city}, ${site.address.region}`, tint: "from-mint-500 to-electric-600" },
   ];
 
   return (
     <footer className="relative text-slate-300">
       {/* ---------- sunset sky with Indian skyline ---------- */}
       <div aria-hidden="true" className="relative overflow-hidden bg-gradient-to-b from-white via-saffron-50 to-[#ffc9a3]">
-        <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-b from-transparent via-[#f4a3a8]/50 to-[#7b5cd6]/60" />
+        <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-b from-transparent via-[#f4a3a8]/50 to-[#2b6cc4]/60" />
         <div className="absolute bottom-[-30%] left-1/2 size-[22rem] -translate-x-1/2 rounded-full bg-gradient-to-b from-[#ffd36e] to-[#ff8a3d] opacity-90 sm:size-[30rem]" />
         <div className="absolute bottom-[-30%] left-1/2 size-[34rem] -translate-x-1/2 rounded-full bg-[#ffb35c]/30 blur-3xl sm:size-[46rem]" />
         <Skyline fit="xMidYMax slice" className="relative -mb-px block h-28 w-full text-brand-950 sm:h-40 lg:h-auto" />
       </div>
 
       {/* ---------- main footer body ---------- */}
-      <div className="relative overflow-hidden bg-gradient-to-b from-brand-950 via-[#120c38] to-ink">
+      <div className="relative overflow-hidden bg-gradient-to-b from-brand-950 via-[#0a1d4a] to-ink">
         <Jali uid="footer-jali" className="pointer-events-none absolute inset-0" opacity={0.06} />
         <Rangoli className="pointer-events-none absolute -left-40 top-24 hidden w-[30rem] text-brand-300 opacity-[0.08] lg:block" />
-        <Rangoli className="pointer-events-none absolute -bottom-40 -right-40 w-[26rem] text-saffron-300 opacity-[0.08]" />
+        <Rangoli className="pointer-events-none absolute -bottom-40 -right-40 w-[26rem] text-mint-300 opacity-[0.08]" />
         <div aria-hidden="true" className="animate-blob absolute left-1/3 top-10 size-96 rounded-full bg-brand-600/20 blur-3xl" />
 
         <div className="container-x relative">
@@ -51,7 +51,7 @@ export default function Footer() {
                 <p className="text-2xl font-extrabold tracking-tight text-white sm:text-3xl">
                   Siddhi <span className="text-gradient-light">Info</span>
                 </p>
-                <p className="mt-1 text-xs font-bold uppercase tracking-[0.2em] text-saffron-300 sm:text-sm">{site.tagline}</p>
+                <p className="mt-1 text-xs font-bold uppercase tracking-[0.2em] text-mint-300 sm:text-sm">{site.tagline}</p>
                 <p className="mt-1.5 text-slate-400">आपका बिज़नेस, हमारी टेक्नोलॉजी।</p>
               </div>
             </div>
@@ -90,8 +90,8 @@ export default function Footer() {
               <h2 className="footer-title">About Siddhi Info</h2>
               <p className="mt-4 max-w-sm leading-relaxed text-slate-400">{site.description}</p>
               <ul className="mt-5 space-y-2.5 text-sm">
-                <li className="flex items-center gap-3"><MapPin className="size-4 shrink-0 text-saffron-300" aria-hidden="true" />{site.address.city}, {site.address.region}, India</li>
-                <li className="flex items-center gap-3"><Clock className="size-4 shrink-0 text-saffron-300" aria-hidden="true" />{site.hours}</li>
+                <li className="flex items-center gap-3"><MapPin className="size-4 shrink-0 text-mint-300" aria-hidden="true" />{site.address.city}, {site.address.region}, India</li>
+                <li className="flex items-center gap-3"><Clock className="size-4 shrink-0 text-mint-300" aria-hidden="true" />{site.hours}</li>
               </ul>
               <Social />
               <span className="mt-6 inline-flex items-center gap-2.5 rounded-full bg-white/[0.06] px-4 py-2 text-sm font-semibold text-white ring-1 ring-white/10">
@@ -133,7 +133,7 @@ export default function Footer() {
           <div className="rounded-3xl bg-white/[0.04] p-5 ring-1 ring-white/10 sm:p-6">
             <div className="flex flex-wrap items-center justify-between gap-3">
               <h2 className="footer-title">Our live work</h2>
-              <Link href="/work/" className="inline-flex min-h-10 items-center gap-1 text-sm font-semibold text-saffron-300 hover:text-saffron-200">
+              <Link href="/work/" className="inline-flex min-h-10 items-center gap-1 text-sm font-semibold text-mint-300 hover:text-mint-200">
                 See all projects <ArrowRight className="size-4" aria-hidden="true" />
               </Link>
             </div>
@@ -160,7 +160,7 @@ export default function Footer() {
           {/* cities ribbon */}
           <div className="py-10">
             <p className="text-center text-sm text-slate-400">
-              Serving businesses across Bharat <span className="text-saffron-300">— आप जहाँ भी हों, हम साथ हैं।</span>
+              Serving businesses across Bharat <span className="text-mint-300">— आप जहाँ भी हों, हम साथ हैं।</span>
             </p>
             <div className="relative mt-4 overflow-hidden [mask-image:linear-gradient(90deg,transparent,black_10%,black_90%,transparent)]">
               <ul className="animate-marquee flex w-max gap-3" aria-label="Cities we serve">
@@ -200,7 +200,7 @@ export default function Footer() {
 function FooterLink({ href, children }) {
   return (
     <Link href={href} className="group inline-flex items-center gap-2 py-0.5 text-slate-300 transition hover:text-white">
-      <span aria-hidden="true" className="size-1.5 shrink-0 rotate-45 bg-saffron-400/60 transition group-hover:bg-saffron-300" />
+      <span aria-hidden="true" className="size-1.5 shrink-0 rotate-45 bg-mint-400/60 transition group-hover:bg-mint-300" />
       {children}
     </Link>
   );

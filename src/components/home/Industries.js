@@ -34,7 +34,7 @@ export default function Industries() {
               />
               <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/20 to-transparent" />
               <p className="absolute bottom-3 left-4 right-4 text-lg font-bold leading-tight text-white">
-                <span className="block text-xs font-semibold text-saffron-300">{ind.hi}</span>
+                <span className="block text-xs font-semibold text-mint-300">{ind.hi}</span>
                 {ind.title}
               </p>
             </div>

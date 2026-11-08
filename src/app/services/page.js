@@ -96,12 +96,12 @@ export default function ServicesPage() {
         text="From your first website to apps, business software, WhatsApp automation and marketing — one dependable team, simple language and honest pricing."
         crumbs={[{ label: "Services", href: "/services/" }]}
       >
-        <p className="mt-4 text-xl font-bold text-saffron-300">वेबसाइट से लेकर पूरे बिज़नेस सॉफ़्टवेयर तक।</p>
+        <p className="mt-4 text-xl font-bold text-mint-300">वेबसाइट से लेकर पूरे बिज़नेस सॉफ़्टवेयर तक।</p>
         <ul className="mt-8 flex max-w-3xl flex-wrap gap-2">
           {services.map((s) => (
             <li key={s.slug}>
               <Link href={`/services/${s.slug}/`} className="glass inline-flex min-h-10 items-center gap-2 rounded-full px-3.5 py-2 text-sm text-slate-200 transition hover:bg-white/15 hover:text-white">
-                <Icon name={s.icon} className="size-4 text-saffron-300" /> {s.title.replace(/ (Development|Software|Solutions)$/, "")}
+                <Icon name={s.icon} className="size-4 text-mint-300" /> {s.title.replace(/ (Development|Software|Solutions)$/, "")}
               </Link>
             </li>
           ))}

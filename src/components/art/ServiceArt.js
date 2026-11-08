@@ -1,8 +1,8 @@
 // Custom service illustrations (viewBox 160×100). Colours come from the
 // service accent so every card has its own identity.
 export const accents = {
-  indigo: { a: "#5839dc", b: "#8578f5", l: "#f0efff", card: "from-brand-50 to-white", text: "text-brand-600", ring: "group-hover:ring-brand-200", chip: "bg-brand-50 text-brand-700" },
-  blue: { a: "#2f7bff", b: "#5aa2ff", l: "#eaf2ff", card: "from-blue-50 to-white", text: "text-electric-600", ring: "group-hover:ring-blue-200", chip: "bg-blue-50 text-blue-700" },
+  indigo: { a: "#1668b5", b: "#38a6e3", l: "#f0efff", card: "from-brand-50 to-white", text: "text-brand-600", ring: "group-hover:ring-brand-200", chip: "bg-brand-50 text-brand-700" },
+  blue: { a: "#14b8d6", b: "#22d3ee", l: "#eaf2ff", card: "from-blue-50 to-white", text: "text-electric-600", ring: "group-hover:ring-blue-200", chip: "bg-blue-50 text-blue-700" },
   saffron: { a: "#f97316", b: "#fdba74", l: "#fff7ed", card: "from-saffron-50 to-white", text: "text-saffron-600", ring: "group-hover:ring-saffron-200", chip: "bg-saffron-50 text-saffron-600" },
   emerald: { a: "#12936a", b: "#5fe0a0", l: "#ecfdf5", card: "from-mint-50 to-white", text: "text-mint-600", ring: "group-hover:ring-mint-200", chip: "bg-mint-50 text-mint-700" },
   green: { a: "#1faa59", b: "#25D366", l: "#ecfdf3", card: "from-green-50 to-white", text: "text-green-700", ring: "group-hover:ring-green-200", chip: "bg-green-50 text-green-700" },
@@ -206,8 +206,8 @@ const art = {
       {[[24, 20], [24, 50], [24, 80], [136, 20], [136, 50], [136, 80]].map(([x, y], i) => (
         <g key={i}>
           <path d={`M${x < 80 ? 44 : 116} ${y < 40 ? 36 : y > 60 ? 60 : 48} L${x} ${y}`} stroke={b} strokeWidth="1.5" strokeDasharray="3 3" />
-          <circle cx={x} cy={y} r="8" fill={W} stroke={i % 2 ? "#5839dc" : b} strokeWidth="2" />
-          <circle cx={x} cy={y} r="3" fill={i % 2 ? "#5839dc" : a} />
+          <circle cx={x} cy={y} r="8" fill={W} stroke={i % 2 ? "#1668b5" : b} strokeWidth="2" />
+          <circle cx={x} cy={y} r="3" fill={i % 2 ? "#1668b5" : a} />
         </g>
       ))}
       <path d="M118 8 l2.5 5 l5 2.5 l-5 2.5 l-2.5 5 l-2.5 -5 l-5 -2.5 l5 -2.5 Z" fill="#fbbf24" />
@@ -219,7 +219,7 @@ const art = {
       {[30, 30, 30].map((_, i) => <circle key={i} cx={24 + i * 7} cy="22" r="2" fill={["#f87171", "#fbbf24", "#4ade80"][i]} />)}
       <text x="24" y="44" fontSize="10" fontFamily="monospace" fill={b}>&lt;/&gt;</text>
       <rect x="44" y="37" width="40" height="4" rx="2" fill="#a78bfa" />
-      <rect x="30" y="49" width="56" height="4" rx="2" fill="#5aa2ff" />
+      <rect x="30" y="49" width="56" height="4" rx="2" fill="#22d3ee" />
       <rect x="30" y="59" width="36" height="4" rx="2" fill="#fdba74" />
       <rect x="24" y="69" width="48" height="4" rx="2" fill="#64748b" />
       <g transform="translate(122 62)">

@@ -114,7 +114,7 @@ export default async function ServicePage({ params }) {
         </div>
         <aside className="lg:sticky lg:top-24 lg:self-start">
           <div data-reveal className="card bg-hero overflow-hidden border-transparent p-7 text-white shadow-2xl shadow-brand-900/25">
-            <Sparkles className="size-6 text-saffron-300" aria-hidden="true" />
+            <Sparkles className="size-6 text-mint-300" aria-hidden="true" />
             <h2 className="mt-3 text-xl font-bold">What you get</h2>
             <ul className="mt-4 space-y-3">
               {s.outcomes.map((o) => (
@@ -159,7 +159,7 @@ export default async function ServicePage({ params }) {
           {steps.map((st, i) => (
             <li key={st.title} data-reveal style={{ "--reveal-delay": `${i * 60}ms` }} className="card p-5">
               <span className="icon-tile size-11"><Icon name={st.icon} className="size-5" /></span>
-              <p className="mt-4 text-xs font-bold text-saffron-600">Step {i + 1}</p>
+              <p className="mt-4 text-xs font-bold text-mint-700">Step {i + 1}</p>
               <h3 className="mt-0.5 font-bold text-ink">{st.title}</h3>
             </li>
           ))}
@@ -180,7 +180,7 @@ export default async function ServicePage({ params }) {
                     <IndustryArt slug={ind.slug} className="size-20 shrink-0" />
                   )}
                   <span>
-                    <span className="block text-xs font-semibold text-saffron-600">{ind.hi}</span>
+                    <span className="block text-xs font-semibold text-mint-700">{ind.hi}</span>
                     <span className="block font-bold text-ink">{ind.title}</span>
                   </span>
                 </Link>

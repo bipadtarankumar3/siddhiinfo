@@ -19,14 +19,14 @@ export default function Hero() {
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
         <div className="animate-blob absolute -left-32 top-20 size-[30rem] rounded-full bg-brand-500/30 blur-3xl" />
         <div className="animate-blob-slow absolute right-[-10rem] top-[-6rem] size-[34rem] rounded-full bg-electric-500/25 blur-3xl" />
-        <div className="animate-blob absolute bottom-[-12rem] left-1/3 size-[28rem] rounded-full bg-saffron-500/15 blur-3xl" />
+        <div className="animate-blob absolute bottom-[-12rem] left-1/3 size-[28rem] rounded-full bg-mint-400/15 blur-3xl" />
         <div className="bg-dots absolute inset-0" />
       </div>
 
       <div className="container-x relative grid items-center gap-14 pb-20 pt-12 sm:pt-16 xl:grid-cols-[1fr_1.12fr] xl:gap-10 lg:pb-28">
         <div>
           <p data-reveal className="glass inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-sm font-medium text-slate-200">
-            <Sparkles className="size-4 text-saffron-400" aria-hidden="true" />
+            <Sparkles className="size-4 text-mint-400" aria-hidden="true" />
             Your Digital Growth Partner
           </p>
           <h1 data-reveal style={{ "--reveal-delay": "80ms" }} className="mt-6 text-[2.5rem] font-extrabold leading-[1.06] tracking-tight text-balance sm:text-6xl xl:text-[3.6rem] 2xl:text-[3.9rem]">
@@ -36,7 +36,7 @@ export default function Hero() {
             We design, develop and grow digital solutions that help Indian businesses reach more customers,
             automate operations and grow faster.
           </p>
-          <p data-reveal style={{ "--reveal-delay": "220ms" }} className="mt-4 text-2xl font-bold text-saffron-400">
+          <p data-reveal style={{ "--reveal-delay": "220ms" }} className="mt-4 text-2xl font-bold text-mint-400">
             आपका बिज़नेस, हमारी टेक्नोलॉजी।
           </p>
           <div data-reveal style={{ "--reveal-delay": "280ms" }} className="mt-8 flex flex-wrap gap-3">
@@ -76,7 +76,7 @@ function HeroVisual() {
     >
       <div className="relative transition-transform duration-700 ease-out group-hover:[transform:rotateY(-5deg)_rotateX(3deg)]">
         {/* glow */}
-        <div aria-hidden="true" className="absolute inset-8 rounded-full bg-gradient-to-tr from-brand-500/40 via-electric-500/30 to-saffron-500/20 blur-3xl" />
+        <div aria-hidden="true" className="absolute inset-8 rounded-full bg-gradient-to-tr from-brand-500/40 via-electric-500/30 to-mint-400/20 blur-3xl" />
 
         <LaptopFrame className="relative mx-auto w-[88%]">
           <DesktopMock variant="business" />
