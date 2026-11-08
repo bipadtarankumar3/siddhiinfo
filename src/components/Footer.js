@@ -3,12 +3,15 @@ import { Mail, Phone, MapPin, Clock } from "lucide-react";
 import { site } from "@/lib/site";
 import { services, industries } from "@/lib/data";
 import Logo from "./Logo";
+import Skyline from "./india/Skyline";
 
 export default function Footer() {
   const year = new Date().getFullYear();
   return (
     <footer className="relative bg-ink text-slate-300">
-      <div aria-hidden="true" className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-brand-600 via-aqua-400 to-mint-400" />
+      <div className="bg-white">
+        <Skyline className="-mb-px block h-auto w-full text-ink" />
+      </div>
       <div className="container-x grid gap-12 py-16 sm:grid-cols-2 lg:grid-cols-12">
         <div className="lg:col-span-4">
           <Link href="/" aria-label="Siddhi Info home" className="inline-block">
@@ -59,7 +62,12 @@ export default function Footer() {
       <div className="border-t border-white/10">
         <div className="container-x flex flex-col gap-2 py-6 text-sm text-slate-500 sm:flex-row sm:justify-between">
           <p>© {year} {site.legalName}. All rights reserved.</p>
-          <p>Made in India 🇮🇳 for Indian businesses</p>
+          <p className="flex items-center gap-2">
+            <span className="flex h-3 w-5 flex-col overflow-hidden rounded-[2px]" aria-hidden="true">
+              <span className="flex-1 bg-saffron-500" /><span className="flex-1 bg-white" /><span className="flex-1 bg-indiagreen" />
+            </span>
+            Made in India, for Bharat’s businesses
+          </p>
         </div>
       </div>
     </footer>

@@ -4,6 +4,7 @@ import { ArrowRight, Check, X } from "lucide-react";
 import PageHero from "@/components/PageHero";
 import CtaBanner from "@/components/CtaBanner";
 import Icon from "@/components/Icon";
+import IndustryArt from "@/components/india/IndustryArt";
 import { industries, getIndustry, getService } from "@/lib/data";
 import { pageMeta } from "@/lib/site";
 
@@ -38,7 +39,10 @@ export default async function IndustryPage({ params }) {
           { label: "Industries", href: "/industries/" },
           { label: i.title, href: `/industries/${i.slug}/` },
         ]}
-      />
+      >
+        <p className="mt-4 text-xl font-bold text-marigold-400">{i.hi}</p>
+        <IndustryArt slug={i.slug} className="pointer-events-none absolute right-8 top-1/2 hidden size-56 -translate-y-1/3 rotate-3 drop-shadow-2xl lg:block" />
+      </PageHero>
 
       <section className="container-x grid gap-6 py-16 sm:py-20 md:grid-cols-2">
         <div className="card p-7">

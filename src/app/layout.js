@@ -1,4 +1,4 @@
-import { Plus_Jakarta_Sans } from "next/font/google";
+import { Plus_Jakarta_Sans, Mukta } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -10,6 +10,14 @@ import { services } from "@/lib/data";
 const jakarta = Plus_Jakarta_Sans({
   variable: "--font-jakarta",
   subsets: ["latin"],
+  display: "swap",
+});
+
+// Devanagari (Hindi) text falls back to Mukta automatically
+const mukta = Mukta({
+  variable: "--font-hindi",
+  subsets: ["devanagari"],
+  weight: ["500", "600", "700", "800"],
   display: "swap",
 });
 
@@ -27,6 +35,9 @@ export const metadata = {
     "GST billing software",
     "WhatsApp Business API",
     "local SEO India",
+    "website for kirana store",
+    "digital India small business",
+    "Hindi website development",
     "Google Business Profile",
     "ecommerce website India",
     "digital marketing for small business",
@@ -119,7 +130,7 @@ const orgSchema = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en-IN" className={jakarta.variable}>
+    <html lang="en-IN" className={`${jakarta.variable} ${mukta.variable}`}>
       <body className="flex min-h-screen flex-col font-sans">
         <JsonLd data={orgSchema} />
         <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-lg focus:bg-white focus:px-4 focus:py-2 focus:shadow">

@@ -2,7 +2,7 @@
 
 /* Palette taken from the Siddhi Info logo: deep navy → royal blue → cyan → mint */
 @theme {
-  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-jakarta), var(--font-hindi), ui-sans-serif, system-ui, sans-serif;
 
   --spacing-18: 4.5rem;
 
@@ -31,6 +31,15 @@
   --color-mint-500: #34c98a;
   --color-mint-600: #12936a;
   --color-mint-700: #0f7a58;
+
+  /* Indian festive accents (used sparingly) */
+  --color-marigold-50: #fffbeb;
+  --color-marigold-100: #fef3c7;
+  --color-marigold-400: #fbbf24;
+  --color-marigold-500: #f59e0b;
+  --color-saffron-500: #f97316;
+  --color-saffron-600: #ea580c;
+  --color-indiagreen: #138808;
 }
 
 :root {

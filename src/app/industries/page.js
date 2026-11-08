@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { pageMeta } from "@/lib/site";
 import PageHero from "@/components/PageHero";
 import CtaBanner from "@/components/CtaBanner";
-import Icon from "@/components/Icon";
+import IndustryArt from "@/components/india/IndustryArt";
 import { industries } from "@/lib/data";
 
 export const metadata = pageMeta({
@@ -25,12 +25,13 @@ export default function IndustriesPage() {
         {industries.map((i) => (
           <article key={i.slug} className="card card-hover group relative p-7">
             <div className="flex items-center gap-4">
-              <span className="icon-tile size-12">
-                <Icon name={i.icon} className="size-6" />
-              </span>
+              <IndustryArt slug={i.slug} className="size-16 shrink-0" />
+              <div>
+              <p className="text-xs font-semibold text-saffron-600">{i.hi}</p>
               <h2 className="text-xl font-bold text-ink">
                 <Link href={`/industries/${i.slug}/`} className="after:absolute after:inset-0">{i.title}</Link>
               </h2>
+              </div>
             </div>
             <p className="mt-4 text-slate-600">{i.short}</p>
             <span className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-brand-600">

@@ -302,6 +302,7 @@ export const industries = [
     slug: "retail-kirana",
     icon: "Store",
     title: "Retail & Kirana Stores",
+    hi: "किराना और रिटेल",
     short: "Billing, WhatsApp ordering and home delivery for neighbourhood stores.",
     problems: [
       "Slow billing at peak hours",
@@ -320,6 +321,7 @@ export const industries = [
     slug: "restaurants-cafes",
     icon: "UtensilsCrossed",
     title: "Restaurants, Cafés & Cloud Kitchens",
+    hi: "रेस्टोरेंट और कैफ़े",
     short: "Direct orders, QR menus and reviews — less dependency on aggregator commissions.",
     problems: [
       "High commission on food delivery apps",
@@ -338,6 +340,7 @@ export const industries = [
     slug: "clinics-healthcare",
     icon: "Stethoscope",
     title: "Clinics, Doctors & Diagnostics",
+    hi: "क्लिनिक और डॉक्टर",
     short: "Online appointments, reminders and a trustworthy web presence for patients.",
     problems: [
       "Phone lines busy with appointment calls",
@@ -356,6 +359,7 @@ export const industries = [
     slug: "schools-coaching",
     icon: "GraduationCap",
     title: "Schools & Coaching Institutes",
+    hi: "स्कूल और कोचिंग",
     short: "Admissions leads, fee tracking and parent communication made simple.",
     problems: [
       "Admission enquiries come and go without follow-up",
@@ -374,6 +378,7 @@ export const industries = [
     slug: "salons-spas",
     icon: "Scissors",
     title: "Salons, Spas & Fitness",
+    hi: "सैलून और जिम",
     short: "Bookings, memberships and repeat visits on autopilot.",
     problems: [
       "No-shows and empty slots",
@@ -392,6 +397,7 @@ export const industries = [
     slug: "real-estate",
     icon: "Building2",
     title: "Real Estate & Builders",
+    hi: "रियल एस्टेट",
     short: "Project websites and lead CRMs that turn ad clicks into site visits.",
     problems: [
       "Expensive leads from portals",
@@ -410,6 +416,7 @@ export const industries = [
     slug: "manufacturers-wholesalers",
     icon: "Factory",
     title: "Manufacturers, Traders & Wholesalers",
+    hi: "निर्माता और होलसेलर",
     short: "B2B catalogues, dealer ordering and export-ready websites.",
     problems: [
       "Depending only on IndiaMART leads",
@@ -428,6 +435,7 @@ export const industries = [
     slug: "professionals-ca-consultants",
     icon: "Briefcase",
     title: "CAs, Lawyers & Consultants",
+    hi: "CA और कंसल्टेंट",
     short: "Credible websites and client portals for professional services.",
     problems: [
       "Referrals are the only source of clients",
@@ -541,3 +549,16 @@ export function getService(slug) {
 export function getIndustry(slug) {
   return industries.find((i) => i.slug === slug);
 }
+
+export const cities = [
+  "Kolkata", "Delhi NCR", "Mumbai", "Bengaluru", "Hyderabad", "Chennai", "Pune", "Ahmedabad",
+  "Jaipur", "Lucknow", "Patna", "Bhubaneswar", "Guwahati", "Ranchi", "Siliguri", "Indore",
+  "Surat", "Nagpur", "Kochi", "Chandigarh",
+];
+
+export const digitalIndia = [
+  { art: "upi", title: "UPI & online payments", hi: "UPI से भुगतान", text: "Accept GPay, PhonePe, Paytm and cards on your website, WhatsApp and counter." },
+  { art: "gst", title: "GST-ready billing", hi: "GST बिलिंग", text: "Proper GST invoices, HSN codes and reports your CA can file from." },
+  { art: "whatsapp", title: "WhatsApp in Hindi & English", hi: "हिंदी में बात", text: "Talk to customers in the language they prefer — automatically." },
+  { art: "maps", title: "Found on Google Maps", hi: "“पास में” सर्च", text: "Show up when nearby customers search “near me” on their phone." },
+];

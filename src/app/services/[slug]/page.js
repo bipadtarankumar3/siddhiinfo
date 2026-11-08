@@ -5,6 +5,7 @@ import PageHero from "@/components/PageHero";
 import CtaBanner from "@/components/CtaBanner";
 import Faq from "@/components/Faq";
 import Icon from "@/components/Icon";
+import IndustryArt from "@/components/india/IndustryArt";
 import JsonLd from "@/components/JsonLd";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
 import { services, industries, getService } from "@/lib/data";
@@ -104,9 +105,7 @@ export default async function ServicePage({ params }) {
             <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {related.map((i) => (
                 <Link key={i.slug} href={`/industries/${i.slug}/`} className="card card-hover flex items-center gap-4 p-5">
-                  <span className="icon-tile-soft size-11 shrink-0">
-                    <Icon name={i.icon} className="size-5" />
-                  </span>
+                  <IndustryArt slug={i.slug} className="size-12 shrink-0" />
                   <span className="font-semibold text-ink">{i.title}</span>
                 </Link>
               ))}

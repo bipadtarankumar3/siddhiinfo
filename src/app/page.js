@@ -1,12 +1,16 @@
 import Link from "next/link";
-import Image from "next/image";
-import { ArrowRight, Check, Star, TrendingUp, Phone, BadgeCheck } from "lucide-react";
+import { ArrowRight, Check, Star, Phone, BadgeCheck } from "lucide-react";
 import Icon from "@/components/Icon";
 import Faq from "@/components/Faq";
 import CtaBanner from "@/components/CtaBanner";
 import Network from "@/components/Network";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
-import { services, industries, reasons, steps, homeFaqs, plans } from "@/lib/data";
+import { services, industries, reasons, steps, homeFaqs, plans, cities, digitalIndia } from "@/lib/data";
+import ShopScene from "@/components/india/ShopScene";
+import Toran from "@/components/india/Toran";
+import Rangoli from "@/components/india/Rangoli";
+import IndustryArt from "@/components/india/IndustryArt";
+import StackArt from "@/components/india/StackArt";
 import { site, whatsappLink, pageMeta } from "@/lib/site";
 
 const homeTitle = "Siddhi Info — Websites, Billing & Digital Marketing for Indian Small Businesses";
@@ -23,11 +27,13 @@ export default function Home() {
     <>
       <Hero />
       <Integrations />
+      <DigitalIndiaSection />
       <ServicesSection />
       <WhySection />
       <IndustriesSection />
       <StepsSection />
       <PricingTeaser />
+      <CitiesSection />
       <Faq items={homeFaqs} />
       <CtaBanner />
     </>
@@ -39,17 +45,19 @@ function Hero() {
     <section className="bg-hero relative -mt-18 overflow-hidden pt-18 text-white">
       <div aria-hidden="true" className="bg-dots absolute inset-0" />
       <Network uid="home-net" className="pointer-events-none absolute -left-40 bottom-0 w-[44rem] opacity-30" />
+      <Toran uid="hero-toran" className="pointer-events-none absolute inset-x-0 top-18 opacity-90" />
 
-      <div className="container-x relative grid items-center gap-16 pb-24 pt-12 sm:pt-20 lg:grid-cols-[1.1fr_1fr] lg:pb-32">
+      <div className="container-x relative grid items-center gap-16 pb-24 pt-20 sm:pt-24 lg:grid-cols-[1.05fr_1fr] lg:pb-28">
         <div>
           <p className="glass inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-sm font-medium text-slate-200">
             <BadgeCheck className="size-4 text-mint-400" aria-hidden="true" />
-            Digital partner for Bharat’s small businesses
+            <span className="font-semibold text-marigold-400">नमस्ते!</span> Digital partner for Bharat’s small businesses
           </p>
           <h1 className="mt-7 text-4xl font-extrabold leading-[1.08] tracking-tight text-balance sm:text-5xl lg:text-[4rem]">
             Take your business <span className="text-gradient-light">online</span> and grow with confidence.
           </h1>
-          <p className="mt-6 max-w-xl text-lg leading-relaxed text-slate-300">
+          <p className="mt-4 text-2xl font-bold text-marigold-400 sm:text-[1.7rem]">अपना बिज़नेस, अब ऑनलाइन।</p>
+          <p className="mt-4 max-w-xl text-lg leading-relaxed text-slate-300">
             Websites, online stores, GST billing, WhatsApp automation and Google Maps visibility — everything
             an Indian small business needs, delivered by one dependable team at honest prices.
           </p>
@@ -80,46 +88,15 @@ function Hero() {
   );
 }
 
-// Decorative dashboard — pure HTML/CSS, illustrates outcomes (not real client data).
+// Illustrated Indian shop going digital, with live-looking notification cards.
 function HeroVisual() {
-  const bars = [32, 48, 41, 60, 55, 74, 92];
   return (
-    <div aria-hidden="true" className="relative mx-auto w-full max-w-md lg:max-w-lg">
-      <div className="absolute -inset-6 rounded-[2.5rem] bg-gradient-to-br from-brand-500/30 via-aqua-400/20 to-mint-400/20 blur-2xl" />
-      <div className="glass relative rounded-3xl p-6 shadow-2xl shadow-black/40">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <Image src="/logo.webp" alt="" width={40} height={40} className="rounded-xl bg-white/90 p-1" />
-            <div>
-              <p className="text-sm text-slate-300">Enquiries this month</p>
-              <p className="text-3xl font-extrabold tracking-tight">142</p>
-            </div>
-          </div>
-          <span className="inline-flex items-center gap-1 rounded-full bg-mint-400/15 px-2.5 py-1 text-sm font-semibold text-mint-300">
-            <TrendingUp className="size-4" /> +38%
-          </span>
-        </div>
-        <div className="mt-7 flex h-40 items-end gap-3">
-          {bars.map((h, i) => (
-            <div key={i} className="flex-1 rounded-t-lg bg-gradient-to-t from-brand-500 via-aqua-400 to-mint-400" style={{ height: `${h}%`, opacity: 0.55 + i * 0.07 }} />
-          ))}
-        </div>
-        <div className="mt-6 grid grid-cols-3 gap-3 text-center">
-          {[
-            ["Website", "61"],
-            ["WhatsApp", "54"],
-            ["Google Maps", "27"],
-          ].map(([k, v]) => (
-            <div key={k} className="rounded-2xl bg-white/5 py-3 ring-1 ring-white/10">
-              <p className="text-lg font-bold">{v}</p>
-              <p className="text-xs text-slate-400">{k}</p>
-            </div>
-          ))}
-        </div>
-      </div>
+    <div className="relative mx-auto w-full max-w-md lg:max-w-none">
+      <div aria-hidden="true" className="absolute inset-6 rounded-full bg-gradient-to-br from-brand-500/30 via-aqua-400/20 to-marigold-400/20 blur-3xl" />
+      <ShopScene className="relative w-full drop-shadow-2xl" />
 
-      <div className="animate-float absolute -left-12 top-36 hidden items-center gap-3 rounded-2xl bg-white p-3 pr-5 text-ink shadow-2xl sm:flex">
-        <span className="grid size-10 place-items-center rounded-xl bg-mint-50 text-mint-600">
+      <div aria-hidden="true" className="animate-float absolute -left-4 bottom-10 hidden items-center gap-3 rounded-2xl bg-white p-3 pr-5 text-ink shadow-2xl sm:flex lg:-left-10">
+        <span className="grid size-10 place-items-center rounded-xl bg-mint-50 text-[#25D366]">
           <WhatsAppIcon className="size-5" />
         </span>
         <div>
@@ -128,13 +105,13 @@ function HeroVisual() {
         </div>
       </div>
 
-      <div className="animate-float-slow absolute -bottom-8 -right-4 hidden items-center gap-3 rounded-2xl bg-white p-3 pr-5 text-ink shadow-2xl sm:flex">
-        <span className="grid size-10 place-items-center rounded-xl bg-brand-50 text-brand-600">
+      <div aria-hidden="true" className="animate-float-slow absolute -right-2 top-2 hidden items-center gap-3 rounded-2xl bg-white p-3 pr-5 text-ink shadow-2xl sm:flex">
+        <span className="grid size-10 place-items-center rounded-xl bg-marigold-50 text-marigold-500">
           <Star className="size-5 fill-current" />
         </span>
         <div>
-          <p className="text-sm font-semibold">Top 3 on Google Maps</p>
-          <p className="text-xs text-slate-500">“bakery near me”</p>
+          <p className="text-sm font-semibold">Top on Google Maps</p>
+          <p className="text-xs text-slate-500">“kirana store near me”</p>
         </div>
       </div>
     </div>
@@ -163,6 +140,32 @@ function SectionHead({ eyebrow, title, text, center = true, id }) {
       <h2 id={id} className="section-title mt-4">{title}</h2>
       {text && <p className="mt-4 text-lg leading-relaxed text-slate-600">{text}</p>}
     </div>
+  );
+}
+
+function DigitalIndiaSection() {
+  return (
+    <section className="relative overflow-hidden py-20 sm:py-28" aria-labelledby="digital-india-title">
+      <Rangoli className="pointer-events-none absolute -right-40 -top-40 hidden w-[30rem] text-brand-300 opacity-[0.12] md:block" />
+      <div className="container-x relative">
+        <SectionHead
+          id="digital-india-title"
+          eyebrow="Made for Digital India"
+          title={<>Built for how <span className="text-gradient">Bharat does business</span></>}
+          text="UPI at the counter, GST on every bill, WhatsApp for every order and customers who search “near me”. We bring all of it together for your shop."
+        />
+        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {digitalIndia.map((d) => (
+            <div key={d.art} className="card card-hover card-accent p-5">
+              <StackArt name={d.art} className="w-full" />
+              <p className="mt-5 text-sm font-semibold text-saffron-600">{d.hi}</p>
+              <h3 className="mt-1 text-lg font-bold text-ink">{d.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-slate-600">{d.text}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -241,10 +244,9 @@ function IndustriesSection() {
       <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {industries.map((i) => (
           <Link key={i.slug} href={`/industries/${i.slug}/`} className="card card-hover card-accent group p-6">
-            <span className="icon-tile-soft size-11 transition group-hover:scale-105">
-              <Icon name={i.icon} className="size-5" />
-            </span>
-            <span className="mt-4 block font-bold text-ink">{i.title}</span>
+            <IndustryArt slug={i.slug} className="size-16 transition duration-300 group-hover:-rotate-3 group-hover:scale-105" />
+            <span className="mt-4 block text-xs font-semibold text-saffron-600">{i.hi}</span>
+            <span className="mt-0.5 block font-bold text-ink">{i.title}</span>
             <span className="mt-1.5 block text-sm leading-relaxed text-slate-600">{i.short}</span>
           </Link>
         ))}
@@ -308,6 +310,41 @@ function PricingTeaser() {
             </span>
           </Link>
         ))}
+      </div>
+    </section>
+  );
+}
+
+function CitiesSection() {
+  return (
+    <section className="container-x pt-20 sm:pt-28" aria-labelledby="cities-title">
+      <div className="relative overflow-hidden rounded-[2rem] border border-marigold-100 bg-gradient-to-br from-marigold-50 via-white to-mint-50 px-6 py-12 sm:px-12">
+        <Rangoli className="pointer-events-none absolute -bottom-32 -right-24 w-[26rem] text-saffron-500 opacity-25" />
+        <div className="relative grid items-center gap-10 lg:grid-cols-5">
+          <div className="lg:col-span-2">
+            <p className="eyebrow">From Kashmir to Kanyakumari</p>
+            <h2 id="cities-title" className="section-title mt-4">Serving small businesses across Bharat</h2>
+            <p className="mt-4 text-lg leading-relaxed text-slate-600">
+              Based in {site.address.city}, working with shop owners, clinics and entrepreneurs in every state — over
+              phone, WhatsApp and video call. <span className="font-semibold text-ink">आप जहाँ भी हों, हम साथ हैं।</span>
+            </p>
+            <div className="mt-6 flex h-2 w-28 overflow-hidden rounded-full ring-1 ring-slate-200" aria-hidden="true">
+              <span className="flex-1 bg-saffron-500" />
+              <span className="flex-1 bg-white" />
+              <span className="flex-1 bg-indiagreen" />
+            </div>
+          </div>
+          <ul className="flex flex-wrap gap-2.5 lg:col-span-3">
+            {cities.map((c) => (
+              <li key={c} className="rounded-full border border-slate-200 bg-white/80 px-4 py-2 text-sm font-medium text-slate-700 shadow-sm">
+                {c}
+              </li>
+            ))}
+            <li className="rounded-full bg-gradient-to-r from-brand-700 to-brand-500 px-4 py-2 text-sm font-semibold text-white shadow-sm">
+              + all of India
+            </li>
+          </ul>
+        </div>
       </div>
     </section>
   );
