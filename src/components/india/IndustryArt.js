@@ -107,6 +107,26 @@ const art = {
   ),
 };
 
+art["ngos-csr"] = (
+  <>
+    <Bg c="#fff7ed" />
+    <path d="M32 50 C18 40 12 32 12 25 a9 9 0 0 1 20 -4 a9 9 0 0 1 20 4 c0 7 -6 15 -20 25 Z" fill="#f97316" />
+    <path d="M22 24 a5 5 0 0 1 8 -2" stroke="#fff" strokeWidth="2.2" fill="none" strokeLinecap="round" />
+    <path d="M8 48 q8 -6 16 -2 l8 4 q4 2 6 0 l12 -6 q4 -2 6 2 l-16 10 q-6 3 -12 0 l-8 -4 Z" fill="#16a34a" />
+  </>
+);
+art["startups-entrepreneurs"] = (
+  <>
+    <Bg c="#f0efff" />
+    <path d="M32 8 c10 6 14 18 12 30 l-6 6 h-12 l-6 -6 c-2 -12 2 -24 12 -30 Z" fill="#5839dc" />
+    <circle cx="32" cy="26" r="5" fill="#fff" />
+    <circle cx="32" cy="26" r="2.5" fill="#2f7bff" />
+    <path d="M20 38 l-8 8 l10 0 Z M44 38 l8 8 l-10 0 Z" fill="#8578f5" />
+    <path d="M27 46 q5 12 10 0" fill="#f97316" />
+    <path d="M30 46 q2 7 4 0" fill="#fbbf24" />
+  </>
+);
+
 export default function IndustryArt({ slug, className = "size-14" }) {
   return (
     <svg viewBox="0 0 64 64" className={className} aria-hidden="true">

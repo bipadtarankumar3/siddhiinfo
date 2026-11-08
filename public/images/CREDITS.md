@@ -22,3 +22,5 @@ All photos: Pexels (https://www.pexels.com/license/) — free for commercial use
 | mock-doctor.webp | https://www.pexels.com/photo/7579831/ |
 | mock-students.webp | https://www.pexels.com/photo/3231358/ |
 | mock-children.webp | https://www.pexels.com/photo/18012462/ |
+| industry-salon.webp | https://www.pexels.com/photo/39559309/ |
+| industry-professionals.webp | https://www.pexels.com/photo/7581004/ |

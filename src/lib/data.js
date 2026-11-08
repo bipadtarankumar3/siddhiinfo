@@ -549,6 +549,8 @@ export const industries = [
   },
   {
     slug: "salons-spas",
+    image: "/images/industry-salon.webp",
+    imageAlt: "Smiling customer getting a haircut at a salon",
     icon: "Scissors",
     title: "Salons, Spas & Fitness",
     hi: "सैलून और जिम",
@@ -652,6 +654,8 @@ export const industries = [
   },
   {
     slug: "professionals-ca-consultants",
+    image: "/images/industry-professionals.webp",
+    imageAlt: "Smiling Indian professional reviewing documents at his office desk",
     icon: "Briefcase",
     title: "CAs, Lawyers & Consultants",
     hi: "CA और कंसल्टेंट",

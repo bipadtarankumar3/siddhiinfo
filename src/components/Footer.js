@@ -1,25 +1,41 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Mail, Phone, MapPin, Clock } from "lucide-react";
 import BrandIcon from "./BrandIcon";
 import { site } from "@/lib/site";
 import { services, industries } from "@/lib/data";
-import Logo from "./Logo";
 import Skyline from "./india/Skyline";
 
 export default function Footer() {
   const year = new Date().getFullYear();
   return (
     <footer className="relative bg-ink text-slate-300">
-      <div className="bg-white">
+      <div className="relative bg-white">
         <Skyline className="-mb-px block h-auto w-full text-ink" />
+        {/* brand emblem sitting on the skyline edge */}
+        <Link
+          href="/"
+          aria-label="Siddhi Info home"
+          className="absolute bottom-0 left-1/2 z-10 grid size-20 -translate-x-1/2 translate-y-1/2 place-items-center rounded-full bg-white p-3 shadow-2xl shadow-black/40 ring-[6px] ring-ink transition hover:scale-105 sm:size-28 sm:p-4 sm:ring-8"
+        >
+          <Image src="/logo-192.png" alt="" width={192} height={192} className="size-full object-contain" />
+        </Link>
       </div>
-      <div className="container-x grid gap-12 py-16 sm:grid-cols-2 lg:grid-cols-12">
+
+      {/* brand line */}
+      <div className="container-x flex flex-col items-center pb-10 pt-16 text-center sm:pt-20">
+        <p className="text-2xl font-extrabold tracking-tight text-white sm:text-3xl">
+          Siddhi <span className="text-gradient-light">Info</span>
+        </p>
+        <p className="mt-1 text-sm font-semibold uppercase tracking-[0.2em] text-saffron-300">{site.tagline}</p>
+        <p className="mt-3 text-slate-400">आपका बिज़नेस, हमारी टेक्नोलॉजी।</p>
+      </div>
+      <div aria-hidden="true" className="container-x"><div className="h-px bg-gradient-to-r from-transparent via-white/15 to-transparent" /></div>
+
+      <div className="container-x grid gap-12 py-14 sm:grid-cols-2 lg:grid-cols-12">
         <div className="lg:col-span-4">
-          <Link href="/" aria-label="Siddhi Info home" className="inline-block">
-            <Logo light size={44} />
-          </Link>
-          <p className="mt-4 text-sm font-semibold text-saffron-300">{site.tagline}</p>
-          <p className="mt-3 max-w-sm leading-relaxed text-slate-400">{site.description}</p>
+          <h2 className="text-sm font-semibold uppercase tracking-wider text-white">About us</h2>
+          <p className="mt-4 max-w-sm leading-relaxed text-slate-400">{site.description}</p>
           <Social />
           <ul className="mt-6 space-y-3 text-sm">
             <li className="flex items-center gap-3">
