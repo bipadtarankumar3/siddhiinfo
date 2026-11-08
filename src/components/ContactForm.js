@@ -67,7 +67,7 @@ export default function ContactForm() {
         </button>
       </div>
       {sent && (
-        <p role="status" className="rounded-xl bg-green-50 p-4 text-sm text-green-800">
+        <p role="status" className="rounded-xl bg-mint-50 p-4 text-sm text-mint-700 ring-1 ring-mint-100">
           Thank you! Your message is ready in WhatsApp / email — just press send. We usually reply within a few working hours.
         </p>
       )}

@@ -25,7 +25,7 @@ export default function ServicesPage() {
         <div className="grid gap-6 md:grid-cols-2">
           {services.map((s) => (
             <article key={s.slug} className="card card-hover group relative flex flex-col p-7">
-              <span className="grid size-12 place-items-center rounded-xl bg-brand-50 text-brand-600">
+              <span className="icon-tile size-12">
                 <Icon name={s.icon} className="size-6" />
               </span>
               <h2 className="mt-5 text-xl font-bold text-ink">

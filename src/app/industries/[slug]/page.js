@@ -59,7 +59,7 @@ export default async function IndustryPage({ params }) {
           <ul className="mt-5 space-y-3">
             {i.solutions.map((s) => (
               <li key={s} className="flex gap-3 text-slate-700">
-                <span className="mt-0.5 grid size-6 shrink-0 place-items-center rounded-full bg-green-50 text-green-600">
+                <span className="mt-0.5 grid size-6 shrink-0 place-items-center rounded-full bg-mint-50 text-mint-600">
                   <Check className="size-4" aria-hidden="true" />
                 </span>
                 {s}

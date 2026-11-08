@@ -38,7 +38,7 @@ export default function ContactPage() {
           {items.map(({ icon: I, label, value, href, external }) => {
             const inner = (
               <>
-                <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-brand-50 text-brand-600">
+                <span className="icon-tile size-11 shrink-0">
                   <I className="size-5" aria-hidden="true" />
                 </span>
                 <span>

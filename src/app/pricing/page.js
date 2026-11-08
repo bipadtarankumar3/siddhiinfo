@@ -50,10 +50,10 @@ export default function PricingPage() {
           {plans.map((p) => (
             <div
               key={p.name}
-              className={`card relative flex flex-col p-8 ${p.featured ? "border-brand-600 shadow-2xl shadow-brand-900/15 ring-1 ring-brand-600 lg:-mt-4 lg:mb-[-1rem]" : ""}`}
+              className={`card relative flex flex-col p-8 ${p.featured ? "border-brand-500 shadow-2xl shadow-brand-900/20 ring-4 ring-brand-500/15 lg:-mt-4 lg:mb-[-1rem]" : ""}`}
             >
               {p.featured && (
-                <span className="absolute -top-3 left-8 rounded-full bg-saffron-500 px-3 py-1 text-xs font-bold uppercase tracking-wide text-white">
+                <span className="absolute -top-3 left-8 rounded-full bg-gradient-to-r from-brand-600 to-aqua-500 px-3 py-1 text-xs font-bold uppercase tracking-wide text-white">
                   Most popular
                 </span>
               )}
@@ -67,7 +67,7 @@ export default function PricingPage() {
               <ul className="mt-6 flex-1 space-y-3">
                 {p.features.map((f) => (
                   <li key={f} className="flex gap-2.5 text-slate-700">
-                    <Check className="mt-0.5 size-5 shrink-0 text-green-600" aria-hidden="true" /> {f}
+                    <Check className="mt-0.5 size-5 shrink-0 text-mint-500" aria-hidden="true" /> {f}
                   </li>
                 ))}
               </ul>

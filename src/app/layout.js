@@ -61,7 +61,7 @@ export const metadata = {
 };
 
 export const viewport = {
-  themeColor: "#4f46e5",
+  themeColor: "#071433",
   width: "device-width",
   initialScale: 1,
 };
@@ -74,7 +74,7 @@ const orgSchema = {
       "@id": absoluteUrl("/#organization"),
       name: site.name,
       url: site.url,
-      logo: absoluteUrl("/icon.svg"),
+      logo: absoluteUrl("/logo-512.png"),
       image: absoluteUrl("/opengraph-image.png"),
       description: site.description,
       email: site.email,

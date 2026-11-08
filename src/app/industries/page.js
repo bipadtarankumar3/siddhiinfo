@@ -25,7 +25,7 @@ export default function IndustriesPage() {
         {industries.map((i) => (
           <article key={i.slug} className="card card-hover group relative p-7">
             <div className="flex items-center gap-4">
-              <span className="grid size-12 place-items-center rounded-xl bg-saffron-50 text-saffron-600">
+              <span className="icon-tile size-12">
                 <Icon name={i.icon} className="size-6" />
               </span>
               <h2 className="text-xl font-bold text-ink">

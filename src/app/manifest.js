@@ -10,7 +10,10 @@ export default function manifest() {
     start_url: "/",
     display: "standalone",
     background_color: "#ffffff",
-    theme_color: "#4f46e5",
-    icons: [{ src: "/icon.svg", sizes: "any", type: "image/svg+xml" }],
+    theme_color: "#071433",
+    icons: [
+      { src: "/logo-192.png", sizes: "192x192", type: "image/png" },
+      { src: "/logo-512.png", sizes: "512x512", type: "image/png" },
+    ],
   };
 }

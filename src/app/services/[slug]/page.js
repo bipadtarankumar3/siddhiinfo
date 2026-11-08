@@ -55,11 +55,11 @@ export default async function ServicePage({ params }) {
         ]}
       >
         <div className="mt-8 flex flex-wrap gap-3">
-          <Link href="/contact/" className="btn btn-primary">
+          <Link href="/contact/" className="btn btn-light">
             Get a free quote <ArrowRight className="size-4" aria-hidden="true" />
           </Link>
-          <a href={whatsappLink(`Hi, I'm interested in ${s.title}.`)} target="_blank" rel="noopener noreferrer" className="btn btn-outline">
-            <WhatsAppIcon className="size-5 text-[#25D366]" /> Ask on WhatsApp
+          <a href={whatsappLink(`Hi, I'm interested in ${s.title}.`)} target="_blank" rel="noopener noreferrer" className="btn btn-glass">
+            <WhatsAppIcon className="size-5 text-mint-400" /> Ask on WhatsApp
           </a>
         </div>
       </PageHero>
@@ -70,7 +70,7 @@ export default async function ServicePage({ params }) {
           <ul className="mt-8 grid gap-4 sm:grid-cols-2">
             {s.features.map((f) => (
               <li key={f} className="card flex items-start gap-3 p-4">
-                <span className="mt-0.5 grid size-6 shrink-0 place-items-center rounded-full bg-green-50 text-green-600">
+                <span className="mt-0.5 grid size-6 shrink-0 place-items-center rounded-full bg-mint-50 text-mint-600">
                   <Check className="size-4" aria-hidden="true" />
                 </span>
                 <span className="text-ink">{f}</span>
@@ -79,13 +79,13 @@ export default async function ServicePage({ params }) {
           </ul>
         </div>
         <aside className="lg:sticky lg:top-24 lg:self-start">
-          <div className="card bg-gradient-to-br from-brand-600 to-brand-700 p-7 text-white">
-            <Sparkles className="size-6 text-saffron-400" aria-hidden="true" />
+          <div className="card bg-hero overflow-hidden border-transparent p-7 text-white shadow-2xl shadow-brand-900/25">
+            <Sparkles className="size-6 text-mint-400" aria-hidden="true" />
             <h2 className="mt-3 text-xl font-bold">What you get</h2>
             <ul className="mt-4 space-y-3">
               {s.outcomes.map((o) => (
-                <li key={o} className="flex gap-2 text-brand-50">
-                  <Check className="mt-0.5 size-5 shrink-0 text-saffron-400" aria-hidden="true" />
+                <li key={o} className="flex gap-2 text-slate-200">
+                  <Check className="mt-0.5 size-5 shrink-0 text-mint-400" aria-hidden="true" />
                   {o}
                 </li>
               ))}
@@ -104,7 +104,7 @@ export default async function ServicePage({ params }) {
             <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {related.map((i) => (
                 <Link key={i.slug} href={`/industries/${i.slug}/`} className="card card-hover flex items-center gap-4 p-5">
-                  <span className="grid size-11 place-items-center rounded-xl bg-saffron-50 text-saffron-600">
+                  <span className="icon-tile-soft size-11 shrink-0">
                     <Icon name={i.icon} className="size-5" />
                   </span>
                   <span className="font-semibold text-ink">{i.title}</span>
