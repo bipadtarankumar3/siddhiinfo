@@ -2,6 +2,7 @@ import { Mail, Phone, MapPin, Clock } from "lucide-react";
 import PageHero from "@/components/PageHero";
 import ContactForm from "@/components/ContactForm";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
+import WhatsAppQrCard from "@/components/india/WhatsAppQrCard";
 import { site, whatsappLink, pageMeta } from "@/lib/site";
 
 export const metadata = pageMeta({
@@ -35,6 +36,7 @@ export default function ContactPage() {
           <ContactForm />
         </div>
         <div className="space-y-4 lg:col-span-2">
+          <WhatsAppQrCard />
           {items.map(({ icon: I, label, value, href, external }) => {
             const inner = (
               <>

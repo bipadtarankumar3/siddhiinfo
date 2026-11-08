@@ -3,6 +3,24 @@
 // Everything is sized in `em` so it scales with the device frame.
 
 const sites = {
+  dukaan: {
+    brand: "श्री गणेश सुपर स्टोर",
+    nav: ["राशन", "डेयरी", "मसाले", "ऑफ़र्स"],
+    cta: "व्हाट्सएप ऑर्डर 🛍️",
+    bg: "#fffdfa", fg: "#1c1917", primary: "#16a34a", soft: "#dcfce7",
+    tag: "🚚 30 मिनट में फ़्री डिलीवरी • 0% कमीशन",
+    title: ["अपनी मनपसंद दुकान,", "अब सीधे फोन पर।"],
+    sub: "सीधे व्हाट्सएप पर राशन मंगाएं, PhonePe / GPay से पेमेंट करें और 100% कमीशन बचाएं।",
+    img: "/images/mock-grocery.webp",
+    section: "आज की महाबचत (Daily Offers)",
+    cards: [
+      ["शुद्ध देसी घी 1L", "₹540", "#fbbf24"],
+      ["बासमती चावल 5kg", "₹480", "#e7e5e4"],
+      ["चक्की आटा 10kg", "₹420", "#fde68a"],
+      ["सरसों तेल 1L", "₹145", "#fb923c"],
+    ],
+    type: "product",
+  },
   business: {
     brand: "Nirmaan Interiors",
     nav: ["Projects", "Services", "About", "Contact"],
