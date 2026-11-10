@@ -61,6 +61,13 @@ function NavIcon({ href }) {
         <path d="M4 20c0-4 4-7 8-7s8 3 8 7" stroke="#ec4899" strokeWidth="1.5" strokeLinecap="round" fill="none" />
       </svg>
     );
+  if (href === "/contact/")
+    return (
+      <svg viewBox="0 0 24 24" className="size-5 shrink-0" fill="none">
+        <path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z" fill="#dbeafe" stroke="#3b82f6" strokeWidth="1.5" />
+        <path d="M2 6l10 7 10-7" stroke="#3b82f6" strokeWidth="1.5" strokeLinecap="round" />
+      </svg>
+    );
   return null;
 }
 
@@ -77,6 +84,7 @@ export default function Header() {
     "/pricing/": t.nav.pricing,
     "/blog/": t.nav.blog,
     "/about/": t.nav.about,
+    "/contact/": t.nav.contact,
   };
 
   useEffect(() => {
@@ -229,19 +237,6 @@ export default function Header() {
                 </li>
               );
             })}
-            <li>
-              <Link
-                href="/contact/"
-                onClick={() => setOpen(false)}
-                className="flex items-center gap-3 rounded-2xl px-4 py-3.5 font-semibold text-slate-700 transition-all hover:bg-slate-50 hover:text-ink active:scale-[0.98]"
-              >
-                <svg viewBox="0 0 24 24" className="size-5 shrink-0" fill="none">
-                  <path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z" fill="#dbeafe" stroke="#3b82f6" strokeWidth="1.5" />
-                  <path d="M2 6l10 7 10-7" stroke="#3b82f6" strokeWidth="1.5" strokeLinecap="round" />
-                </svg>
-                <span>{t.nav.contact}</span>
-              </Link>
-            </li>
           </ul>
         </nav>
 

@@ -8,7 +8,7 @@ export const site = {
   description:
     "Siddhi Info is your technology partner — from websites and online stores to mobile apps, CRM/ERP, GST billing, WhatsApp automation and digital marketing for Indian businesses.",
   // TODO: replace with your real contact details
-  email: "info@siddhiinfo.in",
+  email: "hellosiddhiinfo@gmail.com",
   phone: "+91 90000 00000",
   whatsapp: "919000000000", // country code + number, digits only
   address: {
@@ -37,6 +37,7 @@ export const nav = [
   { label: "Pricing", href: "/pricing/" },
   { label: "Blog", href: "/blog/" },
   { label: "About", href: "/about/" },
+  { label: "Contact", href: "/contact/" },
 ];
 
 export function whatsappLink(text = "Hi Siddhi Info, I want to grow my business online.") {

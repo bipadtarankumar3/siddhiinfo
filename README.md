@@ -32,23 +32,23 @@ Pages, sitemap, JSON-LD schema and footer all update automatically from these fi
 
 ## Deploy
 
-Upload the contents of `out/` to any static host (Hostinger/cPanel `public_html`, Netlify, Vercel,
-Cloudflare Pages, GitHub Pages, S3). URLs use trailing slashes (`/about/` → `about/index.html`),
-so no server rewrites are needed.
+Hosted on **Vercel** (import the repo; framework preset: Next.js). Pages are prerendered as static HTML;
+only `/api/contact/` runs on the server. URLs use trailing slashes (`/about/`).
 
 After going live, verify the domain in Google Search Console and submit `https://siddhiinfo.in/sitemap.xml`.
 
 ## Enquiry form
 
-The site is static, so the contact form has two modes:
+"Send enquiry" posts to `/api/contact/` (`src/app/api/contact/route.js`), which emails the enquiry to
+`site.email` through Gmail SMTP. "Send on WhatsApp" remains as a secondary option. A hidden honeypot field
+drops basic bot spam.
 
-- **Default:** the visitor's enquiry (validated name + Indian mobile number) opens pre-filled in WhatsApp or their email app — they press *Send*.
-- **Form backend:** set `NEXT_PUBLIC_FORM_ENDPOINT` at build time to any endpoint that accepts a JSON `POST`
-  (Formspree, Web3Forms, Getform or your own API). The form then submits directly and shows a success message,
-  with WhatsApp as a secondary option.
+Set these environment variables — in `.env.local` for local dev (git-ignored) and in
+Vercel → Project Settings → Environment Variables for production:
 
 ```bash
-NEXT_PUBLIC_FORM_ENDPOINT="https://formspree.io/f/xxxxxxx" npm run build
+GMAIL_USER=hellosiddhiinfo@gmail.com
+GMAIL_APP_PASSWORD=xxxxxxxxxxxxxxxx   # 16-char Google App password, no spaces
 ```
 
 ## Before going live

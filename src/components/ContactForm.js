@@ -7,15 +7,11 @@ import { services } from "@/lib/data";
 
 /*
   Enquiry form.
-  This is a static site (no server). Two ways the enquiry reaches you:
-
-  1. If NEXT_PUBLIC_FORM_ENDPOINT is set at build time (e.g. a Formspree,
-     Web3Forms, Getform or your own API URL that accepts JSON POST), the form
-     is submitted there and a success message is shown.
-  2. Otherwise the visitor sends the pre-filled enquiry to you on WhatsApp or
-     by email — the message tells them clearly to press "send".
+  "Send enquiry" POSTs to /api/contact/ (src/app/api/contact/route.js), which
+  emails it to site.email via Gmail SMTP. "Send on WhatsApp" opens the
+  pre-filled enquiry in WhatsApp as a secondary option.
 */
-const ENDPOINT = process.env.NEXT_PUBLIC_FORM_ENDPOINT || "";
+const ENDPOINT = process.env.NEXT_PUBLIC_FORM_ENDPOINT || "/api/contact/";
 
 // Indian mobile: optional +91 / 91 / 0 prefix, then 10 digits starting 6–9
 function normaliseIndianMobile(value) {
@@ -24,7 +20,7 @@ function normaliseIndianMobile(value) {
   return /^[6-9]\d{9}$/.test(ten) ? ten : null;
 }
 
-const initial = { name: "", phone: "", business: "", city: "", service: services[0].title, message: "" };
+const initial = { name: "", phone: "", business: "", city: "", service: services[0].title, message: "", website: "" };
 
 export default function ContactForm() {
   const [values, setValues] = useState(initial);
@@ -108,6 +104,11 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={onSubmit} noValidate className="space-y-5">
+      {/* honeypot for spam bots — hidden from people and screen readers */}
+      <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
+        <label htmlFor="website">Website</label>
+        <input id="website" name="website" tabIndex={-1} autoComplete="off" value={values.website} onChange={set("website")} />
+      </div>
       <div className="grid gap-5 sm:grid-cols-2">
         <Field label="Your name" name="name" value={values.name} onChange={set("name")} error={errors.name} required autoComplete="name" />
         <Field
@@ -156,7 +157,8 @@ export default function ContactForm() {
       {status === "error" && (
         <p role="alert" className="flex items-start gap-2 rounded-xl bg-rose-50 p-4 text-sm text-rose-700 ring-1 ring-rose-100">
           <AlertCircle className="mt-0.5 size-4 shrink-0" aria-hidden="true" />
-          Sorry, we couldn’t send your enquiry right now. Please use the WhatsApp button below or call us.
+          Sorry, we couldn’t send your enquiry right now. Please use the WhatsApp button below or email us at{" "}
+          <a href={`mailto:${site.email}`} className="font-semibold underline">{site.email}</a>.
         </p>
       )}
 
