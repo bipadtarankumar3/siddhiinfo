@@ -214,10 +214,10 @@ const icons = {
 
 export const hasColorIcon = (name) => Boolean(icons[name]);
 
-export default function ColorIcon({ name, className = "size-12", plain = false }) {
+export default function ColorIcon({ name, className = "size-12", plain = false, ...svgProps }) {
   const [bg, glyph] = icons[name] ?? icons.Globe;
   return (
-    <svg viewBox="0 0 48 48" className={`shrink-0 ${className}`} aria-hidden="true" focusable="false">
+    <svg viewBox="0 0 48 48" className={`shrink-0 ${className}`} aria-hidden="true" focusable="false" {...svgProps}>
       {!plain && <rect width="48" height="48" rx="13" fill={bg} />}
       {glyph}
     </svg>

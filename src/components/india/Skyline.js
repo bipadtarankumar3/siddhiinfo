@@ -50,14 +50,14 @@ const birds = [[740, 70, 1], [770, 58, 0.8], [795, 76, 0.9], [1060, 90, 0.7], [1
 const trees = [[362, 262, 13], [515, 262, 11], [1012, 262, 12], [1282, 262, 11], [1432, 262, 10], [58, 262, 9]];
 const clouds = [[180, 40, 1], [620, 28, 0.8], [1240, 46, 1.1], [1500, 22, 0.7]];
 
-export default function Skyline({ className = "", variant = "night", top = 0 }) {
+export default function Skyline({ className = "", variant = "night", top = 0, uid = "", ...svgProps }) {
   const p = palettes[variant];
   const day = variant === "day";
-  const id = (n) => `${n}-${variant}`;
+  const id = (n) => `${n}-${variant}${uid && `-${uid}`}`;
   const H = 300 + top;
 
   return (
-    <svg viewBox={`0 0 1600 ${H}`} preserveAspectRatio="xMidYMax slice" className={className} aria-hidden="true" focusable="false">
+    <svg viewBox={`0 0 1600 ${H}`} preserveAspectRatio="xMidYMax slice" className={className} aria-hidden="true" focusable="false" {...svgProps}>
       <defs>
         <linearGradient id={id("sky")} x1="0" y1="0" x2="0" y2="1">
           {p.sky.map(([o, c, op]) => <stop key={o} offset={o} stopColor={c} stopOpacity={op} />)}
@@ -209,6 +209,32 @@ export default function Skyline({ className = "", variant = "night", top = 0 }) 
           </g>
         )}
       </g>
+    </svg>
+  );
+}
+
+/*
+  Full-width backdrop (sky gradient, ground line, river) stretched to any width,
+  placed behind a size-limited <Skyline> so the scene never shows side gaps.
+  Uses the same viewBox heights, so the horizon lines up with the drawing.
+*/
+export function SkylineBackdrop({ className = "", variant = "day", top = 0 }) {
+  const p = palettes[variant];
+  const id = (n) => `bd-${n}-${variant}`;
+  return (
+    <svg viewBox={`0 0 1600 ${300 + top}`} preserveAspectRatio="none" className={className} aria-hidden="true" focusable="false">
+      <defs>
+        <linearGradient id={id("sky")} x1="0" y1="0" x2="0" y2="1">
+          {p.sky.map(([o, c, op]) => <stop key={o} offset={o} stopColor={c} stopOpacity={op} />)}
+        </linearGradient>
+        <linearGradient id={id("river")} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor={p.river[0]} />
+          <stop offset="1" stopColor={p.river[1]} />
+        </linearGradient>
+      </defs>
+      <rect width="1600" height={262 + top} fill={`url(#${id("sky")})`} />
+      <rect y={260 + top} width="1600" height="6" fill={p.ground} />
+      <rect y={266 + top} width="1600" height="34" fill={`url(#${id("river")})`} />
     </svg>
   );
 }

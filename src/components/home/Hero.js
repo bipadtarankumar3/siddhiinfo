@@ -17,20 +17,20 @@ export default function Hero({ smallFrom }) {
 
   return (
     <div lang={lang}>
-      <section className="relative isolate overflow-hidden border-b border-brand-100 bg-[#f4f9ff] text-ink">
-        <div className="container-x relative pt-10 text-center sm:pt-14">
+      <section className="relative isolate flex flex-col overflow-hidden border-b border-brand-100 bg-[#f4f9ff] text-ink lg:min-h-[calc(100svh-4.5rem)]">
+        <div className="container-x relative shrink-0 pt-10 text-center sm:pt-14 lg:pt-[clamp(1.25rem,5vh,3.5rem)]">
           <p className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-1.5 text-sm font-semibold text-slate-700 shadow-sm ring-1 ring-brand-100">
             <span aria-hidden="true" className="flex h-3 w-5 flex-col overflow-hidden rounded-[2px]"><span className="flex-1 bg-saffron-500" /><span className="flex-1 bg-white" /><span className="flex-1 bg-indiagreen" /></span>
             {h.eyebrow}
           </p>
 
-          <h1 className="mx-auto mt-6 max-w-4xl text-[2.25rem] font-extrabold leading-[1.08] tracking-tight text-balance sm:text-6xl xl:text-[3.9rem]">
+          <h1 className="mx-auto mt-6 max-w-4xl text-[2.25rem] font-extrabold leading-[1.08] tracking-tight text-balance sm:text-6xl xl:text-[3.9rem] lg:[@media(max-height:860px)]:mt-4 lg:[@media(max-height:860px)]:max-w-5xl lg:[@media(max-height:860px)]:text-[2.75rem] lg:[@media(max-height:860px)]:leading-[1.05]">
             {h.titleA} <span className="text-brand-700">{h.titleB}</span>
           </h1>
 
-          <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-slate-600">{h.sub}</p>
+          <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-slate-600 lg:[@media(max-height:860px)]:mt-3 lg:[@media(max-height:860px)]:max-w-3xl lg:[@media(max-height:860px)]:text-base">{h.sub}</p>
 
-          <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+          <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row lg:[@media(max-height:860px)]:mt-5">
             <Link href="/contact/#enquiry" className="btn bg-brand-700 px-7 py-3.5 text-base text-white hover:bg-brand-800">
               {h.ctaConsult} <ArrowRight className="size-4" aria-hidden="true" />
             </Link>
@@ -38,7 +38,7 @@ export default function Hero({ smallFrom }) {
               {h.ctaWork}
             </Link>
           </div>
-          <p className="mt-4 text-sm text-slate-500">
+          <p className="mt-4 text-sm text-slate-500 lg:[@media(max-height:860px)]:mt-2">
             {h.orText}{" "}
             {wa ? (
               <a href={wa} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 font-semibold text-green-800 underline underline-offset-4">
@@ -49,7 +49,7 @@ export default function Hero({ smallFrom }) {
             )}
           </p>
 
-          <ul className="mt-6 flex flex-col items-center justify-center gap-x-7 gap-y-2 text-sm font-medium text-slate-700 sm:flex-row sm:flex-wrap">
+          <ul className="mt-6 lg:[@media(max-height:860px)]:mt-3 flex flex-col items-center justify-center gap-x-7 gap-y-2 text-sm font-medium text-slate-700 sm:flex-row sm:flex-wrap">
             {h.trust.map((x) => (
               <li key={x} className="flex items-center gap-2">
                 <CheckCircle2 className="size-4 shrink-0 text-green-700" aria-hidden="true" /> {x}
