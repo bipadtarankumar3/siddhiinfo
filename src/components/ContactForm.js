@@ -77,7 +77,10 @@ export default function ContactForm() {
         setStatus("sent");
         setValues(initial);
       } catch {
-        setStatus("error");
+        // Email failed — silently fall back to WhatsApp so the user can still reach us
+        const text = summary();
+        window.open(whatsappLink(text), "_blank", "noopener,noreferrer");
+        setStatus("handoff");
       }
       return;
     }
@@ -155,11 +158,26 @@ export default function ContactForm() {
       </div>
 
       {status === "error" && (
-        <p role="alert" className="flex items-start gap-2 rounded-xl bg-rose-50 p-4 text-sm text-rose-700 ring-1 ring-rose-100">
-          <AlertCircle className="mt-0.5 size-4 shrink-0" aria-hidden="true" />
-          Sorry, we couldn’t send your enquiry right now. Please use the WhatsApp button below or email us at{" "}
-          <a href={`mailto:${site.email}`} className="font-semibold underline">{site.email}</a>.
-        </p>
+        <div role="alert" className="rounded-xl bg-rose-50 p-4 ring-1 ring-rose-100 space-y-3">
+          <p className="flex items-start gap-2 text-sm text-rose-700">
+            <AlertCircle className="mt-0.5 size-4 shrink-0" aria-hidden="true" />
+            <span>
+              Email could not be sent right now. Please use{" "}
+              <strong>Send on WhatsApp</strong> below — we reply within hours. Or email{" "}
+              <a href={`mailto:${site.email}`} className="font-semibold underline">{site.email}</a>.
+            </span>
+          </p>
+          <button
+            type="button"
+            onClick={() => {
+              window.open(whatsappLink(summary()), "_blank", "noopener,noreferrer");
+              setStatus("handoff");
+            }}
+            className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#25D366] py-2.5 text-sm font-bold text-white transition hover:bg-green-600 active:scale-95"
+          >
+            ✅ Send enquiry via WhatsApp instead
+          </button>
+        </div>
       )}
 
       <div className="flex flex-col gap-3 sm:flex-row">
