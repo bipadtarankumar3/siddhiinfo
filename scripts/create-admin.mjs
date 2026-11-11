@@ -17,8 +17,15 @@ const password = process.env.ADMIN_PASSWORD;
 
 if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) throw new Error("Give a valid email as the first argument");
 if (!["admin", "staff", "viewer"].includes(role)) throw new Error("Role must be admin, staff or viewer");
-if (!password || password.length < 12) throw new Error("Set ADMIN_PASSWORD (12+ characters)");
 if (!process.env.MONGODB_URI) throw new Error("Set MONGODB_URI");
+// Short passwords are allowed only against a local database (development).
+// Production (e.g. MongoDB Atlas) always requires 12+ characters.
+const isLocalDb = /^mongodb:\/\/(127\.0\.0\.1|localhost)(:\d+)?(\/|$)/.test(process.env.MONGODB_URI);
+if (!password) throw new Error("Set ADMIN_PASSWORD");
+if (password.length < 12) {
+  if (!isLocalDb) throw new Error("ADMIN_PASSWORD must be 12+ characters for a non-local database");
+  console.warn("Warning: short password accepted for LOCAL development only.");
+}
 
 const salt = crypto.randomBytes(16);
 const hash = crypto.scryptSync(password, salt, 64, { N: 16384, r: 8, p: 1 });
