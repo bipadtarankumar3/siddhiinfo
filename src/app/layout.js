@@ -1,14 +1,13 @@
 import { Plus_Jakarta_Sans, Mukta } from "next/font/google";
-import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
+import { GoogleTagManager } from "@next/third-parties/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
 import JsonLd from "@/components/JsonLd";
-import RevealObserver from "@/components/RevealObserver";
 import { LanguageProvider } from "@/context/LanguageContext";
-import NamasteModal from "@/components/NamasteModal";
-import { site, absoluteUrl, hasRealPhone } from "@/lib/site";
+import LanguagePrompt from "@/components/LanguagePrompt";
+import { site, absoluteUrl, hasPhone } from "@/lib/site";
 import { services } from "@/lib/data";
 
 const jakarta = Plus_Jakarta_Sans({
@@ -28,32 +27,21 @@ const mukta = Mukta({
 export const metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: "Siddhi Info – Website & Software Development Company in India",
+    default: "Siddhi Info — Websites, Software & Automation for Indian Businesses",
     template: "%s | Siddhi Info",
   },
   description: site.description,
   applicationName: site.name,
   keywords: [
     "website development company in India",
-    "affordable website development",
+    "small business website India",
     "website developer in Kolkata",
     "e-commerce website development India",
-    "custom software development",
-    "mobile app development India",
-    "CRM ERP software for small business",
-    "WhatsApp automation for business",
-    "digital marketing services India",
-    "website development for small business India",
-    "small business website India",
-    "GST billing software",
-    "WhatsApp Business API",
-    "local SEO India",
-    "website for kirana store",
-    "digital India small business",
-    "Hindi website development",
-    "Google Business Profile",
-    "ecommerce website India",
-    "digital marketing for small business",
+    "custom software development India",
+    "CRM ERP software for SMEs",
+    "GST billing software setup",
+    "WhatsApp Business API automation",
+    "local SEO Google Business Profile",
     "Siddhi Info",
   ],
   authors: [{ name: site.name, url: site.url }],
@@ -65,12 +53,12 @@ export const metadata = {
     locale: "en_IN",
     url: site.url,
     siteName: site.name,
-    title: "Siddhi Info – Your Digital Growth Partner",
+    title: "Siddhi Info — Websites, Software & Automation",
     description: site.description,
   },
   twitter: {
     card: "summary_large_image",
-    title: "Siddhi Info – Your Digital Growth Partner",
+    title: "Siddhi Info — Websites, Software & Automation",
     description: site.description,
   },
   robots: {
@@ -104,9 +92,8 @@ const orgSchema = {
       description: site.description,
       slogan: site.tagline,
       email: site.email,
-      // Only published once a real number is set in src/lib/site.js
-      ...(hasRealPhone ? { telephone: site.phone } : {}),
-      priceRange: "₹₹",
+      // Only published once a verified number is set in src/lib/site.js
+      ...(hasPhone ? { telephone: site.phone } : {}),
       areaServed: { "@type": "Country", name: "India" },
       address: {
         "@type": "PostalAddress",
@@ -116,13 +103,8 @@ const orgSchema = {
         postalCode: site.address.postalCode || undefined,
         addressCountry: site.address.country,
       },
-      openingHoursSpecification: {
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-        opens: "10:00",
-        closes: "19:00",
-      },
-      knowsLanguage: ["en", "hi"],
+      // Add openingHoursSpecification here once business hours are confirmed
+      knowsLanguage: ["en", "hi", "bn"],
       sameAs: Object.values(site.social).filter(Boolean),
       hasOfferCatalog: {
         "@type": "OfferCatalog",
@@ -147,10 +129,6 @@ const orgSchema = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en-IN" className={`${jakarta.variable} ${mukta.variable}`} suppressHydrationWarning>
-      <head>
-        {/* Enables scroll-reveal styles only when JS runs, so content is never hidden without it */}
-        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
-      </head>
       <body className="flex min-h-screen flex-col font-sans">
         <LanguageProvider>
           <JsonLd data={orgSchema} />
@@ -161,10 +139,10 @@ export default function RootLayout({ children }) {
           <main id="main" className="flex-1">{children}</main>
           <Footer />
           <WhatsAppFloat />
-          <RevealObserver />
-          <NamasteModal />
+          <LanguagePrompt />
         </LanguageProvider>
-        <GoogleTagManager gtmId="GTM-PNTGKWRK" />
+        {/* Analytics: disclosed on /privacy-policy/. Remove site.gtmId to disable. */}
+        {site.gtmId && <GoogleTagManager gtmId={site.gtmId} />}
       </body>
     </html>
   );

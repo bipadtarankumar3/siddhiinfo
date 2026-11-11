@@ -1,80 +1,119 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Mail, Phone, MapPin, Clock, ArrowRight, ArrowUpRight, Heart } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import BrandIcon from "./BrandIcon";
-import WhatsAppIcon from "./WhatsAppIcon";
+import ColorIcon from "./ColorIcon";
+import Toran from "./india/Toran";
 import Skyline from "./india/Skyline";
-import Rangoli from "./india/Rangoli";
-import Jali from "./india/Jali";
-import { site, whatsappLink } from "@/lib/site";
-import { services, industries, portfolio } from "@/lib/data";
+import { site, whatsappLink, telHref, mailHref } from "@/lib/site";
+import { smallBusinessServices, enterpriseServices, portfolio } from "@/lib/data";
 
-const cities = ["Kolkata", "Delhi NCR", "Mumbai", "Bengaluru", "Hyderabad", "Chennai", "Pune", "Ahmedabad", "Jaipur", "Lucknow", "Patna", "Bhubaneswar", "Guwahati", "Ranchi", "Siliguri", "Indore", "Surat", "Kochi"];
+const columns = (smallOnly) => [
+  {
+    title: "Small Business",
+    color: "#F97316",
+    links: [["Small Business Solutions", "/small-business/"], ...smallOnly.map((s) => [s.title, `/services/${s.slug}/`])],
+  },
+  {
+    title: "Enterprise",
+    color: "#14B8A6",
+    links: [["Enterprise & Custom Projects", "/enterprise/"], ...enterpriseServices.map((s) => [s.title, `/services/${s.slug}/`])],
+  },
+  {
+    title: "Company",
+    color: "#F472B6",
+    links: [
+      ["About", "/about/"],
+      ["Our work", "/work/"],
+      ["Pricing", "/pricing/"],
+      ["Custom development pricing", "/pricing/#custom"],
+      ["Industries", "/industries/"],
+      ["Blog", "/blog/"],
+      ["Contact", "/contact/"],
+    ],
+  },
+];
 
 export default function Footer() {
   const year = new Date().getFullYear();
-  const tel = site.phone.replace(/\s/g, "");
-  const live = portfolio.filter((p) => !p.concept);
+  const wa = whatsappLink();
+  const smallOnly = smallBusinessServices.filter((s) => s.audience === "small");
 
   const contacts = [
-    { icon: WhatsAppIcon, label: "WhatsApp", value: "Chat with us", href: whatsappLink(), ext: true, tint: "from-[#25D366] to-[#128C7E]" },
-    { icon: Phone, label: "Call us", value: site.phone, href: `tel:${tel}`, tint: "from-brand-500 to-electric-500" },
-    { icon: Mail, label: "Email", value: site.email, href: `mailto:${site.email}`, tint: "from-electric-500 to-brand-600" },
-    { icon: MapPin, label: "Office", value: `${site.address.city}, ${site.address.region}`, tint: "from-mint-500 to-electric-600" },
-  ];
+    { icon: "Mail", label: "Email us", value: site.email, href: mailHref },
+    wa && { icon: "MessageCircle", label: "WhatsApp", value: "Chat with us", href: wa, external: true },
+    telHref && { icon: "Phone", label: "Call us", value: site.phone, href: telHref },
+    { icon: "MapPin", label: "Based in", value: `${site.address.city}, ${site.address.region}` },
+    { icon: "Clock", label: "We reply", value: site.responseTime },
+    { icon: "Languages", label: "We speak", value: "English · हिन्दी · বাংলা" },
+  ].filter(Boolean);
 
   return (
-    <footer className="relative text-slate-300">
-      {/* ---------- sunset sky with Indian skyline ---------- */}
-      <div aria-hidden="true" className="relative overflow-hidden bg-gradient-to-b from-white via-saffron-50 to-[#ffc9a3]">
-        <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-b from-transparent via-[#f4a3a8]/50 to-[#2b6cc4]/60" />
-        <div className="absolute bottom-[-30%] left-1/2 size-[22rem] -translate-x-1/2 rounded-full bg-gradient-to-b from-[#ffd36e] to-[#ff8a3d] opacity-90 sm:size-[30rem]" />
-        <div className="absolute bottom-[-30%] left-1/2 size-[34rem] -translate-x-1/2 rounded-full bg-[#ffb35c]/30 blur-3xl sm:size-[46rem]" />
-        <Skyline fit="xMidYMax slice" className="relative -mb-px block h-28 w-full text-brand-950 sm:h-40 lg:h-auto" />
-      </div>
+    <footer className="relative isolate overflow-hidden bg-[#071636] text-slate-100">
+      {/* Background photo of Kolkata under a deep navy overlay */}
+      <Image
+        src="/images/industry-real-estate.webp"
+        alt=""
+        fill
+        sizes="100vw"
+        className="-z-20 object-cover object-center opacity-25 grayscale"
+      />
+      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgb(7_22_54/0.97)_0%,rgb(7_22_54/0.985)_40%,rgb(5_16_40/1)_100%)]" />
+      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[radial-gradient(36rem_18rem_at_0%_20%,rgb(249_115_22/0.12),transparent_60%),radial-gradient(36rem_18rem_at_100%_50%,rgb(219_39_119/0.10),transparent_60%)]" />
 
-      {/* ---------- main footer body ---------- */}
-      <div className="relative overflow-hidden bg-gradient-to-b from-brand-950 via-[#0a1d4a] to-ink">
-        <Jali uid="footer-jali" className="pointer-events-none absolute inset-0" opacity={0.06} />
-        <Rangoli className="pointer-events-none absolute -left-40 top-24 hidden w-[30rem] text-brand-300 opacity-[0.08] lg:block" />
-        <Rangoli className="pointer-events-none absolute -bottom-40 -right-40 w-[26rem] text-mint-300 opacity-[0.08]" />
-        <div aria-hidden="true" className="animate-blob absolute left-1/3 top-10 size-96 rounded-full bg-brand-600/20 blur-3xl" />
+      <div aria-hidden="true" className="flex h-1.5"><span className="flex-1 bg-saffron-500" /><span className="flex-1 bg-white" /><span className="flex-1 bg-indiagreen" /></div>
+      <Toran uid="footer-toran" />
 
-        <div className="container-x relative">
-          {/* brand + contact tiles */}
-          <div className="grid gap-8 border-b border-white/10 py-12 lg:py-14">
-            <div className="flex items-center gap-5">
-              <Link href="/" aria-label="Siddhi Info home" className="grid size-20 shrink-0 place-items-center rounded-3xl bg-white p-2.5 shadow-2xl shadow-black/40 ring-4 ring-white/10 transition hover:-rotate-3 hover:scale-105 sm:size-24">
-                <Image src="/logo-192.png" alt="" width={192} height={192} className="size-full object-contain" />
-              </Link>
-              <div>
-                <p className="text-2xl font-extrabold tracking-tight text-white sm:text-3xl">
-                  Siddhi <span className="text-gradient-light">Info</span>
-                </p>
-                <p className="mt-1 text-xs font-bold uppercase tracking-[0.2em] text-mint-300 sm:text-sm">{site.tagline}</p>
-                <p className="mt-1.5 text-slate-400">आपका बिज़नेस, हमारी टेक्नोलॉजी।</p>
-              </div>
+      <div className="container-x">
+        {/* CTA band */}
+        <div className="relative mt-8 overflow-hidden rounded-3xl bg-gradient-to-r from-saffron-600 via-pink-600 to-indigo-700 p-6 text-white shadow-2xl shadow-black/30 sm:p-8">
+          <div aria-hidden="true" className="pointer-events-none absolute -right-10 -top-16 size-56 rounded-full bg-white/10" />
+          <div className="relative flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+            <div>
+              <p className="text-sm font-bold uppercase tracking-wider text-amber-100">Have a project in mind?</p>
+              <p className="mt-1 text-2xl font-extrabold sm:text-3xl">Let&apos;s talk — the first consultation is free.</p>
             </div>
-            <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-              {contacts.map(({ icon: I, label, value, href, ext, tint }) => {
+            <div className="flex flex-col gap-3 sm:flex-row">
+              <Link href="/contact/#enquiry" className="btn btn-light">
+                Book a free consultation <ArrowRight className="size-4" aria-hidden="true" />
+              </Link>
+              <Link href="/pricing/" className="btn bg-white/15 text-white ring-1 ring-white/40 hover:bg-white/25">
+                See pricing
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        <div className="grid gap-10 py-14 lg:grid-cols-12">
+          {/* Brand + contacts */}
+          <div className="lg:col-span-4 xl:col-span-3">
+            <Link href="/" aria-label="Siddhi Info home" className="inline-flex items-center gap-3">
+              <span className="grid size-14 place-items-center rounded-2xl bg-white p-1.5 shadow-lg ring-4 ring-white/10">
+                <Image src="/logo-192.png" alt="" width={192} height={192} className="size-full object-contain" />
+              </span>
+              <span>
+                <span className="block text-2xl font-extrabold text-white">Siddhi <span className="text-marigold-400">Info</span></span>
+                <span className="block text-sm text-amber-200" lang="hi">आपका बिज़नेस, हमारी टेक्नोलॉजी</span>
+              </span>
+            </Link>
+            <p className="mt-5 max-w-md leading-relaxed text-slate-200">{site.description}</p>
+
+            <ul className="mt-6 grid gap-2.5 sm:grid-cols-2 lg:grid-cols-1">
+              {contacts.map((c) => {
                 const inner = (
                   <>
-                    <span className={`grid size-10 shrink-0 place-items-center rounded-xl bg-gradient-to-br ${tint} text-white shadow-lg`}>
-                      <I className="size-5" aria-hidden="true" />
-                    </span>
+                    <ColorIcon name={c.icon} className="size-10" />
                     <span className="min-w-0">
-                      <span className="block text-xs text-slate-400">{label}</span>
-                      <span className="block truncate text-sm font-semibold text-white">{value}</span>
+                      <span className="block text-xs font-medium text-slate-300">{c.label}</span>
+                      <span className="block break-words text-sm font-semibold text-white">{c.value}</span>
                     </span>
                   </>
                 );
-                const cls = "flex h-full items-center gap-3 rounded-2xl bg-white/[0.05] p-3 ring-1 ring-white/10 backdrop-blur transition";
+                const cls = "flex items-center gap-3 rounded-2xl bg-[#0d2250] p-2.5 pr-4 ring-1 ring-white/15";
                 return (
-                  <li key={label}>
-                    {href ? (
-                      <a href={href} {...(ext && { target: "_blank", rel: "noopener noreferrer" })} className={`${cls} hover:-translate-y-0.5 hover:bg-white/10 hover:ring-white/25`}>
-                        {inner}
-                      </a>
+                  <li key={c.label}>
+                    {c.href ? (
+                      <a href={c.href} {...(c.external && { target: "_blank", rel: "noopener noreferrer" })} className={`${cls} transition hover:bg-[#13306b] hover:ring-white/30`}>{inner}</a>
                     ) : (
                       <div className={cls}>{inner}</div>
                     )}
@@ -82,141 +121,60 @@ export default function Footer() {
                 );
               })}
             </ul>
+            <Social />
           </div>
 
-          {/* link columns */}
-          <div className="grid grid-cols-2 gap-x-6 gap-y-10 py-12 lg:grid-cols-12">
-            <div className="col-span-2 lg:col-span-4">
-              <h2 className="footer-title">About Siddhi Info</h2>
-              <p className="mt-4 max-w-sm leading-relaxed text-slate-400">{site.description}</p>
-              <ul className="mt-5 space-y-2.5 text-sm">
-                <li className="flex items-center gap-3"><MapPin className="size-4 shrink-0 text-mint-300" aria-hidden="true" />{site.address.city}, {site.address.region}, India</li>
-                <li className="flex items-center gap-3"><Clock className="size-4 shrink-0 text-mint-300" aria-hidden="true" />{site.hours}</li>
-              </ul>
-              <Social />
-              <div className="mt-6 flex flex-wrap gap-2.5">
-                <span className="inline-flex items-center gap-2.5 rounded-full bg-white/[0.06] px-4 py-2 text-xs font-semibold text-white ring-1 ring-white/10">
-                  <span className="flex h-3.5 w-6 flex-col overflow-hidden rounded-[3px]" aria-hidden="true">
-                    <span className="flex-1 bg-saffron-500" /><span className="flex-1 bg-white" /><span className="flex-1 bg-indiagreen" />
-                  </span>
-                  Proudly Made in India
-                </span>
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-500/10 px-3.5 py-1.5 text-xs font-bold text-amber-300 ring-1 ring-amber-500/25">
-                  🇮🇳 28 States & 8 UTs
-                </span>
-              </div>
-            </div>
-
-            <FooterCol title="Services" className="col-span-2 sm:col-span-1 lg:col-span-3">
-              {services.map((s) => (
-                <li key={s.slug}><FooterLink href={`/services/${s.slug}/`}>{s.title}</FooterLink></li>
-              ))}
-            </FooterCol>
-
-            <FooterCol title="Industries" className="lg:col-span-3">
-              {industries.map((i) => (
-                <li key={i.slug}><FooterLink href={`/industries/${i.slug}/`}>{i.title}</FooterLink></li>
-              ))}
-            </FooterCol>
-
-            <FooterCol title="Company" className="lg:col-span-2">
-              {[
-                ["About us", "/about/"],
-                ["Our work", "/work/"],
-                ["Pricing", "/pricing/"],
-                ["Blog", "/blog/"],
-                ["Contact", "/contact/"],
-                ["Privacy policy", "/privacy-policy/"],
-                ["Terms of service", "/terms/"],
-              ].map(([l, h]) => (
-                <li key={h}><FooterLink href={h}>{l}</FooterLink></li>
-              ))}
-            </FooterCol>
-          </div>
-
-          {/* live work strip */}
-          <div className="rounded-3xl bg-white/[0.04] p-5 ring-1 ring-white/10 sm:p-6">
-            <div className="flex flex-wrap items-center justify-between gap-3">
-              <h2 className="footer-title">Our live work</h2>
-              <Link href="/work/" className="inline-flex min-h-10 items-center gap-1 text-sm font-semibold text-mint-300 hover:text-mint-200">
-                See all projects <ArrowRight className="size-4" aria-hidden="true" />
-              </Link>
-            </div>
-            <ul className="mt-4 grid grid-cols-2 gap-3 lg:grid-cols-4">
-              {live.map((p) => (
-                <li key={p.slug}>
-                  <a href={p.liveUrl} target="_blank" rel="noopener noreferrer" className="group block overflow-hidden rounded-2xl bg-white/5 ring-1 ring-white/10 transition hover:ring-white/30">
-                    <span className="relative block aspect-[16/9] overflow-hidden">
-                      <Image src={p.images.desktop} alt={`${p.name} website`} fill sizes="(min-width: 1024px) 280px, 45vw" className="object-cover object-top transition duration-500 group-hover:scale-105" />
-                    </span>
-                    <span className="flex items-center justify-between gap-2 px-3 py-2.5">
-                      <span className="min-w-0">
-                        <span className="block truncate text-sm font-semibold text-white">{p.name}</span>
-                        <span className="block truncate text-xs text-slate-400">{p.url}</span>
-                      </span>
-                      <ArrowUpRight className="size-4 shrink-0 text-slate-400 transition group-hover:text-white" aria-hidden="true" />
-                    </span>
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* cities ribbon */}
-          <div className="py-10">
-            <p className="text-center text-sm text-slate-400">
-              Serving businesses across Bharat <span className="text-mint-300">— आप जहाँ भी हों, हम साथ हैं।</span>
-            </p>
-            <div className="relative mt-4 overflow-hidden [mask-image:linear-gradient(90deg,transparent,black_10%,black_90%,transparent)]">
-              <ul className="animate-marquee flex w-max gap-3" aria-label="Cities we serve">
-                {[...cities, ...cities].map((c, i) => (
-                  <li key={i} aria-hidden={i >= cities.length || undefined} className="shrink-0 rounded-full bg-white/[0.05] px-4 py-1.5 text-sm text-slate-300 ring-1 ring-white/10">
-                    {c}
-                  </li>
-                ))}
-              </ul>
-            </div>
+          {/* Link columns */}
+          <div className="grid gap-x-8 gap-y-10 sm:grid-cols-3 lg:col-span-8 xl:col-span-9 xl:pl-6">
+            {columns(smallOnly).map((col) => (
+              <nav key={col.title} aria-label={`${col.title} links`}>
+                <h2 className="text-sm font-bold uppercase tracking-wider text-white">
+                  {col.title}
+                  <span aria-hidden="true" className="mt-2 block h-1 w-10 rounded-full" style={{ background: col.color }} />
+                </h2>
+                <ul className="mt-3 text-[0.95rem]">
+                  {col.links.map(([label, href], i) => (
+                    <li key={href + label}>
+                      <Link href={href} className={`group inline-flex min-h-10 items-start gap-2 py-2 leading-snug hover:text-white ${i === 0 && col.title !== "Company" ? "font-semibold text-white" : "text-slate-100"}`}>
+                        <span aria-hidden="true" className="mt-1.5 size-1.5 shrink-0 rotate-45 transition group-hover:scale-150" style={{ background: col.color }} />
+                        {label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            ))}
           </div>
         </div>
 
-        {/* bottom bar */}
-        <div className="relative">
-          <div aria-hidden="true" className="flex h-1">
-            <span className="flex-1 bg-saffron-500" /><span className="flex-1 bg-white" /><span className="flex-1 bg-indiagreen" />
-          </div>
-          <div className="bg-black/30">
-            <div className="container-x flex flex-col items-center gap-2 py-4 text-center text-sm text-slate-400 sm:flex-row sm:justify-between sm:text-left">
-              <p>© {year} {site.legalName}. All rights reserved.</p>
-              <p className="flex items-center gap-1.5">
-                Made with <Heart className="size-4 fill-rose-500 text-rose-500" aria-label="love" /> in India, for Bharat’s businesses
-              </p>
-              <p className="flex gap-4">
-                <Link href="/privacy-policy/" className="inline-flex min-h-10 items-center hover:text-white">Privacy</Link>
-                <Link href="/terms/" className="inline-flex min-h-10 items-center hover:text-white">Terms</Link>
-              </p>
-            </div>
-          </div>
+        {/* Live products strip */}
+        <div className="flex flex-wrap items-center gap-2 rounded-2xl bg-[#0d2250] p-4 text-sm ring-1 ring-white/15">
+          <span className="mr-1 font-bold text-white">Live products:</span>
+          {portfolio.filter((p) => !p.concept).map(({ name: n, liveUrl: u }) => (
+            <a key={u} href={u} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-9 items-center gap-1 rounded-full bg-white/15 px-3 text-white hover:bg-white/25 hover:text-white">
+              {n} <ArrowUpRight className="size-3.5" aria-hidden="true" />
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <Skyline className="mt-10 block h-36 w-full sm:h-auto" />
+
+      <div className="border-t border-white/10 bg-[#040d22]">
+        <div className="container-x flex flex-col gap-3 py-5 text-sm text-slate-300 md:flex-row md:items-center md:justify-between">
+          <p>© {year} {site.legalName}. All rights reserved.</p>
+          <p className="flex flex-wrap gap-x-5">
+            <Link href="/privacy-policy/" className="inline-flex min-h-10 items-center hover:text-white">Privacy policy</Link>
+            <Link href="/terms/" className="inline-flex min-h-10 items-center hover:text-white">Terms</Link>
+            <Link href="/sitemap.xml" className="inline-flex min-h-10 items-center hover:text-white">Sitemap</Link>
+          </p>
+          <p className="flex items-center gap-2">
+            <span aria-hidden="true" className="flex h-3 w-5 flex-col overflow-hidden rounded-[2px]"><span className="flex-1 bg-saffron-500" /><span className="flex-1 bg-white" /><span className="flex-1 bg-indiagreen" /></span>
+            Made in Kolkata, India
+          </p>
         </div>
       </div>
     </footer>
-  );
-}
-
-function FooterLink({ href, children }) {
-  return (
-    <Link href={href} className="group inline-flex items-center gap-2 py-0.5 text-slate-300 transition hover:text-white">
-      <span aria-hidden="true" className="size-1.5 shrink-0 rotate-45 bg-mint-400/60 transition group-hover:bg-mint-300" />
-      {children}
-    </Link>
-  );
-}
-
-function FooterCol({ title, children, className = "" }) {
-  return (
-    <div className={className}>
-      <h2 className="footer-title">{title}</h2>
-      <ul className="mt-4 space-y-2 text-sm">{children}</ul>
-    </div>
   );
 }
 
@@ -230,7 +188,7 @@ function Social() {
     <ul className="mt-5 flex gap-2" aria-label="Social media">
       {links.map(([key, url]) => (
         <li key={key}>
-          <a href={url} target="_blank" rel="noopener noreferrer" aria-label={`Siddhi Info on ${key}`} className="grid size-10 place-items-center rounded-xl bg-white/5 text-slate-300 ring-1 ring-white/10 transition hover:bg-white/10 hover:text-white">
+          <a href={url} target="_blank" rel="noopener noreferrer" aria-label={`Siddhi Info on ${key}`} className="grid size-11 place-items-center rounded-xl bg-white/10 text-white ring-1 ring-white/15 hover:bg-white/20">
             {socialIcons[key] ? <BrandIcon name={socialIcons[key]} color={false} className="size-4" /> : <span className="text-xs font-bold">in</span>}
           </a>
         </li>

@@ -8,9 +8,9 @@ const sites = {
     nav: ["राशन", "डेयरी", "मसाले", "ऑफ़र्स"],
     cta: "व्हाट्सएप ऑर्डर 🛍️",
     bg: "#fffdfa", fg: "#1c1917", primary: "#16a34a", soft: "#dcfce7",
-    tag: "🚚 30 मिनट में फ़्री डिलीवरी • 0% कमीशन",
+    tag: "नमूना डिज़ाइन • काल्पनिक दुकान",
     title: ["अपनी मनपसंद दुकान,", "अब सीधे फोन पर।"],
-    sub: "सीधे व्हाट्सएप पर राशन मंगाएं, PhonePe / GPay से पेमेंट करें और 100% कमीशन बचाएं।",
+    sub: "सीधे व्हाट्सएप पर राशन मंगाएं और UPI से पेमेंट करें।",
     img: "/images/mock-grocery.webp",
     section: "आज की महाबचत (Daily Offers)",
     cards: [
@@ -175,7 +175,7 @@ function SiteDesktop({ s }) {
         <div className="relative h-[12.5em] overflow-hidden rounded-[1em]">
           <img src={s.img} alt="" loading="lazy" decoding="async" className="size-full object-cover" />
           <span className="absolute bottom-[0.6em] left-[0.6em] rounded-[0.5em] bg-white/95 px-[0.7em] py-[0.4em] text-[0.6em] font-bold text-slate-800 shadow">
-            ★ 4.8 Google rating
+            Sample data
           </span>
         </div>
       </div>
@@ -187,7 +187,7 @@ function SiteDesktop({ s }) {
       </div>
       <div className="mx-[2em] mt-[1.2em] flex items-center justify-between rounded-[0.8em] px-[1.2em] py-[0.8em] text-white" style={{ background: s.primary }}>
         <div>
-          <p className="text-[0.8em] font-bold">Have a question? We reply within minutes.</p>
+          <p className="text-[0.8em] font-bold">Have a question? Message us.</p>
           <p className="text-[0.6em] opacity-80">Call, WhatsApp or visit us — Mon to Sat</p>
         </div>
         <span className="rounded-full bg-white px-[0.9em] py-[0.35em] text-[0.62em] font-bold" style={{ color: s.primary }}>Chat now</span>
@@ -268,10 +268,10 @@ const kpis = [
   ["Low stock items", "7", "Reorder"],
 ];
 const orders = [
-  ["Shree Traders", "INV-2041", "₹48,200", "Paid"],
-  ["Gupta Stores", "INV-2040", "₹12,750", "Due"],
-  ["Maa Durga Agency", "INV-2039", "₹31,900", "Paid"],
-  ["R.K. Enterprises", "INV-2038", "₹8,430", "Draft"],
+  ["Sample Traders", "INV-2041", "₹48,200", "Paid"],
+  ["Demo Stores", "INV-2040", "₹12,750", "Due"],
+  ["Example Agency", "INV-2039", "₹31,900", "Paid"],
+  ["Test Enterprises", "INV-2038", "₹8,430", "Draft"],
 ];
 const statusColor = { Paid: ["#dcfce7", "#15803d"], Due: ["#fef3c7", "#b45309"], Draft: ["#e2e8f0", "#475569"] };
 
@@ -391,7 +391,7 @@ function WebappDesktop() {
           ))}
         </div>
         <div className="mt-[0.7em] grid grid-cols-3 gap-[0.6em]">
-          {[["Revenue today", "₹14,350"], ["Technicians on duty", "6 / 8"], ["Avg. rating", "4.8 ★"]].map(([k, v]) => (
+          {[["Revenue today", "₹14,350"], ["Technicians on duty", "6 / 8"], ["Jobs completed", "12"]].map(([k, v]) => (
             <div key={k} className="rounded-[0.7em] bg-white p-[0.7em] ring-1 ring-slate-200">
               <p className="text-[0.58em] text-slate-500">{k}</p>
               <p className="text-[0.95em] font-extrabold text-slate-800">{v}</p>
@@ -400,7 +400,7 @@ function WebappDesktop() {
         </div>
         <div className="mt-[0.7em] rounded-[0.7em] bg-white p-[0.8em] ring-1 ring-slate-200">
           <p className="text-[0.66em] font-bold text-slate-700">Upcoming visits</p>
-          {[["Amit S.", "AC service", "Salt Lake", "4:00 PM"], ["Meera K.", "RO repair", "Behala", "4:30 PM"], ["Rahul D.", "Deep cleaning", "Garia", "5:15 PM"]].map(([c, j, a, t]) => (
+          {[["Customer A", "AC service", "Salt Lake", "4:00 PM"], ["Customer B", "RO repair", "Behala", "4:30 PM"], ["Customer C", "Deep cleaning", "Garia", "5:15 PM"]].map(([c, j, a, t]) => (
             <div key={c} className="mt-[0.45em] grid grid-cols-4 text-[0.58em] text-slate-600">
               <span className="font-semibold text-slate-800">{c}</span><span>{j}</span><span>{a}</span><span className="justify-self-end font-semibold text-electric-600">{t}</span>
             </div>

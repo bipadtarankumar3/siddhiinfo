@@ -1,17 +1,20 @@
 "use client";
 
-import { useState } from "react";
-import { Send, CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
-import { site, whatsappLink } from "@/lib/site";
-import { services } from "@/lib/data";
+import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import { Send, CheckCircle2, AlertCircle, Loader2, Copy, Mail } from "lucide-react";
+import { site, whatsappLink, mailHref } from "@/lib/site";
+import { services, plans } from "@/lib/data";
+import WhatsAppIcon from "./WhatsAppIcon";
 
 /*
   Enquiry form.
-  "Send enquiry" POSTs to /api/contact/ (src/app/api/contact/route.js), which
-  emails it to site.email via Gmail SMTP. "Send on WhatsApp" opens the
-  pre-filled enquiry in WhatsApp as a secondary option.
+  "Send enquiry" POSTs JSON to /api/contact/ (src/app/api/contact/route.js), which
+  emails it to site.email. Nothing is stored on the website itself.
+  If sending fails, the visitor keeps everything they typed and gets other ways
+  to reach us — an enquiry is never silently dropped.
 */
-const ENDPOINT = process.env.NEXT_PUBLIC_FORM_ENDPOINT || "/api/contact/";
+const ENDPOINT = "/api/contact/";
 
 // Indian mobile: optional +91 / 91 / 0 prefix, then 10 digits starting 6–9
 function normaliseIndianMobile(value) {
@@ -20,12 +23,39 @@ function normaliseIndianMobile(value) {
   return /^[6-9]\d{9}$/.test(ten) ? ten : null;
 }
 
-const initial = { name: "", phone: "", business: "", city: "", service: services[0].title, message: "", website: "" };
+const baseOptions = [
+  ...services.map((s) => s.title),
+  ...plans.map((p) => `${p.name} package`),
+  "Custom project / Enterprise",
+  "Not sure — need advice",
+];
+
+const initial = { name: "", phone: "", business: "", city: "", service: "", message: "", website: "" };
 
 export default function ContactForm() {
   const [values, setValues] = useState(initial);
   const [errors, setErrors] = useState({});
-  const [status, setStatus] = useState("idle"); // idle | sending | sent | handoff | error
+  const [status, setStatus] = useState("idle"); // idle | sending | sent | error
+  const [copied, setCopied] = useState(false);
+  const [options, setOptions] = useState(baseOptions);
+  const errorRef = useRef(null);
+  const successRef = useRef(null);
+
+  // Pre-select a service passed as ?service=… from a "Get a quote" button
+  useEffect(() => {
+    const pre = new URLSearchParams(window.location.search).get("service");
+    if (!pre) return;
+    const match = baseOptions.find((o) => o === pre || o === `${pre} package`) ?? pre.slice(0, 80);
+    /* eslint-disable react-hooks/set-state-in-effect -- one-time read of the URL after hydration */
+    if (!baseOptions.includes(match)) setOptions([match, ...baseOptions]);
+    setValues((v) => ({ ...v, service: match }));
+    /* eslint-enable react-hooks/set-state-in-effect */
+  }, []);
+
+  useEffect(() => {
+    if (status === "error") errorRef.current?.focus();
+    if (status === "sent") successRef.current?.focus();
+  }, [status]);
 
   const set = (k) => (e) => {
     setValues((v) => ({ ...v, [k]: e.target.value }));
@@ -35,8 +65,11 @@ export default function ContactForm() {
   function validate() {
     const er = {};
     if (values.name.trim().length < 2) er.name = "Please enter your name.";
-    if (!normaliseIndianMobile(values.phone)) er.phone = "Enter a valid 10-digit Indian mobile number (e.g. 98765 43210).";
-    if (values.message.length > 2000) er.message = "Please keep the description under 2000 characters.";
+    if (!normaliseIndianMobile(values.phone)) er.phone = "Enter a 10-digit Indian mobile number, e.g. 98765 43210.";
+    if (values.city.trim().length < 2) er.city = "Please enter your city or town.";
+    if (!values.service) er.service = "Please choose a service, or “Not sure — need advice”.";
+    if (values.message.trim().length < 10) er.message = "Please describe what you need in a sentence or two.";
+    if (values.message.length > 2000) er.message = "Please keep the description under 2,000 characters.";
     setErrors(er);
     return Object.keys(er).length === 0;
   }
@@ -44,13 +77,13 @@ export default function ContactForm() {
   function summary() {
     const mobile = normaliseIndianMobile(values.phone);
     return [
-      "Hi Siddhi Info, I'd like a free consultation.",
+      "Website enquiry for Siddhi Info",
       `Name: ${values.name.trim()}`,
-      `Mobile: +91 ${mobile}`,
-      values.business && `Business: ${values.business.trim()}`,
-      values.city && `City: ${values.city.trim()}`,
+      `Mobile: +91 ${mobile ?? values.phone}`,
+      values.business.trim() && `Business: ${values.business.trim()}`,
+      `City: ${values.city.trim()}`,
       `Service: ${values.service}`,
-      values.message && `Project: ${values.message.trim()}`,
+      `Project: ${values.message.trim()}`,
     ]
       .filter(Boolean)
       .join("\n");
@@ -59,59 +92,63 @@ export default function ContactForm() {
   async function onSubmit(e) {
     e.preventDefault();
     if (!validate()) {
-      const first = e.currentTarget.querySelector("[aria-invalid='true']");
-      first?.focus();
+      requestAnimationFrame(() => e.target.querySelector("[aria-invalid='true']")?.focus());
       return;
     }
-    const via = e.nativeEvent.submitter?.value;
-
-    if (ENDPOINT && via !== "whatsapp" && via !== "email") {
-      setStatus("sending");
-      try {
-        const res = await fetch(ENDPOINT, {
-          method: "POST",
-          headers: { "Content-Type": "application/json", Accept: "application/json" },
-          body: JSON.stringify({ ...values, phone: `+91 ${normaliseIndianMobile(values.phone)}`, source: "siddhiinfo.in" }),
-        });
-        if (!res.ok) throw new Error(String(res.status));
-        setStatus("sent");
-        setValues(initial);
-      } catch {
-        // Email failed — silently fall back to WhatsApp so the user can still reach us
-        const text = summary();
-        window.open(whatsappLink(text), "_blank", "noopener,noreferrer");
-        setStatus("handoff");
-      }
-      return;
+    setStatus("sending");
+    try {
+      const res = await fetch(ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({ ...values, phone: `+91 ${normaliseIndianMobile(values.phone)}` }),
+      });
+      if (!res.ok) throw new Error(String(res.status));
+      setStatus("sent");
+      setValues(initial);
+    } catch {
+      setStatus("error"); // values are kept so nothing is lost
     }
+  }
 
-    const text = summary();
-    if (via === "email") {
-      window.location.href = `mailto:${site.email}?subject=${encodeURIComponent("New enquiry from website")}&body=${encodeURIComponent(text)}`;
-    } else {
-      window.open(whatsappLink(text), "_blank", "noopener,noreferrer");
+  async function copyDetails() {
+    try {
+      await navigator.clipboard.writeText(summary());
+      setCopied(true);
+    } catch {
+      setCopied(false);
     }
-    setStatus("handoff");
   }
 
   if (status === "sent") {
     return (
-      <div role="status" className="rounded-2xl bg-mint-50 p-8 text-center ring-1 ring-mint-100">
+      <div ref={successRef} tabIndex={-1} role="status" className="rounded-2xl bg-mint-50 p-8 text-center ring-1 ring-mint-200 outline-none">
         <CheckCircle2 className="mx-auto size-12 text-mint-600" aria-hidden="true" />
-        <h3 className="mt-4 text-xl font-bold text-ink">Thank you! Your enquiry has been received.</h3>
-        <p className="mt-2 text-slate-600">Our team will call or WhatsApp you within one working day. धन्यवाद!</p>
+        <h3 className="mt-4 text-xl font-bold text-ink">Thank you — your enquiry has been sent.</h3>
+        <p className="mt-2 text-slate-700">
+          It has reached our team&apos;s inbox. We&apos;ll contact you {site.responseTime} on the mobile number you gave.
+        </p>
         <button type="button" onClick={() => setStatus("idle")} className="btn btn-outline mt-6">Send another enquiry</button>
       </div>
     );
   }
 
+  const wa = whatsappLink(summary());
+  const mailto = `${mailHref}?subject=${encodeURIComponent("Website enquiry")}&body=${encodeURIComponent(summary())}`;
+
   return (
-    <form onSubmit={onSubmit} noValidate className="space-y-5">
+    <form onSubmit={onSubmit} noValidate className="space-y-5" aria-describedby="form-how">
+      <p id="form-how" className="rounded-xl bg-slate-50 p-4 text-sm leading-relaxed text-slate-700 ring-1 ring-slate-200">
+        <strong className="text-ink">What happens when you send:</strong> your details are emailed to our team at{" "}
+        <span className="break-all font-semibold">{site.email}</span>. We reply {site.responseTime} by phone or WhatsApp.
+        Fields marked <span aria-hidden="true">*</span><span className="sr-only">with an asterisk</span> are required.
+      </p>
+
       {/* honeypot for spam bots — hidden from people and screen readers */}
       <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
         <label htmlFor="website">Website</label>
         <input id="website" name="website" tabIndex={-1} autoComplete="off" value={values.website} onChange={set("website")} />
       </div>
+
       <div className="grid gap-5 sm:grid-cols-2">
         <Field label="Your name" name="name" value={values.name} onChange={set("name")} error={errors.name} required autoComplete="name" />
         <Field
@@ -122,100 +159,96 @@ export default function ContactForm() {
           onChange={set("phone")}
           error={errors.phone}
           required
-          autoComplete="tel"
+          autoComplete="tel-national"
           inputMode="tel"
           placeholder="98765 43210"
           prefix="+91"
         />
-        <Field label="Business name" name="business" value={values.business} onChange={set("business")} autoComplete="organization" />
-        <Field label="City" name="city" value={values.city} onChange={set("city")} autoComplete="address-level2" />
+        <Field label="Business name" optional name="business" value={values.business} onChange={set("business")} autoComplete="organization" />
+        <Field label="City / town" name="city" value={values.city} onChange={set("city")} error={errors.city} required autoComplete="address-level2" />
       </div>
+
       <div>
-        <label htmlFor="service" className="label">Required service</label>
-        <select id="service" name="service" className="input" value={values.service} onChange={set("service")}>
-          {services.map((s) => (
-            <option key={s.slug}>{s.title}</option>
-          ))}
-          <option>Not sure — need advice</option>
+        <label htmlFor="service" className="label">
+          Service <span className="text-rose-600" aria-hidden="true">*</span>
+        </label>
+        <select
+          id="service"
+          name="service"
+          className={`input min-h-12 ${errors.service ? "!border-rose-500" : ""}`}
+          value={values.service}
+          onChange={set("service")}
+          required
+          aria-invalid={errors.service ? "true" : undefined}
+          aria-describedby={errors.service ? "service-error" : undefined}
+        >
+          <option value="" disabled>Choose a service…</option>
+          {options.map((o) => <option key={o}>{o}</option>)}
         </select>
+        {errors.service && <p id="service-error" className="mt-1.5 text-sm text-rose-700">{errors.service}</p>}
       </div>
+
       <div>
         <label htmlFor="message" className="label">
-          Project description <span className="font-normal text-slate-400">(optional)</span>
+          What do you need? <span className="text-rose-600" aria-hidden="true">*</span>
         </label>
         <textarea
           id="message"
           name="message"
           rows={4}
-          className="input"
+          required
+          maxLength={2000}
+          className={`input ${errors.message ? "!border-rose-500" : ""}`}
           value={values.message}
           onChange={set("message")}
           aria-invalid={errors.message ? "true" : undefined}
-          aria-describedby={errors.message ? "message-error" : undefined}
-          placeholder="E.g. I run a bakery in Salt Lake and want a website with online orders…"
+          aria-describedby={`message-hint${errors.message ? " message-error" : ""}`}
+          placeholder="E.g. I run a bakery and want customers to order cakes on WhatsApp."
         />
-        {errors.message && <p id="message-error" className="mt-1.5 text-sm text-rose-600">{errors.message}</p>}
+        <p id="message-hint" className="mt-1.5 text-sm text-slate-500">A sentence or two is enough.</p>
+        {errors.message && <p id="message-error" className="mt-1 text-sm text-rose-700">{errors.message}</p>}
       </div>
 
       {status === "error" && (
-        <div role="alert" className="rounded-xl bg-rose-50 p-4 ring-1 ring-rose-100 space-y-3">
-          <p className="flex items-start gap-2 text-sm text-rose-700">
-            <AlertCircle className="mt-0.5 size-4 shrink-0" aria-hidden="true" />
+        <div ref={errorRef} tabIndex={-1} role="alert" className="space-y-3 rounded-xl bg-rose-50 p-4 ring-1 ring-rose-200 outline-none">
+          <p className="flex items-start gap-2 text-rose-900">
+            <AlertCircle className="mt-0.5 size-5 shrink-0" aria-hidden="true" />
             <span>
-              Email could not be sent right now. Please use{" "}
-              <strong>Send on WhatsApp</strong> below — we reply within hours. Or email{" "}
-              <a href={`mailto:${site.email}`} className="font-semibold underline">{site.email}</a>.
+              <strong>Your enquiry was not sent.</strong> Your details are still in the form. Please try again, or send them to us another way:
             </span>
           </p>
-          <button
-            type="button"
-            onClick={() => {
-              window.open(whatsappLink(summary()), "_blank", "noopener,noreferrer");
-              setStatus("handoff");
-            }}
-            className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#25D366] py-2.5 text-sm font-bold text-white transition hover:bg-green-600 active:scale-95"
-          >
-            ✅ Send enquiry via WhatsApp instead
-          </button>
+          <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap">
+            <button type="submit" className="btn btn-primary">Try again</button>
+            <a href={mailto} className="btn btn-outline"><Mail className="size-4" aria-hidden="true" /> Email the details</a>
+            {wa && (
+              <a href={wa} target="_blank" rel="noopener noreferrer" className="btn btn-whatsapp"><WhatsAppIcon className="size-4" /> Send on WhatsApp</a>
+            )}
+            <button type="button" onClick={copyDetails} className="btn btn-outline"><Copy className="size-4" aria-hidden="true" /> {copied ? "Copied" : "Copy details"}</button>
+          </div>
         </div>
       )}
 
-      <div className="flex flex-col gap-3 sm:flex-row">
-        {ENDPOINT ? (
-          <>
-            <button type="submit" value="form" disabled={status === "sending"} className="btn btn-primary flex-1 disabled:opacity-70">
-              {status === "sending" ? <Loader2 className="size-4 animate-spin" aria-hidden="true" /> : <Send className="size-4" aria-hidden="true" />}
-              {status === "sending" ? "Sending…" : "Send enquiry"}
-            </button>
-            <button type="submit" value="whatsapp" className="btn btn-outline flex-1">Send on WhatsApp</button>
-          </>
-        ) : (
-          <>
-            <button type="submit" value="whatsapp" className="btn btn-primary flex-1">
-              <Send className="size-4" aria-hidden="true" /> Send on WhatsApp
-            </button>
-            <button type="submit" value="email" className="btn btn-outline flex-1">Send by email</button>
-          </>
-        )}
-      </div>
+      <button type="submit" disabled={status === "sending"} className="btn btn-primary w-full disabled:opacity-70 sm:w-auto">
+        {status === "sending" ? <Loader2 className="size-4 animate-spin" aria-hidden="true" /> : <Send className="size-4" aria-hidden="true" />}
+        {status === "sending" ? "Sending…" : "Send enquiry"}
+      </button>
+      <p className="sr-only" role="status">{status === "sending" ? "Sending your enquiry" : ""}</p>
 
-      {status === "handoff" && (
-        <p role="status" className="flex items-start gap-2 rounded-xl bg-mint-50 p-4 text-sm text-mint-700 ring-1 ring-mint-100">
-          <CheckCircle2 className="mt-0.5 size-4 shrink-0" aria-hidden="true" />
-          Almost done! Your enquiry is ready in WhatsApp / your email app — just press <strong>Send</strong>. We usually reply within a few working hours.
-        </p>
-      )}
-      <p className="text-xs text-slate-500">We only use your details to reply to your enquiry. No spam, ever.</p>
+      <p className="text-sm leading-relaxed text-slate-600">
+        <strong className="text-slate-700">Privacy:</strong> we use these details only to reply to your enquiry. They are sent by email
+        to our inbox and are not stored on this website or shared with anyone else.{" "}
+        <Link href="/privacy-policy/" className="font-semibold text-brand-700 underline">Privacy policy</Link>
+      </p>
     </form>
   );
 }
 
-function Field({ label, name, error, prefix, ...props }) {
+function Field({ label, name, error, prefix, optional, ...props }) {
   const input = (
     <input
       id={name}
       name={name}
-      className={`input ${prefix ? "rounded-l-none" : ""} ${error ? "!border-rose-400" : ""}`}
+      className={`input min-h-12 ${prefix ? "rounded-l-none" : ""} ${error ? "!border-rose-500" : ""}`}
       aria-invalid={error ? "true" : undefined}
       aria-describedby={error ? `${name}-error` : undefined}
       {...props}
@@ -224,17 +257,19 @@ function Field({ label, name, error, prefix, ...props }) {
   return (
     <div>
       <label htmlFor={name} className="label">
-        {label} {props.required && <span className="text-rose-500" aria-hidden="true">*</span>}
+        {label}{" "}
+        {props.required && <span className="text-rose-600" aria-hidden="true">*</span>}
+        {optional && <span className="font-normal text-slate-500">(optional)</span>}
       </label>
       {prefix ? (
         <div className="flex">
-          <span className="grid place-items-center rounded-l-xl border border-r-0 border-slate-300 bg-slate-50 px-3 text-sm font-semibold text-slate-600">{prefix}</span>
+          <span className="grid place-items-center rounded-l-xl border border-r-0 border-slate-300 bg-slate-50 px-3 text-sm font-semibold text-slate-700">{prefix}</span>
           {input}
         </div>
       ) : (
         input
       )}
-      {error && <p id={`${name}-error`} className="mt-1.5 text-sm text-rose-600">{error}</p>}
+      {error && <p id={`${name}-error`} className="mt-1.5 text-sm text-rose-700">{error}</p>}
     </div>
   );
 }

@@ -1,90 +1,45 @@
 import Link from "next/link";
-import Image from "next/image";
-import { ArrowRight, Phone, Mail, Clock, MessagesSquare, FileText, Rocket } from "lucide-react";
-import { site, whatsappLink } from "@/lib/site";
-import WhatsAppIcon from "./WhatsAppIcon";
-
-const nextSteps = [
-  { icon: MessagesSquare, title: "Share your idea", text: "Call, WhatsApp or fill the form — Hindi or English." },
-  { icon: FileText, title: "Free consultation & quote", text: "Clear plan and a written quote, usually within 24 hours." },
-  { icon: Rocket, title: "We build & support", text: "Regular updates, launch, and help after go-live." },
-];
+import { ArrowRight, Mail, Phone } from "lucide-react";
+import { site, telHref, mailHref } from "@/lib/site";
+import { WhatsAppButton } from "./ContactButtons";
+import Rangoli from "./india/Rangoli";
+import Toran from "./india/Toran";
 
 export default function CtaBanner({
-  title = "Let’s Build Something Great for Your Business.",
-  text = "Tell us your idea. We will help you turn it into a digital solution.",
+  title = "Tell us what you need",
+  text = "Share a few details about your business. We'll reply with honest advice and, if it's a fit, a written quote.",
+  whatsappText,
 }) {
-  const tel = site.phone.replace(/\s/g, "");
   return (
-    <section className="container-x py-16 sm:py-24">
-      <div data-reveal className="bg-hero relative overflow-hidden rounded-[2rem] text-white shadow-2xl shadow-brand-900/30">
-        <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-          <div className="animate-blob absolute -left-24 -top-24 size-80 rounded-full bg-brand-500/40 blur-3xl" />
-          <div className="animate-blob-slow absolute -bottom-32 right-1/4 size-96 rounded-full bg-mint-400/20 blur-3xl" />
-          <div className="bg-dots absolute inset-0" />
-        </div>
-
-        <div className="relative grid items-center gap-10 p-6 py-12 sm:p-12 lg:grid-cols-[1.15fr_1fr] lg:gap-12 lg:p-14">
-          {/* left: message + actions */}
+    <section className="container-x py-16 sm:py-20" aria-labelledby="cta-title">
+      <div className="bg-hero relative overflow-hidden rounded-[2rem] p-6 pb-12 pt-14 text-white sm:p-12 sm:pt-16">
+        <Toran uid="cta-toran" className="absolute inset-x-0 top-0" />
+        <Rangoli className="pointer-events-none absolute -bottom-32 -left-32 w-[22rem] opacity-25" />
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(30rem_18rem_at_100%_0%,rgb(249_115_22/0.25),transparent_60%)]" />
+        <div className="relative grid gap-8 lg:grid-cols-[1.4fr_1fr] lg:items-center">
           <div>
-            <p className="eyebrow eyebrow-dark">Start your project</p>
-            <h2 className="mt-4 text-3xl font-extrabold leading-tight tracking-tight text-balance sm:text-[2.6rem]">{title}</h2>
-            <p className="mt-4 text-lg text-slate-300">{text}</p>
-            <p className="mt-2 font-semibold text-mint-300">पहली बातचीत बिल्कुल मुफ़्त है।</p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Link href="/contact/" className="btn btn-light">
-                Start Your Project <ArrowRight className="size-4" aria-hidden="true" />
+            <h2 id="cta-title" className="text-3xl font-extrabold tracking-tight text-balance sm:text-4xl">{title}</h2>
+            <p className="mt-4 max-w-2xl text-lg text-slate-200">{text}</p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+              <Link href="/contact/#enquiry" className="btn btn-light">
+                Book a free consultation <ArrowRight className="size-4" aria-hidden="true" />
               </Link>
-              <a
-                href={whatsappLink("Hi Siddhi Info, I'd like to talk to a developer about my project.")}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn bg-[#25D366] text-white hover:bg-[#1fb857]"
-              >
-                <WhatsAppIcon className="size-5" /> Talk to Our Developer on WhatsApp
-              </a>
+              <WhatsAppButton text={whatsappText} onDark />
             </div>
-            <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-slate-300">
-              <li>
-                <a href={`tel:${tel}`} className="inline-flex min-h-10 items-center gap-2 hover:text-white">
-                  <Phone className="size-4 text-mint-300" aria-hidden="true" /> {site.phone}
-                </a>
-              </li>
-              <li>
-                <a href={`mailto:${site.email}`} className="inline-flex min-h-10 items-center gap-2 hover:text-white">
-                  <Mail className="size-4 text-mint-300" aria-hidden="true" /> {site.email}
-                </a>
-              </li>
-            </ul>
           </div>
-
-          {/* right: what happens next */}
-          <div className="glass relative rounded-3xl p-6 sm:p-8">
-            <div className="flex items-center gap-4">
-              <span className="grid size-14 shrink-0 place-items-center rounded-2xl bg-white p-1.5 shadow-lg">
-                <Image src="/logo.webp" alt="" width={56} height={56} className="size-full object-contain" />
-              </span>
-              <div>
-                <p className="font-bold">What happens next?</p>
-                <p className="flex items-center gap-1.5 text-sm text-slate-300">
-                  <Clock className="size-3.5 text-mint-300" aria-hidden="true" /> We usually reply within a few working hours
-                </p>
-              </div>
-            </div>
-            <ol className="mt-6 space-y-3">
-              {nextSteps.map(({ icon: I, title: t, text: d }, i) => (
-                <li key={t} className="flex gap-4 rounded-2xl bg-white/[0.06] p-4 ring-1 ring-white/10">
-                  <span className="relative grid size-10 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-brand-500 to-electric-500">
-                    <I className="size-5" aria-hidden="true" />
-                    <span className="absolute -right-1.5 -top-1.5 grid size-5 place-items-center rounded-full bg-mint-600 text-[11px] font-bold ring-2 ring-[#0b2a63]">{i + 1}</span>
-                  </span>
-                  <span>
-                    <span className="block font-semibold">{t}</span>
-                    <span className="block text-sm text-slate-300">{d}</span>
-                  </span>
-                </li>
-              ))}
+          <div className="rounded-2xl bg-white/[0.07] p-6 ring-1 ring-white/15">
+            <p className="font-bold">What happens next</p>
+            <ol className="mt-3 list-decimal space-y-2 pl-5 text-slate-200">
+              <li>We reply {site.responseTime} by phone, WhatsApp or email.</li>
+              <li>A short call to understand your needs — free, no obligation.</li>
+              <li>If it&apos;s a fit, you get a written scope and quote.</li>
             </ol>
+            <ul className="mt-5 space-y-1 text-sm">
+              {telHref && (
+                <li><a href={telHref} className="inline-flex min-h-11 items-center gap-2 hover:underline"><Phone className="size-4" aria-hidden="true" />{site.phone}</a></li>
+              )}
+              <li><a href={mailHref} className="inline-flex min-h-11 items-center gap-2 break-all hover:underline"><Mail className="size-4 shrink-0" aria-hidden="true" />{site.email}</a></li>
+            </ul>
           </div>
         </div>
       </div>

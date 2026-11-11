@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import JsonLd from "./JsonLd";
-import Network from "./Network";
+import Toran from "./india/Toran";
+import Rangoli from "./india/Rangoli";
+import Jali from "./india/Jali";
 import { absoluteUrl } from "@/lib/site";
 
 // crumbs: [{ label, href }] — Home is added automatically
@@ -21,12 +23,11 @@ export default function PageHero({ eyebrow, title, text, crumbs = [], children }
           })),
         }}
       />
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-        <div className="animate-blob absolute -left-32 -top-20 size-96 rounded-full bg-brand-500/30 blur-3xl" />
-        <div className="bg-dots absolute inset-0" />
-      </div>
-      <Network uid="hero-net" className="pointer-events-none absolute -right-24 top-6 hidden w-[42rem] opacity-50 lg:block" />
-      <div className="container-x relative pb-16 pt-10 sm:pb-20 sm:pt-14">
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(36rem_22rem_at_90%_0%,rgb(249_115_22/0.25),transparent_60%),radial-gradient(30rem_20rem_at_0%_100%,rgb(219_39_119/0.18),transparent_60%)]" />
+      <Jali uid="page-jali" className="pointer-events-none absolute inset-0" opacity={0.08} />
+      <Rangoli className="pointer-events-none absolute -right-24 top-16 hidden w-[24rem] opacity-25 lg:block" />
+      <Toran uid="page-toran" className="relative" />
+      <div className="container-x relative pb-16 pt-8 sm:pb-20 sm:pt-10">
         <nav aria-label="Breadcrumb">
           <ol className="flex flex-wrap items-center gap-1 text-sm text-slate-400">
             {all.map((c, i) => (
@@ -41,12 +42,13 @@ export default function PageHero({ eyebrow, title, text, crumbs = [], children }
             ))}
           </ol>
         </nav>
-        {eyebrow && <p className="eyebrow eyebrow-dark mt-8">{eyebrow}</p>}
+        {eyebrow && <p className="eyebrow mt-8 !text-marigold-400">{eyebrow}</p>}
         <h1 className="mt-4 max-w-3xl text-4xl font-extrabold tracking-tight text-balance sm:text-5xl">{title}</h1>
+        <span aria-hidden="true" className="mt-4 block h-1.5 w-32 rounded-full bg-gradient-to-r from-saffron-500 via-marigold-400 to-pink-500" />
         {text && <p className="mt-5 max-w-2xl text-lg leading-relaxed text-slate-300">{text}</p>}
         {children}
       </div>
-      <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-aqua-400/60 to-transparent" />
+      <div aria-hidden="true" className="absolute inset-x-0 bottom-0 flex h-1"><span className="flex-1 bg-saffron-500" /><span className="flex-1 bg-white" /><span className="flex-1 bg-indiagreen" /></div>
     </section>
   );
 }

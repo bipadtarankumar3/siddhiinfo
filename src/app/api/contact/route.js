@@ -43,18 +43,20 @@ export async function POST(request) {
 
   const name = clean(body.name, 100);
   const mobile = normaliseIndianMobile(body.phone);
-  if (name.length < 2 || !mobile) {
-    return Response.json({ ok: false, error: "Please enter your name and a valid mobile number." }, { status: 400 });
+  const city = clean(body.city, 100);
+  const service = clean(body.service, 150);
+  const message = String(body.message ?? "").trim().slice(0, 2000);
+  if (name.length < 2 || !mobile || city.length < 2 || !service || message.length < 10) {
+    return Response.json({ ok: false, error: "Please fill in all required fields." }, { status: 400 });
   }
 
   const fields = [
     ["Name", name],
     ["Mobile", `+91 ${mobile}`],
     ["Business", clean(body.business, 150)],
-    ["City", clean(body.city, 100)],
-    ["Service", clean(body.service, 150)],
+    ["City", city],
+    ["Service", service],
   ].filter(([, v]) => v);
-  const message = String(body.message ?? "").trim().slice(0, 2000);
 
   const text = [...fields.map(([k, v]) => `${k}: ${v}`), message && `\nProject:\n${message}`].filter(Boolean).join("\n");
   const html = `
@@ -73,7 +75,7 @@ export async function POST(request) {
     await getTransporter().sendMail({
       from: `"${site.name} Website" <${process.env.GMAIL_USER}>`,
       to: site.email,
-      subject: `New enquiry: ${name}${fields.find(([k]) => k === "Service") ? ` — ${clean(body.service, 80)}` : ""}`,
+      subject: `New enquiry: ${name} — ${service.slice(0, 80)}`,
       text,
       html,
     });

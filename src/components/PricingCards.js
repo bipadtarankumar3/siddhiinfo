@@ -1,114 +1,90 @@
-"use client";
-
 import Link from "next/link";
-import { Check, Clock, Users } from "lucide-react";
-import { plans } from "@/lib/data";
-import { useLanguage } from "@/context/LanguageContext";
+import { Check, Clock, Users, Info } from "lucide-react";
+import { plans, formatINR } from "@/lib/data";
+import ColorIcon from "./ColorIcon";
 
-export default function PricingCards() {
-  const { t, locale } = useLanguage();
+const planStyle = {
+  "digital-dukaan": { band: "from-orange-500 to-amber-400", icon: "Store" },
+  "starter-website": { band: "from-teal-600 to-sky-500", icon: "Globe" },
+  "business-growth": { band: "from-indigo-600 to-pink-600", icon: "TrendingUp" },
+  ecommerce: { band: "from-pink-600 to-orange-500", icon: "ShoppingBag" },
+};
 
+/*
+  Package cards. All prices come from `plans` in src/lib/data.js.
+  `detailed` adds limits, what the customer provides and renewal terms (pricing page).
+*/
+export default function PricingCards({ detailed = false, ids }) {
+  const list = ids ? plans.filter((p) => ids.includes(p.id)) : plans;
   return (
-    <>
-      <div className="grid items-stretch gap-6 sm:grid-cols-2 xl:grid-cols-4">
-        {plans.map((p, i) => {
-          const nativeName = locale === "bn" ? p.bn : p.hi;
-          return (
-            <div
-              key={p.name}
-              data-reveal
-              style={{ "--reveal-delay": `${i * 80}ms` }}
-              className={`card relative flex flex-col p-6 sm:p-7 ${
-                p.featured
-                  ? "border-transparent bg-gradient-to-b from-brand-700 via-brand-800 to-brand-900 text-white shadow-2xl shadow-brand-900/30 xl:-my-3 xl:py-10 ring-2 ring-brand-400/50"
-                  : "bg-white border-slate-200/90 hover:border-brand-300"
-              }`}
-            >
-              {p.featured ? (
-                <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 rounded-full bg-mint-500 px-3.5 py-1 text-[11px] font-bold uppercase tracking-wider text-white shadow-md">
-                  ★ {p.badge || "Most popular"}
-                </span>
-              ) : p.badge ? (
-                <span className="absolute -top-3 left-6 rounded-full bg-amber-500 px-3 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white shadow-sm">
-                  {p.badge}
-                </span>
-              ) : null}
+    <div className={`grid items-stretch gap-6 sm:grid-cols-2 ${list.length >= 4 ? "xl:grid-cols-4" : "lg:grid-cols-3"}`}>
+      {list.map((p) => (
+        <article
+          key={p.id}
+          id={p.id}
+          aria-labelledby={`${p.id}-name`}
+          className={`card relative flex scroll-mt-28 flex-col overflow-hidden p-6 pt-8 ${p.featured ? "border-indigo-500 ring-2 ring-indigo-500" : ""}`}
+        >
+          <span aria-hidden="true" className={`absolute inset-x-0 top-0 h-2 bg-gradient-to-r ${planStyle[p.id]?.band ?? "from-orange-500 to-amber-400"}`} />
+          {p.badge && (
+            <span className={`absolute right-4 top-4 rounded-full px-3 py-0.5 text-xs font-bold ${p.featured ? "bg-indigo-700 text-white" : "bg-marigold-100 text-amber-900 ring-1 ring-amber-300"}`}>
+              {p.badge}
+            </span>
+          )}
+          <ColorIcon name={planStyle[p.id]?.icon ?? "Store"} className="size-12" />
+          <p className="mt-3 text-sm font-semibold text-saffron-700" lang="hi">{p.hi}</p>
+          <h3 id={`${p.id}-name`} className="text-xl font-extrabold text-ink">{p.name}</h3>
+          <p className="mt-2 text-[0.95rem] leading-relaxed text-slate-600">{p.description}</p>
 
-              <div className="mt-1">
-                <span className={`text-xs font-bold ${p.featured ? "text-mint-300" : "text-amber-600"}`}>
-                  {nativeName}
-                </span>
-                <h3 className={`text-lg font-extrabold ${p.featured ? "text-white" : "text-ink"}`}>
-                  {p.name}
-                </h3>
-              </div>
+          <p className="mt-5 flex items-baseline gap-1.5 border-t border-slate-200 pt-4">
+            <span className="text-sm text-slate-500">from</span>
+            <span className="text-3xl font-black tracking-tight text-ink">{formatINR(p.price)}</span>
+          </p>
+          <p className="text-sm text-slate-500">Starting price · one-time · + GST if applicable</p>
 
-              <p className={`mt-2 text-xs leading-relaxed ${p.featured ? "text-brand-100" : "text-slate-600"}`}>
-                {p.description}
-              </p>
-
-              <div className="mt-5 border-t pt-4 border-slate-100 dark:border-white/10">
-                <p className="flex items-baseline gap-1.5">
-                  <span className={`text-xs ${p.featured ? "text-brand-200" : "text-slate-500"}`}>
-                    {t.pricing.startingFrom}
-                  </span>
-                  <span className={`text-3xl font-black tracking-tight ${p.featured ? "text-white" : "text-ink"}`}>
-                    {p.price}
-                  </span>
-                </p>
-                <p className={`text-[11px] mt-0.5 ${p.featured ? "text-brand-200" : "text-slate-400"}`}>
-                  {t.pricing.startingNote}
-                </p>
-              </div>
-
-              <dl className={`mt-5 space-y-2 rounded-xl p-3 text-xs ${p.featured ? "bg-white/10" : "bg-slate-50 ring-1 ring-slate-100"}`}>
-                <div className="flex gap-2">
-                  <Users className={`size-3.5 shrink-0 mt-0.5 ${p.featured ? "text-mint-300" : "text-brand-600"}`} />
-                  <div>
-                    <dt className={`text-[10px] font-bold uppercase ${p.featured ? "text-brand-200" : "text-slate-500"}`}>{t.pricing.bestFor}</dt>
-                    <dd className={p.featured ? "text-white font-medium" : "text-slate-700"}>{p.bestFor}</dd>
-                  </div>
-                </div>
-                <div className="flex gap-2">
-                  <Clock className={`size-3.5 shrink-0 mt-0.5 ${p.featured ? "text-mint-300" : "text-brand-600"}`} />
-                  <div>
-                    <dt className={`text-[10px] font-bold uppercase ${p.featured ? "text-brand-200" : "text-slate-500"}`}>{t.pricing.delivery}</dt>
-                    <dd className={p.featured ? "text-white font-medium" : "text-slate-700"}>{p.delivery}</dd>
-                  </div>
-                </div>
-              </dl>
-
-              <ul className="mt-5 flex-1 space-y-2 text-xs">
-                {p.features.map((f) => (
-                  <li key={f} className={`flex items-start gap-2 ${p.featured ? "text-brand-50" : "text-slate-700"}`}>
-                    <Check className={`size-3.5 shrink-0 mt-0.5 font-bold ${p.featured ? "text-mint-300" : "text-mint-600"}`} />
-                    <span>{f}</span>
-                  </li>
-                ))}
-              </ul>
-
-              <Link
-                href="/contact/"
-                className={`btn mt-6 w-full text-xs font-bold py-2.5 ${
-                  p.featured ? "btn-light" : "btn-primary"
-                }`}
-              >
-                {p.cta}
-              </Link>
+          <dl className="mt-5 space-y-3 rounded-xl bg-slate-50 p-3 text-sm ring-1 ring-slate-200">
+            <div className="flex gap-2">
+              <Users className="mt-0.5 size-4 shrink-0 text-brand-700" aria-hidden="true" />
+              <div><dt className="font-semibold text-ink">Best for</dt><dd className="text-slate-600">{p.bestFor}</dd></div>
             </div>
-          );
-        })}
-      </div>
+            <div className="flex gap-2">
+              <Clock className="mt-0.5 size-4 shrink-0 text-brand-700" aria-hidden="true" />
+              <div><dt className="font-semibold text-ink">Delivery</dt><dd className="text-slate-600">{p.delivery}</dd></div>
+            </div>
+          </dl>
 
-      <div data-reveal className="mx-auto mt-12 max-w-3xl rounded-2xl bg-amber-50/80 p-5 ring-1 ring-amber-200/80 text-center text-xs leading-relaxed text-amber-950 sm:text-sm">
-        <p>
-          <strong className="font-bold">सच्ची और पारदर्शी दरें:</strong> {t.pricing.writtenQuoteNote}
-          {" "}सभी सेवाओं के लिए पक्का जीएसटी बिल (18% ITC क्लेम करने योग्य) दिया जाता है।{" "}
-          <Link href="/contact/" className="font-bold text-brand-700 underline hover:text-brand-800">
-            मुफ़्त कोटेशन प्राप्त करें →
+          <h4 className="mt-5 text-sm font-bold text-ink">Included</h4>
+          <ul className="mt-2 space-y-2 text-[0.95rem]">
+            {p.features.map((f) => (
+              <li key={f} className="flex gap-2 text-slate-700">
+                <Check className="mt-0.5 size-4 shrink-0 text-mint-600" aria-hidden="true" /> {f}
+              </li>
+            ))}
+          </ul>
+
+          {detailed && (
+            <div className="mt-5 space-y-4 border-t border-slate-200 pt-4 text-sm text-slate-600">
+              <div>
+                <h4 className="font-bold text-ink">Limits</h4>
+                <ul className="mt-1 list-disc space-y-1 pl-5">{p.limits.map((l) => <li key={l}>{l}</li>)}</ul>
+              </div>
+              <div>
+                <h4 className="font-bold text-ink">You provide</h4>
+                <ul className="mt-1 list-disc space-y-1 pl-5">{p.youProvide.map((l) => <li key={l}>{l}</li>)}</ul>
+              </div>
+              <div>
+                <h4 className="flex items-center gap-1.5 font-bold text-ink"><Info className="size-4" aria-hidden="true" /> Renewals</h4>
+                <p className="mt-1">{p.renewal}</p>
+              </div>
+            </div>
+          )}
+
+          <div className="flex-1" />
+          <Link href={`/contact/?service=${encodeURIComponent(p.name)}#enquiry`} className={`btn mt-6 w-full ${p.featured ? "btn-primary" : "btn-outline"}`}>
+            {p.cta}
           </Link>
-        </p>
-      </div>
-    </>
+        </article>
+      ))}
+    </div>
   );
 }

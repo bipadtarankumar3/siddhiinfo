@@ -1,16 +1,33 @@
-// Central business details. Update these once and every page, footer,
-// JSON-LD schema, sitemap and WhatsApp link picks them up.
+/*
+  ─────────────────────────────────────────────────────────────────────────────
+  CENTRAL BUSINESS DETAILS — edit this file once and every page, the header,
+  footer, contact page, JSON-LD schema and WhatsApp buttons update together.
+
+  ⚠️  OWNER TO VERIFY BEFORE LAUNCH
+  Anything left empty ("") is hidden from the site rather than shown as a
+  placeholder. Fill a value in only once you have confirmed it is correct.
+
+    phone      → a number that is answered during business hours, e.g. "+91 98765 43210"
+    whatsapp   → the WhatsApp number, digits only with country code, e.g. "919876543210"
+                 (WhatsApp buttons and the QR code appear automatically once set)
+    hours      → e.g. "Mon–Sat, 10:00 AM – 7:00 PM IST"
+    team       → founder / team details you are happy to publish
+    legal      → GSTIN, Udyam or company registration, if you want them shown
+  ─────────────────────────────────────────────────────────────────────────────
+*/
 export const site = {
   name: "Siddhi Info",
   legalName: "Siddhi Info",
   url: "https://siddhiinfo.in",
-  tagline: "Your Digital Growth Partner",
+  tagline: "Websites, software & automation for Indian businesses",
   description:
-    "Siddhi Info is your technology partner — from websites and online stores to mobile apps, CRM/ERP, GST billing, WhatsApp automation and digital marketing for Indian businesses.",
-  // TODO: replace with your real contact details
+    "Siddhi Info builds websites, online ordering, billing and WhatsApp tools for small businesses, and custom software, integrations and automation for growing organisations across India.",
+
+  // Enquiry inbox. The contact form emails enquiries here (see src/app/api/contact/route.js).
   email: "hellosiddhiinfo@gmail.com",
-  phone: "+91 90000 00000",
-  whatsapp: "919000000000", // country code + number, digits only
+  phone: "", // OWNER: add a verified phone number
+  whatsapp: "", // OWNER: add a verified WhatsApp number (digits only, with 91)
+
   address: {
     street: "",
     city: "Kolkata",
@@ -18,29 +35,53 @@ export const site = {
     postalCode: "",
     country: "IN",
   },
-  hours: "Mon–Sat, 10:00 AM – 7:00 PM IST",
+  hours: "", // OWNER: add confirmed business hours
+  // Shown next to the form and in "what happens next". Keep it realistic.
+  responseTime: "within one working day",
+
+  // Optional: shown on the About page only when filled in.
+  team: [
+    // { name: "", role: "Founder", bio: "", photo: "/images/team/....webp", linkedin: "" },
+  ],
+  legal: {
+    gstin: "",
+    registration: "", // e.g. "Udyam Registration No. UDYAM-WB-.."
+  },
+
   social: {
     facebook: "",
     instagram: "",
     linkedin: "",
     youtube: "",
   },
+
+  // Google Tag Manager container. Leave empty to load no analytics at all.
+  // Disclosed on /privacy-policy/.
+  gtmId: "GTM-PNTGKWRK",
 };
 
-// true once a real phone number replaces the placeholder above
-export const hasRealPhone = !site.phone.includes("90000 00000");
+export const hasPhone = /\d{10}/.test(site.phone.replace(/\D/g, ""));
+export const hasWhatsApp = /^91[6-9]\d{9}$/.test(site.whatsapp);
+export const telHref = hasPhone ? `tel:${site.phone.replace(/[^\d+]/g, "")}` : null;
+export const mailHref = `mailto:${site.email}`;
 
+// Main navigation. Labels come from translations (src/lib/translations.js) by key.
 export const nav = [
-  { label: "Services", href: "/services/" },
-  { label: "Our Work", href: "/work/" },
-  { label: "Industries", href: "/industries/" },
-  { label: "Pricing", href: "/pricing/" },
-  { label: "Blog", href: "/blog/" },
-  { label: "About", href: "/about/" },
-  { label: "Contact", href: "/contact/" },
+  { key: "services", href: "/services/" },
+  { key: "smallBusiness", href: "/small-business/" },
+  { key: "enterprise", href: "/enterprise/" },
+  { key: "pricing", href: "/pricing/" },
+  { key: "work", href: "/work/" },
+  { key: "about", href: "/about/" },
+  { key: "contact", href: "/contact/" },
 ];
 
-export function whatsappLink(text = "Hi Siddhi Info, I want to grow my business online.") {
+/**
+ * WhatsApp click-to-chat link, or null while no verified number is configured.
+ * Always render WhatsApp buttons conditionally on the result.
+ */
+export function whatsappLink(text = "Hi Siddhi Info, I'd like to discuss a project for my business.") {
+  if (!hasWhatsApp) return null;
   return `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(text)}`;
 }
 
@@ -58,4 +99,17 @@ export function pageMeta({ title, description, path, type = "website", ...og }) 
     openGraph: { type, title, description, url: path, siteName: site.name, locale: "en_IN", images, ...og },
     twitter: { card: "summary_large_image", title, description, images: ["/opengraph-image.png"] },
   };
+}
+
+// Build-time reminder for the site owner. Prints once per server process.
+if (typeof window === "undefined" && !globalThis.__siddhiConfigWarned) {
+  globalThis.__siddhiConfigWarned = true;
+  const missing = [
+    !hasPhone && "phone",
+    !hasWhatsApp && "whatsapp",
+    !site.hours && "hours",
+  ].filter(Boolean);
+  if (missing.length) {
+    console.warn(`[site config] Owner to verify in src/lib/site.js: ${missing.join(", ")} (hidden on the site until set)`);
+  }
 }

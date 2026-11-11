@@ -6,6 +6,20 @@ import WhatsAppIcon from "@/components/WhatsAppIcon";
 import { BrowserFrame, PhoneFrame } from "@/components/mockups/Frames";
 import { DesktopMock, MobileMock } from "@/components/mockups/SiteMocks";
 import { whatsappLink } from "@/lib/site";
+import { ownershipLabel } from "@/lib/data";
+
+// Printed on the preview itself so a screenshot of a concept can never pass as real work.
+function ConceptStamp({ small = false }) {
+  return (
+    <span
+      className={`pointer-events-none absolute z-10 rounded-md bg-amber-300 font-bold uppercase tracking-wide text-amber-950 shadow ${
+        small ? "left-1 top-1 px-1 py-0.5 text-[8px]" : "left-2 top-2 px-2 py-1 text-[11px]"
+      }`}
+    >
+      {small ? "Concept" : "Concept demo · sample data"}
+    </span>
+  );
+}
 
 // One portfolio item: a live project (real screenshots) or a concept demo (illustrative mock).
 export default function ProjectCard({ p, i = 0, dark = true }) {
@@ -19,7 +33,8 @@ export default function ProjectCard({ p, i = 0, dark = true }) {
       }`}
     >
       <div className="relative pb-6 pr-8 sm:pr-12">
-        <div data-mock="desktop" className="transition duration-500 group-hover:-translate-y-1">
+        <div data-mock="desktop" className="relative transition duration-500 group-hover:-translate-y-1">
+          {!live && <ConceptStamp />}
           <BrowserFrame url={p.url}>
             {live ? (
               <Image
@@ -45,20 +60,27 @@ export default function ProjectCard({ p, i = 0, dark = true }) {
                 className="object-cover object-top"
               />
             ) : (
-              <MobileMock variant={p.variant} />
+              <>
+                <MobileMock variant={p.variant} />
+                <ConceptStamp small />
+              </>
             )}
           </PhoneFrame>
         </div>
       </div>
 
       <div className="mt-5 flex flex-wrap items-center gap-2">
-        <span className="rounded-full bg-gradient-to-r from-brand-500 to-electric-500 px-3 py-1 text-xs font-semibold text-white">{p.category}</span>
+        <span className="rounded-full bg-brand-700 px-3 py-1 text-xs font-semibold text-white">{p.category}</span>
         {live ? (
-          <span className="inline-flex items-center gap-1 rounded-full bg-mint-400/15 px-3 py-1 text-xs font-semibold text-mint-500 ring-1 ring-mint-400/30">
-            <BadgeCheck className="size-3.5" aria-hidden="true" /> Live project
+          <span className="inline-flex items-center gap-1 rounded-full bg-mint-400/15 px-3 py-1 text-xs font-semibold text-mint-700 ring-1 ring-mint-400/30">
+            <BadgeCheck className="size-3.5" aria-hidden="true" /> Live product
           </span>
-        ) : (
-          <span className="rounded-full bg-saffron-500/15 px-3 py-1 text-xs font-semibold text-saffron-500 ring-1 ring-saffron-400/30">Concept demo</span>
+        ) : null}
+        {live && p.ownership ? (
+          <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700">{ownershipLabel[p.ownership]}</span>
+        ) : null}
+        {!live && (
+          <span className={`rounded-full px-3 py-1 text-xs font-semibold ring-1 ${dark ? "bg-amber-300/15 text-amber-200 ring-amber-300/30" : "bg-amber-50 text-amber-900 ring-amber-300"}`}>Concept demo — fictional brand</span>
         )}
       </div>
       <h3 className={`mt-3 text-2xl font-bold tracking-tight ${dark ? "text-white" : "text-ink"}`}>{p.name}</h3>
@@ -103,7 +125,7 @@ function ProjectDialog({ p }) {
       <div className="sticky top-0 z-10 flex items-center justify-between gap-4 border-b border-slate-200 bg-white/95 px-5 py-4 backdrop-blur sm:px-8">
         <div>
           <p className="text-xs font-semibold uppercase tracking-wider text-brand-600">
-            {p.category} • {live ? "Live project" : "Concept demo"}
+            {p.category} • {live ? "Live product" : "Concept demo — fictional brand & sample data"}
           </p>
           <h3 id={`${id}-title`} className="text-xl font-extrabold tracking-tight">{p.name}</h3>
         </div>
@@ -123,8 +145,8 @@ function ProjectDialog({ p }) {
           <h4 className="font-bold">{live ? "About this project" : "About this concept"}</h4>
           <p className="mt-2 text-sm leading-relaxed text-slate-600">{p.description}</p>
           {!live && (
-            <p className="mt-3 rounded-xl bg-saffron-50 p-3 text-xs text-mint-700 ring-1 ring-saffron-100">
-              This is an illustrative demo design with a fictional brand — not a client project.
+            <p className="mt-3 rounded-xl bg-amber-50 p-3 text-sm text-amber-950 ring-1 ring-amber-200">
+              This is an illustrative design with a fictional brand and sample data — not a client project. Names, prices and figures shown are made up.
             </p>
           )}
         </div>
@@ -151,9 +173,15 @@ function ProjectDialog({ p }) {
                 Visit {p.url} <ArrowUpRight className="size-4" aria-hidden="true" />
               </a>
             )}
-            <a href={whatsappLink(`Hi Siddhi Info, I'd like something similar to ${p.name}.`)} target="_blank" rel="noopener noreferrer" className={`btn ${live ? "btn-outline" : "btn-primary"}`}>
-              <WhatsAppIcon className="size-4" /> Build something similar
-            </a>
+            {whatsappLink() ? (
+              <a href={whatsappLink(`Hi Siddhi Info, I'd like something similar to ${p.name}.`)} target="_blank" rel="noopener noreferrer" className={`btn ${live ? "btn-outline" : "btn-primary"}`}>
+                <WhatsAppIcon className="size-4" /> Build something similar
+              </a>
+            ) : (
+              <Link href={`/contact/?service=${encodeURIComponent(p.category)}#enquiry`} className={`btn ${live ? "btn-outline" : "btn-primary"}`}>
+                Build something similar
+              </Link>
+            )}
             <Link href={`/services/${p.service}/`} className="btn btn-outline">View service details</Link>
           </div>
         </div>

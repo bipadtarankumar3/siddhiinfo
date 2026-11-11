@@ -1,16 +1,15 @@
-import { BadgeCheck, Lightbulb } from "lucide-react";
 import PageHero from "@/components/PageHero";
 import CtaBanner from "@/components/CtaBanner";
 import SectionHead from "@/components/SectionHead";
 import ProjectCard from "@/components/work/ProjectCard";
 import JsonLd from "@/components/JsonLd";
 import { portfolio } from "@/lib/data";
-import { absoluteUrl, pageMeta } from "@/lib/site";
+import { pageMeta } from "@/lib/site";
 
 export const metadata = pageMeta({
-  title: "Our Work — Live Projects & Website Demos",
+  title: "Our Work — Live Products and Concept Demos",
   description:
-    "See platforms built by Siddhi Info — AskReview, PrizeWheel, Vyapari Chat and Magic Scratch — plus concept demos for e-commerce, restaurants, clinics, coaching centres, NGOs and CRM dashboards.",
+    "Live products in the Siddhi Info portfolio — AskReview, PrizeWheel, Vyapari Chat and Magic Scratch — and clearly labelled concept demos for e-commerce, restaurants, clinics, coaching, NGOs and business software.",
   path: "/work/",
 });
 
@@ -23,61 +22,55 @@ export default function WorkPage() {
         data={{
           "@context": "https://schema.org",
           "@type": "ItemList",
-          name: "Projects developed by Siddhi Info",
+          name: "Live products in the Siddhi Info portfolio",
           itemListElement: live.map((p, i) => ({
             "@type": "ListItem",
             position: i + 1,
-            item: { "@type": "WebApplication", name: p.name, url: p.liveUrl, applicationCategory: "BusinessApplication", creator: { "@id": absoluteUrl("/#organization") } },
+            item: { "@type": "WebApplication", name: p.name, url: p.liveUrl, applicationCategory: "BusinessApplication" },
           })),
         }}
       />
       <PageHero
         eyebrow="Our work"
-        title="Turning business ideas into digital experiences"
-        text="Live platforms we have designed, developed and launched — and concept demos showing what we can build for your business."
+        title="Live products and concept demos"
+        text="Two separate lists: working products you can open today, and concept demos — illustrative designs with fictional brands and sample data that show what we can build."
         crumbs={[{ label: "Our Work", href: "/work/" }]}
       >
-        <div className="mt-8 flex flex-wrap gap-3 text-sm">
-          <span className="glass inline-flex items-center gap-2 rounded-full px-4 py-2 text-mint-300">
-            <BadgeCheck className="size-4" aria-hidden="true" /> {live.length} live projects
-          </span>
-          <span className="glass inline-flex items-center gap-2 rounded-full px-4 py-2 text-slate-200">
-            <Lightbulb className="size-4 text-mint-300" aria-hidden="true" /> {concepts.length} concept demos
-          </span>
-        </div>
+        <nav aria-label="Work sections" className="mt-8 flex flex-col gap-3 sm:flex-row">
+          <a href="#live" className="btn btn-light">Live products ({live.length})</a>
+          <a href="#concepts" className="btn btn-glass">Concept demos ({concepts.length})</a>
+        </nav>
       </PageHero>
 
-      <section className="bg-lavender-mesh py-16 sm:py-24" aria-labelledby="live-title">
+      <section id="live" className="scroll-mt-24 bg-haldi py-16 sm:py-20" aria-labelledby="live-title">
         <div className="container-x">
           <SectionHead
             id="live-title"
-            eyebrow="Live projects"
-            title={<>Platforms we have <span className="text-gradient">built &amp; launched</span></>}
-            text="Real products running today. Click “View Project” for a closer look, or visit the live site."
+            eyebrow="Live products"
+            title="Products running today"
+            text="Open the live sites to see them working. Results and client details are published only with evidence and permission."
           />
-          <div className="mt-14 grid gap-8 lg:grid-cols-2">
+          <div className="mt-12 grid gap-8 lg:grid-cols-2">
             {live.map((p, i) => <ProjectCard key={p.slug} p={p} i={i} dark={false} />)}
           </div>
         </div>
       </section>
 
-      <section className="bg-hero relative overflow-hidden py-16 text-white sm:py-24" aria-labelledby="concept-title">
-        <div aria-hidden="true" className="bg-dots absolute inset-0" />
-        <div className="container-x relative">
+      <section id="concepts" className="scroll-mt-24 py-16 sm:py-20" aria-labelledby="concept-title">
+        <div className="container-x">
           <SectionHead
-            dark
             id="concept-title"
             eyebrow="Concept demos"
-            title={<>What we can build <span className="text-gradient-light">for your business</span></>}
-            text="Illustrative designs with fictional brand names — e-commerce, restaurants, coaching, healthcare, NGOs and business software."
+            title="What we could build for your business"
+            text="These are not client projects. Brand names, people, prices, orders and figures in these previews are fictional sample data, and each preview is stamped “Concept demo”."
           />
-          <div className="mt-14 grid gap-8 lg:grid-cols-2">
-            {concepts.map((p, i) => <ProjectCard key={p.slug} p={p} i={i} />)}
+          <div className="mt-12 grid gap-8 lg:grid-cols-2">
+            {concepts.map((p, i) => <ProjectCard key={p.slug} p={p} i={i} dark={false} />)}
           </div>
         </div>
       </section>
 
-      <CtaBanner title="Have an idea like these? Let’s build it." />
+      <CtaBanner title="Have something similar in mind?" />
     </>
   );
 }

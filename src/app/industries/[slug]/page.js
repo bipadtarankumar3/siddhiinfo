@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { ArrowRight, Check, X } from "lucide-react";
 import PageHero from "@/components/PageHero";
 import CtaBanner from "@/components/CtaBanner";
-import Icon from "@/components/Icon";
+import ColorIcon from "@/components/ColorIcon";
 import Image from "next/image";
 import IndustryArt from "@/components/india/IndustryArt";
 import { industries, getIndustry, getService } from "@/lib/data";
@@ -80,13 +80,13 @@ export default async function IndustryPage({ params }) {
         </div>
       </section>
 
-      <section className="bg-slate-50 py-16 sm:py-20">
+      <section className="bg-haldi py-16 sm:py-20">
         <div className="container-x">
           <h2 className="section-title">Recommended services</h2>
           <div className="mt-8 grid gap-5 md:grid-cols-3">
             {recommended.map((s) => (
               <Link key={s.slug} href={`/services/${s.slug}/`} className="card card-hover group flex flex-col p-6">
-                <Icon name={s.icon} className="size-7 text-brand-600" />
+                <ColorIcon name={s.icon} className="size-12" />
                 <h3 className="mt-4 font-bold text-ink">{s.title}</h3>
                 <p className="mt-1.5 flex-1 text-sm text-slate-600">{s.short}</p>
                 <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-brand-600">

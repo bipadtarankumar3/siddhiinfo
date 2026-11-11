@@ -15,13 +15,14 @@ npm run build   # static site in ./out
 
 | What | File |
 | --- | --- |
-| Phone, email, WhatsApp, address, socials | `src/lib/site.js` |
-| Services, industries, pricing, FAQs | `src/lib/data.js` |
+| Phone, WhatsApp, email, hours, team, GSTIN, analytics ID | `src/lib/site.js` (single source — empty values are hidden) |
+| Package prices, limits, renewals, pricing terms, third-party fees | `plans`, `pricingTerms`, `thirdPartyFees` in `src/lib/data.js` |
+| Services (problem, included/excluded, timelines, fees) | `services` in `src/lib/data.js` |
+| Portfolio (live products / concept demos) | `portfolio` in `src/lib/data.js` |
+| Client testimonials (real, approved ones only) | `testimonials` in `src/lib/data.js` — section hidden while empty |
+| Industries | `src/lib/industries.js` |
+| Interface translations (EN / हिन्दी / বাংলা) | `src/lib/translations.js` |
 | Blog posts | `src/lib/blog.js` |
-| Portfolio (concept demos → real projects) | `portfolio` in `src/lib/data.js` |
-| Client testimonials (real ones only) | `testimonials` in `src/lib/data.js` |
-
-Pages, sitemap, JSON-LD schema and footer all update automatically from these files.
 
 ## SEO included
 
@@ -51,18 +52,18 @@ GMAIL_USER=hellosiddhiinfo@gmail.com
 GMAIL_APP_PASSWORD=xxxxxxxxxxxxxxxx   # 16-char Google App password, no spaces
 ```
 
-## Before going live
+## Before going live — owner checklist
 
-- Replace the placeholder phone / WhatsApp number in `src/lib/site.js` (the phone is left out of the
-  structured data until it is changed).
-- Add social profile URLs in `site.social` — footer icons appear automatically.
-- Portfolio items are **concept demos** with fictional brands and are labelled as such on the site. Swap in
-  real client projects (with permission) as they are completed.
-- Add real testimonials only; the section shows an honest "coming soon" state while the list is empty.
-
-## Image credits
-
-Photographs are from [Pexels](https://www.pexels.com) and used under the
-[Pexels License](https://www.pexels.com/license/) (free for commercial use, no attribution required).
-Source photo IDs are listed in `public/images/CREDITS.md`. All illustrations are original SVG.
-Technology logos come from [Simple Icons](https://simpleicons.org) and belong to their owners.
+- [ ] **Phone & WhatsApp** — add verified values in `src/lib/site.js`. Until then, WhatsApp buttons become
+      "Request a call back" links, and the phone number and QR code are hidden. The QR code is generated from the
+      WhatsApp link automatically.
+- [ ] **Business hours** — add `site.hours` (also add `openingHoursSpecification` in `src/app/layout.js`).
+- [ ] **Digital Dukaan price** — the old site showed both ₹4,999 and ₹3,999. `plans` uses ₹4,999; confirm it.
+- [ ] **All package prices, limits, renewals and `pricingTerms`** — confirm each line in `src/lib/data.js`.
+- [ ] **Custom software "from ₹40,000"** (`planFrom` on Custom Software) — confirm or remove.
+- [ ] **Live products** — confirm Siddhi Info built AskReview, PrizeWheel, Vyapari Chat and Magic Scratch, and set
+      `ownership` to `"siddhi-info"` or `"client"` for each.
+- [ ] **Team / founder, GSTIN, registration** — add to `site.team` / `site.legal` only if you want them public.
+- [ ] **Analytics** — `site.gtmId` loads Google Tag Manager; the privacy policy describes it. Check which tags the
+      container fires and whether you need a cookie-consent banner for them.
+- [ ] Verify the domain in Google Search Console and submit `https://siddhiinfo.in/sitemap.xml`.

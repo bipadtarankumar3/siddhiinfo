@@ -1,19 +1,17 @@
 import Link from "next/link";
-import Image from "next/image";
 import { notFound } from "next/navigation";
-import { ArrowRight, Check, Sparkles, IndianRupee } from "lucide-react";
+import { Check, X, IndianRupee, Clock, Info, ArrowRight } from "lucide-react";
 import PageHero from "@/components/PageHero";
 import CtaBanner from "@/components/CtaBanner";
 import Faq from "@/components/Faq";
-import Icon from "@/components/Icon";
 import SectionHead from "@/components/SectionHead";
-import IndustryArt from "@/components/india/IndustryArt";
+import ServiceCard from "@/components/ServiceCard";
 import JsonLd from "@/components/JsonLd";
-import WhatsAppIcon from "@/components/WhatsAppIcon";
-import ServiceArt, { accents } from "@/components/art/ServiceArt";
+import ColorIcon from "@/components/ColorIcon";
 import ProjectCard from "@/components/work/ProjectCard";
-import { services, industries, getService, portfolio, steps, plans } from "@/lib/data";
-import { absoluteUrl, whatsappLink, pageMeta } from "@/lib/site";
+import { ConsultButton, WhatsAppButton } from "@/components/ContactButtons";
+import { services, getService, getProject, steps, servicePrice } from "@/lib/data";
+import { absoluteUrl, pageMeta } from "@/lib/site";
 
 export const dynamicParams = false;
 
@@ -28,26 +26,26 @@ export async function generateMetadata({ params }) {
   return pageMeta({ title: s.metaTitle, description: s.metaDescription, path: `/services/${s.slug}/` });
 }
 
-// Starting prices only exist for the packaged website services
-const startingPrice = {
-  "website-development": plans[0].price,
-  "ecommerce-store": plans[2].price,
-};
+function List({ items, icon: I, tone }) {
+  return (
+    <ul className="mt-4 space-y-2.5">
+      {items.map((x) => (
+        <li key={x} className="flex gap-2.5 text-slate-700">
+          <I className={`mt-0.5 size-5 shrink-0 ${tone}`} aria-hidden="true" /> {x}
+        </li>
+      ))}
+    </ul>
+  );
+}
 
 export default async function ServicePage({ params }) {
   const { slug } = await params;
   const s = getService(slug);
   if (!s) notFound();
 
-  const c = accents[s.accent] ?? accents.indigo;
-  const related = industries.filter((i) => i.services.includes(s.slug));
-  const projects = portfolio
-    .filter((p) => p.service === s.slug)
-    .sort((a, b) => Number(a.concept) - Number(b.concept))
-    .slice(0, 2);
-  const idx = services.findIndex((o) => o.slug === s.slug);
-  const others = [1, 2, 3].map((n) => services[(idx + n) % services.length]);
-  const price = startingPrice[s.slug];
+  const price = servicePrice(s);
+  const example = s.example ? getProject(s.example) : null;
+  const related = services.filter((o) => o.slug !== s.slug && o.audience === s.audience).slice(0, 3);
 
   return (
     <>
@@ -64,159 +62,142 @@ export default async function ServicePage({ params }) {
         }}
       />
       <PageHero
-        eyebrow="Service"
+        eyebrow={s.audience === "enterprise" ? "Enterprise & custom service" : s.audience === "both" ? "Service · small business & enterprise" : "Small business service"}
         title={s.title}
-        text={s.intro}
+        text={s.short}
         crumbs={[
           { label: "Services", href: "/services/" },
           { label: s.title, href: `/services/${s.slug}/` },
         ]}
       >
-        <ul className="mt-6 flex flex-wrap gap-2">
-          {s.benefits.map((b) => (
-            <li key={b} className="glass inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm text-slate-200">
-              <Check className="size-4 text-mint-400" aria-hidden="true" /> {b}
-            </li>
-          ))}
-        </ul>
-        <div className="mt-8 flex flex-wrap gap-3">
-          <Link href="/contact/" className="btn btn-light">
-            Get a free quote <ArrowRight className="size-4" aria-hidden="true" />
-          </Link>
-          <a href={whatsappLink(`Hi, I'm interested in ${s.title}.`)} target="_blank" rel="noopener noreferrer" className="btn bg-[#25D366] text-white hover:bg-[#1fb857]">
-            <WhatsAppIcon className="size-5" /> Ask on WhatsApp
-          </a>
+        <div aria-hidden="true" className="absolute right-10 top-1/2 hidden -translate-y-1/2 rounded-[2rem] bg-white/95 p-6 shadow-2xl shadow-black/30 xl:block">
+          <ColorIcon name={s.icon} className="size-40" />
         </div>
-        <div aria-hidden="true" className="pointer-events-none absolute right-6 top-1/2 hidden w-[24rem] -translate-y-1/2 xl:block">
-          <div className="animate-float rounded-[2rem] bg-white/95 p-8 shadow-2xl shadow-black/30">
-            <ServiceArt name={s.art} accent={s.accent} />
-          </div>
-          <span className={`absolute -left-6 -top-5 grid size-16 place-items-center rounded-2xl bg-white shadow-xl ${c.text}`}>
-            <Icon name={s.icon} className="size-8" />
-          </span>
+        {s.hi && <p className="mt-3 text-lg font-semibold text-marigold-400" lang="hi">{s.hi}{s.bn && <span lang="bn" className="text-slate-300"> · {s.bn}</span>}</p>}
+        <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+          <ConsultButton label="Enquire about this service" className="btn-light" service={s.title} />
+          <WhatsAppButton onDark text={`Hi Siddhi Info, I'm interested in ${s.title}.`} label="Ask on WhatsApp" />
         </div>
       </PageHero>
 
-      {/* what's included */}
-      <section className="container-x grid gap-12 py-16 sm:py-24 lg:grid-cols-3">
+      {/* Problem + who it's for */}
+      <section className="container-x grid gap-10 py-16 sm:py-20 lg:grid-cols-3">
         <div className="lg:col-span-2">
-          <SectionHead center={false} eyebrow="What’s included" title={<>Everything you need, <span className="text-gradient">done for you</span></>} />
-          <ul className="mt-10 grid gap-4 sm:grid-cols-2">
-            {s.features.map((f, i) => (
-              <li key={f} data-reveal style={{ "--reveal-delay": `${(i % 2) * 70}ms` }} className="card card-hover flex items-start gap-4 p-5">
-                <span className={`grid size-10 shrink-0 place-items-center rounded-xl bg-gradient-to-br ${c.card} font-bold ${c.text} ring-1 ring-slate-200`}>
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <span className="pt-2 font-medium text-ink">{f}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <aside className="lg:sticky lg:top-24 lg:self-start">
-          <div data-reveal className="card bg-hero overflow-hidden border-transparent p-7 text-white shadow-2xl shadow-brand-900/25">
-            <Sparkles className="size-6 text-mint-300" aria-hidden="true" />
-            <h2 className="mt-3 text-xl font-bold">What you get</h2>
-            <ul className="mt-4 space-y-3">
-              {s.outcomes.map((o) => (
-                <li key={o} className="flex gap-2 text-slate-200">
-                  <Check className="mt-0.5 size-5 shrink-0 text-mint-400" aria-hidden="true" />
-                  {o}
-                </li>
-              ))}
-            </ul>
-            <div className="mt-6 rounded-2xl bg-white/10 p-4">
-              <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-brand-200">
-                <IndianRupee className="size-4" aria-hidden="true" /> Pricing
-              </p>
-              <p className="mt-1 text-lg font-bold">{price ? `Starting from ${price}` : "Fixed quote after a free consultation"}</p>
-              <p className="mt-1 text-xs text-slate-300">Final price confirmed in a written quotation.</p>
+          <h2 className="section-title">The problem this solves</h2>
+          <p className="mt-4 text-lg leading-relaxed text-slate-700">{s.problem}</p>
+          <p className="mt-4 text-lg leading-relaxed text-slate-700">{s.intro}</p>
+          {s.distinction && (
+            <p className="mt-6 flex gap-3 rounded-2xl bg-brand-50 p-4 text-slate-700 ring-1 ring-brand-100">
+              <Info className="mt-0.5 size-5 shrink-0 text-brand-700" aria-hidden="true" />
+              <span><strong className="text-ink">Which service is right?</strong> {s.distinction}</span>
+            </p>
+          )}
+
+          <div className="mt-10 grid gap-6 sm:grid-cols-2">
+            <div className="card p-6">
+              <h3 className="flex items-center gap-3 text-lg font-bold text-ink"><ColorIcon name="Users" className="size-10" /> Suitable for</h3>
+              <List items={s.suitableFor} icon={Check} tone="text-mint-600" />
             </div>
-            <Link href="/contact/" className="btn btn-light mt-5 w-full">Get my free quote</Link>
+            {s.notFor.length > 0 && (
+              <div className="card p-6">
+                <h3 className="flex items-center gap-3 text-lg font-bold text-ink"><ColorIcon name="Puzzle" className="size-10" /> Probably not the right fit if…</h3>
+                <List items={s.notFor} icon={ArrowRight} tone="text-slate-400" />
+              </div>
+            )}
+          </div>
+        </div>
+
+        <aside className="lg:sticky lg:top-24 lg:self-start" aria-labelledby="price-title">
+          <div className="card p-6">
+            <p id="price-title" className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-slate-500">
+              <IndianRupee className="size-4" aria-hidden="true" /> Pricing
+            </p>
+            <p className="mt-1 text-2xl font-extrabold text-ink">{price ? `From ${price}` : "Custom quote"}</p>
+            <p className="mt-1 text-sm text-slate-600">
+              {price ? "Starting price for the standard scope, + GST if applicable. " : "Quoted after a free discovery call. "}
+              Third-party fees are separate.
+            </p>
+            <p className="mt-4 flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-slate-500">
+              <Clock className="size-4" aria-hidden="true" /> Typical timeline
+            </p>
+            <p className="mt-1 text-slate-700">{s.timeline}</p>
+            <div className="mt-6 flex flex-col gap-2">
+              <ConsultButton label="Get a quote" service={s.title} />
+              {price && <Link href="/pricing/" className="btn btn-outline">See pricing terms</Link>}
+            </div>
           </div>
         </aside>
       </section>
 
-      {/* related work */}
-      {projects.length > 0 && (
-        <section className="bg-lavender-mesh py-16 sm:py-24" aria-labelledby="related-work-title">
-          <div className="container-x">
-            <SectionHead
-              id="related-work-title"
-              eyebrow="Related work"
-              title={<>See what we <span className="text-gradient">have built</span></>}
-            />
-            <div className={`mt-12 grid gap-8 ${projects.length > 1 ? "lg:grid-cols-2" : "mx-auto max-w-2xl"}`}>
-              {projects.map((p, i) => <ProjectCard key={p.slug} p={p} i={i} dark={false} />)}
+      {/* Included / excluded */}
+      <section className="bg-haldi py-16 sm:py-20" aria-labelledby="scope-title">
+        <div className="container-x">
+          <SectionHead id="scope-title" eyebrow="Scope" title="What's included — and what isn't" text="The exact scope for your project is written in your quote." />
+          <div className="mt-10 grid gap-6 lg:grid-cols-2">
+            <div className="card p-6 sm:p-8">
+              <h3 className="flex items-center gap-3 text-lg font-bold text-ink"><ColorIcon name="ClipboardCheck" className="size-10" /> Included</h3>
+              <List items={s.features} icon={Check} tone="text-mint-600" />
+            </div>
+            <div className="card p-6 sm:p-8">
+              <h3 className="flex items-center gap-3 text-lg font-bold text-ink"><ColorIcon name="LifeBuoy" className="size-10" /> Not included</h3>
+              <List items={s.excluded} icon={X} tone="text-rose-500" />
+              <h3 className="mt-8 flex items-center gap-3 text-lg font-bold text-ink"><ColorIcon name="IndianRupee" className="size-10" /> Third-party costs (paid to the provider)</h3>
+              <List items={s.thirdParty} icon={IndianRupee} tone="text-slate-500" />
             </div>
           </div>
-        </section>
-      )}
-
-      {/* how we deliver */}
-      <section className="container-x py-16 sm:py-24" aria-labelledby="deliver-title">
-        <SectionHead id="deliver-title" eyebrow="How we deliver" title="A simple, transparent process" />
-        <ol className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-6">
-          {steps.map((st, i) => (
-            <li key={st.title} data-reveal style={{ "--reveal-delay": `${i * 60}ms` }} className="card p-5">
-              <span className="icon-tile size-11"><Icon name={st.icon} className="size-5" /></span>
-              <p className="mt-4 text-xs font-bold text-mint-700">Step {i + 1}</p>
-              <h3 className="mt-0.5 font-bold text-ink">{st.title}</h3>
-            </li>
-          ))}
-        </ol>
-      </section>
-
-      {/* industries */}
-      {related.length > 0 && (
-        <section className="bg-slate-50 py-16 sm:py-24">
-          <div className="container-x">
-            <SectionHead center={false} eyebrow="Popular with" title="Businesses that use this service" />
-            <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-              {related.map((ind) => (
-                <Link key={ind.slug} href={`/industries/${ind.slug}/`} data-reveal className="card card-hover group flex items-center gap-4 overflow-hidden p-3 pr-5">
-                  {ind.image ? (
-                    <Image src={ind.image} alt={ind.imageAlt} width={760} height={520} sizes="96px" className="size-20 shrink-0 rounded-xl object-cover transition duration-500 group-hover:scale-105" />
-                  ) : (
-                    <IndustryArt slug={ind.slug} className="size-20 shrink-0" />
-                  )}
-                  <span>
-                    <span className="block text-xs font-semibold text-mint-700">{ind.hi}</span>
-                    <span className="block font-bold text-ink">{ind.title}</span>
-                  </span>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
-      <Faq items={s.faqs} />
-
-      {/* other services */}
-      <section className="container-x pb-4" aria-labelledby="other-title">
-        <SectionHead center={false} id="other-title" eyebrow="Explore more" title="Other services" />
-        <div className="mt-10 grid gap-6 md:grid-cols-3">
-          {others.map((o) => {
-            const oc = accents[o.accent] ?? accents.indigo;
-            return (
-              <Link key={o.slug} href={`/services/${o.slug}/`} data-reveal className="card card-hover group overflow-hidden">
-                <div className={`bg-gradient-to-br ${oc.card} px-8 pb-2 pt-6`}>
-                  <ServiceArt name={o.art} accent={o.accent} className="mx-auto max-w-[200px] transition duration-500 group-hover:scale-105" />
-                </div>
-                <div className="p-6 pt-4">
-                  <h3 className="font-bold text-ink">{o.title}</h3>
-                  <p className="mt-1.5 text-sm text-slate-600">{o.short}</p>
-                  <span className={`mt-4 inline-flex items-center gap-1 text-sm font-semibold ${oc.text}`}>
-                    Learn more <ArrowRight className="size-4 transition group-hover:translate-x-1" aria-hidden="true" />
-                  </span>
-                </div>
-              </Link>
-            );
-          })}
         </div>
       </section>
 
-      <CtaBanner title={`Let’s talk about your ${s.title.replace(/ Development$/, "").toLowerCase()}.`} />
+      {/* Process + timeline factors */}
+      <section className="container-x py-16 sm:py-20" aria-labelledby="deliver-title">
+        <SectionHead id="deliver-title" eyebrow="Delivery" title="How it's delivered" />
+        <div className="mt-10 grid gap-8 lg:grid-cols-[1.6fr_1fr]">
+          <ol className="grid gap-3 sm:grid-cols-2">
+            {steps.map((st, i) => (
+              <li key={st.title} className="card p-5">
+                <p className="text-sm font-bold text-brand-700">Step {i + 1}</p>
+                <h3 className="font-bold text-ink">{st.title}</h3>
+                <p className="mt-1 text-[0.95rem] text-slate-600">{st.text}</p>
+              </li>
+            ))}
+          </ol>
+          <div className="card self-start p-6">
+            <h3 className="flex items-center gap-3 text-lg font-bold text-ink"><ColorIcon name="Clock" className="size-10" /> What affects the timeline</h3>
+            <List items={s.timelineFactors} icon={Clock} tone="text-brand-700" />
+            <p className="mt-5 text-sm text-slate-600">{s.timeline}</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Example */}
+      {example && (
+        <section className="bg-peacock py-16 sm:py-20" aria-labelledby="example-title">
+          <div className="container-x">
+            <SectionHead
+              id="example-title"
+              eyebrow={example.concept ? "Concept demo" : "Live product"}
+              title={example.concept ? "An example of what this can look like" : "A related product you can try"}
+              text={example.concept ? "This is an illustrative design with a fictional brand and sample data — not a client project." : undefined}
+            />
+            <div className="mx-auto mt-10 max-w-2xl">
+              <ProjectCard p={example} dark={false} />
+            </div>
+          </div>
+        </section>
+      )}
+
+      <Faq items={s.faqs} title={`${s.title}: questions`} />
+
+      {related.length > 0 && (
+        <section className="container-x pb-4" aria-labelledby="other-title">
+          <SectionHead center={false} id="other-title" eyebrow="Related" title="Related services" />
+          <div className="mt-8 grid gap-5 md:grid-cols-3">
+            {related.map((o) => <ServiceCard key={o.slug} s={o} price={servicePrice(o)} />)}
+          </div>
+        </section>
+      )}
+
+      <CtaBanner title={`Talk to us about ${s.title.toLowerCase()}`} whatsappText={`Hi Siddhi Info, I'm interested in ${s.title}.`} />
     </>
   );
 }

@@ -1,81 +1,110 @@
 import Image from "next/image";
-import { pageMeta } from "@/lib/site";
+import Link from "next/link";
+import { pageMeta, site } from "@/lib/site";
 import PageHero from "@/components/PageHero";
 import CtaBanner from "@/components/CtaBanner";
-import Icon from "@/components/Icon";
-import DesiValuesShowcase from "@/components/india/DesiValuesShowcase";
-import PanIndiaCoverage from "@/components/india/PanIndiaCoverage";
-import { reasons } from "@/lib/data";
+import SectionHead from "@/components/SectionHead";
+import WorkingTerms from "@/components/WorkingTerms";
+import ProcessSteps from "@/components/ProcessSteps";
 
 export const metadata = pageMeta({
-  title: "About Us — Technology Partner for Indian Small Businesses",
-  description: "Siddhi Info is an Indian digital solutions company helping small and medium businesses go online with websites, software, automation and marketing.",
+  title: "About Siddhi Info — Technology Partner in Kolkata",
+  description:
+    "Siddhi Info is a Kolkata-based technology partner building websites and digital tools for small businesses, and custom software and automation for growing organisations. How we work, communicate, get paid and hand over ownership.",
   path: "/about/",
 });
 
-const values = [
-  { title: "Honest advice", text: "We recommend only what will help your business — even if it means a smaller project for us." },
-  { title: "Simple language", text: "No technical jargon. We explain in Hindi or English, whatever you prefer." },
-  { title: "Long-term support", text: "We grow with you. Many small fixes, updates and ideas happen after launch." },
+const principles = [
+  { title: "Honest advice", text: "We recommend what will help — including a ready-made tool or a smaller scope when that's the better choice." },
+  { title: "Plain language", text: "No jargon. We explain in English, Hindi or Bengali, whichever you prefer." },
+  { title: "Written scope", text: "What's included, what isn't, the price and the milestones are agreed in writing before work starts." },
+  { title: "Long-term support", text: "Most useful improvements happen after launch, so we stay available for fixes and updates." },
 ];
 
 export default function AboutPage() {
+  const details = [
+    ["Based in", `${site.address.city}, ${site.address.region}, India`],
+    ["Works with", "Businesses across India, remotely by phone, WhatsApp and video call"],
+    ["Languages", "English, Hindi, Bengali"],
+    site.hours && ["Business hours", site.hours],
+    site.legal.gstin && ["GSTIN", site.legal.gstin],
+    site.legal.registration && ["Registration", site.legal.registration],
+  ].filter(Boolean);
+
   return (
     <>
       <PageHero
-        eyebrow="About Siddhi Info"
-        title="Helping India’s small businesses win online"
-        text="‘Siddhi’ means success and accomplishment. Our mission is simple: give every small business in India access to the same digital tools that big companies use — at a price that makes sense."
+        eyebrow="About"
+        title="A technology partner for Indian businesses"
+        text="Siddhi Info builds websites and practical digital tools for small businesses, and custom software, integrations and automation for growing organisations. ‘Siddhi’ means accomplishment — getting the job done."
         crumbs={[{ label: "About", href: "/about/" }]}
       />
-      <section className="container-x grid gap-12 py-16 sm:py-20 lg:grid-cols-2">
-        <div className="space-y-5 text-lg leading-relaxed text-slate-600">
-          <h2 className="section-title">Our story</h2>
+
+      <section className="container-x grid gap-12 py-16 sm:py-20 lg:grid-cols-[1.4fr_1fr]">
+        <div className="space-y-5 text-lg leading-relaxed text-slate-700">
+          <h2 className="section-title">What we do</h2>
           <p>
-            Small businesses are the backbone of India — kirana stores, clinics, coaching centres, restaurants,
-            workshops and family-run manufacturers. Yet most of them are still invisible online or stuck with
-            tools that were never built for them.
+            Many Indian businesses still run on registers, spreadsheets and WhatsApp groups, or have a website that
+            doesn&apos;t bring in enquiries. We help in two ways:
           </p>
+          <ul className="list-disc space-y-2 pl-6">
+            <li>
+              <Link href="/small-business/" className="font-semibold text-brand-700 underline">Small businesses</Link>{" "}
+              — websites, online ordering, GST billing, WhatsApp tools and Google visibility at clear starting prices.
+            </li>
+            <li>
+              <Link href="/enterprise/" className="font-semibold text-brand-700 underline">Growing organisations</Link>{" "}
+              — custom web applications, CRM/ERP, integrations, automation and ongoing technical support, scoped and quoted in writing.
+            </li>
+          </ul>
           <p>
-            Siddhi Info was started to fix that. We combine web development, software and marketing into practical
-            packages that a business owner can understand, afford and actually use every day.
-          </p>
-          <p>
-            Whether you need your first website, want to sell online, or need to replace a pile of registers with
-            simple software, we are your long-term technology partner.
+            You can see products in our portfolio running live on the <Link href="/work/" className="font-semibold text-brand-700 underline">Our Work</Link> page.
           </p>
         </div>
-        <div className="grid gap-5 self-start">
-          <div className="overflow-hidden rounded-3xl shadow-xl shadow-brand-900/10">
-            <Image src="/images/developer-workspace.webp" alt="Indian web developer working on a laptop at his desk" width={720} height={540} sizes="(min-width: 1024px) 560px, 100vw" className="h-auto w-full" />
-          </div>
-          {values.map((v, i) => (
-            <div key={v.title} className="card flex gap-5 p-6">
-              <span className="grid size-10 shrink-0 place-items-center rounded-full bg-brand-600 font-bold text-white">{i + 1}</span>
-              <div>
-                <h3 className="font-bold text-ink">{v.title}</h3>
-                <p className="mt-1 text-slate-600">{v.text}</p>
-              </div>
+        <dl className="card self-start divide-y divide-slate-200">
+          {details.map(([k, v]) => (
+            <div key={k} className="p-5">
+              <dt className="text-sm font-semibold text-slate-500">{k}</dt>
+              <dd className="mt-0.5 font-semibold text-ink">{v}</dd>
             </div>
           ))}
-        </div>
+        </dl>
       </section>
-      <section className="bg-slate-50 py-16 sm:py-20">
-        <div className="container-x">
-          <h2 className="section-title text-center">What makes us different</h2>
-          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {reasons.map((r) => (
-              <div key={r.title} className="card p-6">
-                <Icon name={r.icon} className="size-6 text-brand-600" />
-                <h3 className="mt-4 font-bold text-ink">{r.title}</h3>
-                <p className="mt-1.5 text-sm text-slate-600">{r.text}</p>
-              </div>
-            ))}
+
+      {site.team.length > 0 && (
+        <section className="bg-haldi py-16 sm:py-20" aria-labelledby="team-title">
+          <div className="container-x">
+            <SectionHead id="team-title" eyebrow="People" title="Who you'll work with" />
+            <ul className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {site.team.map((m) => (
+                <li key={m.name} className="card p-6">
+                  {m.photo && <Image src={m.photo} alt={`Photo of ${m.name}`} width={160} height={160} className="size-20 rounded-full object-cover" />}
+                  <h3 className="mt-4 text-lg font-bold text-ink">{m.name}</h3>
+                  <p className="text-sm font-semibold text-brand-700">{m.role}</p>
+                  {m.bio && <p className="mt-2 text-slate-600">{m.bio}</p>}
+                  {m.linkedin && <a href={m.linkedin} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex min-h-11 items-center text-sm font-semibold text-brand-700 underline">LinkedIn</a>}
+                </li>
+              ))}
+            </ul>
           </div>
-        </div>
+        </section>
+      )}
+
+      <section className="container-x py-16 sm:py-20" aria-labelledby="principles-title">
+        <SectionHead id="principles-title" eyebrow="Principles" title="How we approach every project" />
+        <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {principles.map((p, i) => (
+            <li key={p.title} className="card p-6">
+              <span className="grid size-9 place-items-center rounded-full bg-brand-700 font-bold text-white">{i + 1}</span>
+              <h3 className="mt-3 font-bold text-ink">{p.title}</h3>
+              <p className="mt-1.5 text-slate-600">{p.text}</p>
+            </li>
+          ))}
+        </ul>
       </section>
-      <DesiValuesShowcase />
-      <PanIndiaCoverage />
+
+      <WorkingTerms title="Communication, ownership, support and payments" />
+      <ProcessSteps />
       <CtaBanner />
     </>
   );

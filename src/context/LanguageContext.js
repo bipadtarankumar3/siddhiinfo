@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useSyncExternalStore } from "react";
+import React, { createContext, useContext, useEffect, useSyncExternalStore } from "react";
 import { translations, defaultLocale, languages } from "@/lib/translations";
 
 const LanguageContext = createContext({
@@ -49,6 +49,12 @@ export function LanguageProvider({ children }) {
   };
 
   const t = translations[locale] || translations[defaultLocale];
+
+  // Keep <html lang> in sync so screen readers pronounce Hindi/Bengali correctly
+  useEffect(() => {
+    const lang = languages.find((l) => l.code === locale)?.htmlLang || "en-IN";
+    document.documentElement.lang = lang;
+  }, [locale]);
 
   return (
     <LanguageContext.Provider value={{ locale, setLocale, t, languages }}>
