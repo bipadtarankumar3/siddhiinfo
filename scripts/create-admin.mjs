@@ -11,7 +11,7 @@
 import crypto from "node:crypto";
 import { MongoClient } from "mongodb";
 
-const [emailArg, role = "admin", name = ""] = process.argv.slice(2);
+const [emailArg, role = "admin", name = ""] = process.argv.slice(2).filter((a) => !a.startsWith("--"));
 const email = String(emailArg || "").toLowerCase();
 const password = process.env.ADMIN_PASSWORD;
 
@@ -22,9 +22,11 @@ if (!process.env.MONGODB_URI) throw new Error("Set MONGODB_URI");
 // Production (e.g. MongoDB Atlas) always requires 12+ characters.
 const isLocalDb = /^mongodb:\/\/(127\.0\.0\.1|localhost)(:\d+)?(\/|$)/.test(process.env.MONGODB_URI);
 if (!password) throw new Error("Set ADMIN_PASSWORD");
+// --allow-weak-password: owner's explicit override for a short password on a non-local database.
+const allowWeak = process.argv.includes("--allow-weak-password");
 if (password.length < 12) {
-  if (!isLocalDb) throw new Error("ADMIN_PASSWORD must be 12+ characters for a non-local database");
-  console.warn("Warning: short password accepted for LOCAL development only.");
+  if (!isLocalDb && !allowWeak) throw new Error("ADMIN_PASSWORD must be 12+ characters for a non-local database (or pass --allow-weak-password)");
+  console.warn(`Warning: short password accepted${isLocalDb ? " for LOCAL development" : " by explicit override (not recommended)"}.`);
 }
 
 const salt = crypto.randomBytes(16);
