@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { Send, CheckCircle2, AlertCircle, Loader2, Copy, Mail } from "lucide-react";
+import { Send, CheckCircle2, AlertCircle, Loader2, Copy, Mail, RefreshCw, ShieldCheck } from "lucide-react";
 import { site, whatsappLink, mailHref } from "@/lib/site";
 import { services, plans } from "@/lib/data";
 import WhatsAppIcon from "./WhatsAppIcon";
@@ -30,7 +30,7 @@ const baseOptions = [
   "Not sure — need advice",
 ];
 
-const initial = { name: "", phone: "", business: "", city: "", service: "", message: "", website: "" };
+const initial = { name: "", phone: "", business: "", city: "", service: "", message: "", website: "", captchaAnswer: "" };
 
 export default function ContactForm() {
   const [values, setValues] = useState(initial);
@@ -38,6 +38,26 @@ export default function ContactForm() {
   const [status, setStatus] = useState("idle"); // idle | sending | sent | error
   const [copied, setCopied] = useState(false);
   const [options, setOptions] = useState(baseOptions);
+  const [captcha, setCaptcha] = useState({ image: "", token: "", loading: true, error: "" });
+  const [serverMsg, setServerMsg] = useState("");
+
+  // Fetch a fresh, single-use security code from the server
+  async function loadCaptcha() {
+    setCaptcha((c) => ({ ...c, loading: true, error: "" }));
+    try {
+      const res = await fetch("/api/captcha/", { cache: "no-store" });
+      const data = await res.json();
+      if (!res.ok || !data.ok) throw new Error(data.error || "unavailable");
+      setCaptcha({ image: data.image, token: data.token, loading: false, error: "" });
+    } catch (err) {
+      setCaptcha({ image: "", token: "", loading: false, error: err.message === "unavailable" ? "Could not load the security code." : err.message });
+    }
+  }
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- initial fetch of the security code
+    loadCaptcha();
+  }, []);
   const errorRef = useRef(null);
   const successRef = useRef(null);
 
@@ -70,6 +90,7 @@ export default function ContactForm() {
     if (!values.service) er.service = "Please choose a service, or “Not sure — need advice”.";
     if (values.message.trim().length < 10) er.message = "Please describe what you need in a sentence or two.";
     if (values.message.length > 2000) er.message = "Please keep the description under 2,000 characters.";
+    if (!/^[A-Za-z0-9]{5}$/.test(values.captchaAnswer.trim())) er.captchaAnswer = "Enter the 5 characters shown in the image.";
     setErrors(er);
     return Object.keys(er).length === 0;
   }
@@ -96,15 +117,31 @@ export default function ContactForm() {
       return;
     }
     setStatus("sending");
+    setServerMsg("");
     try {
       const res = await fetch(ENDPOINT, {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({ ...values, phone: `+91 ${normaliseIndianMobile(values.phone)}` }),
+        body: JSON.stringify({ ...values, phone: `+91 ${normaliseIndianMobile(values.phone)}`, captchaToken: captcha.token }),
       });
-      if (!res.ok) throw new Error(String(res.status));
-      setStatus("sent");
-      setValues(initial);
+      const data = await res.json().catch(() => ({}));
+      if (res.ok) {
+        setStatus("sent");
+        setValues(initial);
+        loadCaptcha();
+        return;
+      }
+      // Every attempt uses up the code, so always fetch a new one
+      setValues((v) => ({ ...v, captchaAnswer: "" }));
+      loadCaptcha();
+      if (data.code === "captcha") {
+        setStatus("idle");
+        setErrors((er) => ({ ...er, captchaAnswer: data.error }));
+        requestAnimationFrame(() => document.getElementById("captchaAnswer")?.focus());
+        return;
+      }
+      if (res.status === 429 || res.status === 400) setServerMsg(data.error || "");
+      throw new Error(String(res.status));
     } catch {
       setStatus("error"); // values are kept so nothing is lost
     }
@@ -209,12 +246,59 @@ export default function ContactForm() {
         {errors.message && <p id="message-error" className="mt-1 text-sm text-rose-700">{errors.message}</p>}
       </div>
 
+      <div>
+        <label htmlFor="captchaAnswer" className="label">
+          Security code <span className="text-rose-600" aria-hidden="true">*</span>
+        </label>
+        <div className="flex flex-wrap items-center gap-3">
+          <div className="grid h-14 w-[170px] place-items-center overflow-hidden rounded-xl bg-slate-100 ring-1 ring-slate-300">
+            {captcha.image ? (
+              // eslint-disable-next-line @next/next/no-img-element -- server-generated data URI
+              <img src={captcha.image} alt="Security code image. If you cannot read it, use the refresh button or email us." width={170} height={56} />
+            ) : (
+              <span className="text-xs text-slate-500">{captcha.loading ? "Loading…" : "Unavailable"}</span>
+            )}
+          </div>
+          <button
+            type="button"
+            onClick={() => { setValues((v) => ({ ...v, captchaAnswer: "" })); loadCaptcha(); }}
+            className="btn btn-outline min-h-12 !px-3"
+            aria-label="Get a new security code"
+            disabled={captcha.loading}
+          >
+            <RefreshCw className={`size-4 ${captcha.loading ? "animate-spin" : ""}`} aria-hidden="true" /> New code
+          </button>
+          <input
+            id="captchaAnswer"
+            name="captchaAnswer"
+            className={`input min-h-12 w-40 uppercase tracking-[0.3em] ${errors.captchaAnswer ? "!border-rose-500" : ""}`}
+            value={values.captchaAnswer}
+            onChange={set("captchaAnswer")}
+            maxLength={5}
+            autoComplete="off"
+            autoCapitalize="characters"
+            spellCheck={false}
+            required
+            aria-invalid={errors.captchaAnswer ? "true" : undefined}
+            aria-describedby={`captcha-hint${errors.captchaAnswer ? " captchaAnswer-error" : ""}`}
+            placeholder="ABC12"
+          />
+        </div>
+        <p id="captcha-hint" className="mt-1.5 text-sm text-slate-500">
+          <ShieldCheck className="mr-1 inline size-4 align-[-3px] text-green-700" aria-hidden="true" />
+          Type the 5 characters above (not case-sensitive). Can&apos;t read it? Tap “New code” or email{" "}
+          <a href={mailHref} className="break-all font-semibold text-brand-700 underline">{site.email}</a>.
+        </p>
+        {captcha.error && <p className="mt-1 text-sm text-rose-700">{captcha.error}</p>}
+        {errors.captchaAnswer && <p id="captchaAnswer-error" className="mt-1 text-sm text-rose-700">{errors.captchaAnswer}</p>}
+      </div>
+
       {status === "error" && (
         <div ref={errorRef} tabIndex={-1} role="alert" className="space-y-3 rounded-xl bg-rose-50 p-4 ring-1 ring-rose-200 outline-none">
           <p className="flex items-start gap-2 text-rose-900">
             <AlertCircle className="mt-0.5 size-5 shrink-0" aria-hidden="true" />
             <span>
-              <strong>Your enquiry was not sent.</strong> Your details are still in the form. Please try again, or send them to us another way:
+              <strong>Your enquiry was not sent.</strong> {serverMsg || "Your details are still in the form."} Please try again, or send them to us another way:
             </span>
           </p>
           <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap">

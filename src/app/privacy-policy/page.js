@@ -32,6 +32,11 @@ export default function PrivacyPage() {
             and delete them on request unless we must keep them by law.
           </p>
           <p>
+            To stop spam and repeated automated submissions, the form asks you to type a security code drawn by our own
+            server (no third-party captcha service is used). Your IP address is held briefly in server memory to limit how
+            many enquiries can be sent in a short time; it is not saved or used for anything else.
+          </p>
+          <p>
             If you choose to contact us by WhatsApp, phone or your own email app instead, those services&apos; own privacy
             policies also apply.
           </p>

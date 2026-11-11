@@ -1,5 +1,6 @@
 import nodemailer from "nodemailer";
 import { site } from "@/lib/site";
+import { verifyCaptcha, rateLimit, clientIp } from "@/lib/captcha";
 
 // Sends website enquiries to the Siddhi Info inbox through Gmail SMTP.
 // Needs GMAIL_USER and GMAIL_APP_PASSWORD (a Google "App password") in the
@@ -31,6 +32,19 @@ export async function POST(request) {
     return Response.json({ ok: false, error: "Email is not configured." }, { status: 500 });
   }
 
+  // Rate limit: 5 enquiries per IP per 15 minutes (per server instance)
+  const limited = rateLimit(`contact:${clientIp(request)}`, { limit: 5, windowMs: 15 * 60 * 1000 });
+  if (!limited.ok) {
+    return Response.json(
+      { ok: false, code: "rate_limited", error: "Too many enquiries from your connection. Please try again later." },
+      { status: 429, headers: { "Retry-After": String(limited.retryAfter) } },
+    );
+  }
+
+  if (Number(request.headers.get("content-length") || 0) > 10_000) {
+    return Response.json({ ok: false, error: "Request too large." }, { status: 413 });
+  }
+
   let body;
   try {
     body = await request.json();
@@ -40,6 +54,16 @@ export async function POST(request) {
 
   // Honeypot: real visitors never see or fill this field.
   if (body.website) return Response.json({ ok: true });
+
+  // Captcha: server-side check of the signed, single-use, time-limited code
+  const captcha = verifyCaptcha(body.captchaToken, String(body.captchaAnswer ?? ""));
+  if (!captcha.ok) {
+    const msg =
+      captcha.reason === "expired" ? "The security code expired. Please enter the new code."
+      : captcha.reason === "too-fast" ? "Please take a moment and try again."
+      : "The security code was not correct. Please try the new code.";
+    return Response.json({ ok: false, code: "captcha", error: msg }, { status: 400 });
+  }
 
   const name = clean(body.name, 100);
   const mobile = normaliseIndianMobile(body.phone);
