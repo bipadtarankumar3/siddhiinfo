@@ -10,7 +10,7 @@
   Saffron / marigold stay for Indian touches only (tricolour, sunset, badges).
 */
 @theme {
-  --font-sans: var(--font-jakarta), var(--font-hindi), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-manrope), var(--font-deva), var(--font-beng), ui-sans-serif, system-ui, sans-serif;
 
   --spacing-18: 4.5rem;
 
@@ -65,6 +65,13 @@
   --color-saffron-700: #c2410c;
   --color-saffron-800: #9a3412;
   --color-indiagreen: #138808;
+
+  /* Brief accents: orange CTA, growth green, warm gold, deep navy */
+  --color-cta: #F47B20;
+  --color-cta-hover: #E8690C;
+  --color-growth: #16865B;
+  --color-gold: #E7A63D;
+  --color-deepnavy: #14243A;
 }
 
 :root {
@@ -155,6 +162,15 @@ body {
   color: var(--color-ink);
   box-shadow: inset 0 0 0 1px var(--color-slate-300);
   &:hover { box-shadow: inset 0 0 0 1px var(--color-brand-600); color: var(--color-brand-700); }
+}
+
+/* Main call-to-action: brand orange with deep-navy text (5.5:1 contrast; white on this orange fails AA) */
+@utility btn-cta {
+  color: var(--color-deepnavy);
+  background: var(--color-cta);
+  font-weight: 700;
+  box-shadow: 0 10px 24px -12px rgb(244 123 32 / 0.7);
+  &:hover { background: var(--color-cta-hover); }
 }
 
 /* WhatsApp green darkened for 4.5:1 contrast with white text */

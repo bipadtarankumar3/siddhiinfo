@@ -6,8 +6,8 @@ import Rangoli from "./india/Rangoli";
 import Toran from "./india/Toran";
 
 export default function CtaBanner({
-  title = "Tell us what you need",
-  text = "Share a few details about your business. We'll reply with honest advice and, if it's a fit, a written quote.",
+  title = "Let's build something great for your business",
+  text = "Whether you need a business website or a complete software solution, Siddhi Info is ready to help.",
   whatsappText,
 }) {
   return (
@@ -21,10 +21,10 @@ export default function CtaBanner({
             <h2 id="cta-title" className="text-3xl font-extrabold tracking-tight text-balance sm:text-4xl">{title}</h2>
             <p className="mt-4 max-w-2xl text-lg text-slate-200">{text}</p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-              <Link href="/contact/#enquiry" className="btn btn-light">
-                Book a free consultation <ArrowRight className="size-4" aria-hidden="true" />
+              <Link href="/get-a-quote/" className="btn btn-cta">
+                Get a free initial consultation <ArrowRight className="size-4" aria-hidden="true" />
               </Link>
-              <WhatsAppButton text={whatsappText} onDark />
+              <WhatsAppButton text={whatsappText} label="WhatsApp us" onDark />
             </div>
           </div>
           <div className="rounded-2xl bg-white/[0.07] p-6 ring-1 ring-white/15">

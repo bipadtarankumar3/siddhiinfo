@@ -1,4 +1,4 @@
-import { Plus_Jakarta_Sans, Mukta } from "next/font/google";
+import { Manrope, Noto_Sans_Devanagari, Noto_Sans_Bengali } from "next/font/google";
 import { GoogleTagManager } from "@next/third-parties/google";
 import "./globals.css";
 import Header from "@/components/Header";
@@ -7,22 +7,16 @@ import WhatsAppFloat from "@/components/WhatsAppFloat";
 import JsonLd from "@/components/JsonLd";
 import { LanguageProvider } from "@/context/LanguageContext";
 import LanguagePrompt from "@/components/LanguagePrompt";
+import ClickTracker from "@/components/ClickTracker";
+import SiteChrome from "@/components/SiteChrome";
 import { site, absoluteUrl, hasPhone } from "@/lib/site";
 import { services } from "@/lib/data";
 
-const jakarta = Plus_Jakarta_Sans({
-  variable: "--font-jakarta",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-// Devanagari (Hindi) text falls back to Mukta automatically
-const mukta = Mukta({
-  variable: "--font-hindi",
-  subsets: ["devanagari"],
-  weight: ["500", "600", "700", "800"],
-  display: "swap",
-});
+// English UI font
+const manrope = Manrope({ variable: "--font-manrope", subsets: ["latin"], display: "swap" });
+// Hindi / Bengali text falls back to these automatically (only downloaded when those scripts appear)
+const deva = Noto_Sans_Devanagari({ variable: "--font-deva", subsets: ["devanagari"], weight: ["500", "600", "700"], display: "swap" });
+const beng = Noto_Sans_Bengali({ variable: "--font-beng", subsets: ["bengali"], weight: ["500", "600", "700"], display: "swap" });
 
 export const metadata = {
   metadataBase: new URL(site.url),
@@ -128,18 +122,21 @@ const orgSchema = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en-IN" className={`${jakarta.variable} ${mukta.variable}`} suppressHydrationWarning>
+    <html lang="en-IN" className={`${manrope.variable} ${deva.variable} ${beng.variable}`} suppressHydrationWarning>
       <body className="flex min-h-screen flex-col font-sans">
         <LanguageProvider>
           <JsonLd data={orgSchema} />
           <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-lg focus:bg-white focus:px-4 focus:py-2 focus:shadow">
             Skip to content
           </a>
-          <Header />
+          <SiteChrome><Header /></SiteChrome>
           <main id="main" className="flex-1">{children}</main>
-          <Footer />
-          <WhatsAppFloat />
-          <LanguagePrompt />
+          <SiteChrome>
+            <Footer />
+            <WhatsAppFloat />
+            <LanguagePrompt />
+          </SiteChrome>
+          <ClickTracker />
         </LanguageProvider>
         {/* Analytics: disclosed on /privacy-policy/. Remove site.gtmId to disable. */}
         {site.gtmId && <GoogleTagManager gtmId={site.gtmId} />}

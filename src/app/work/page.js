@@ -2,14 +2,15 @@ import PageHero from "@/components/PageHero";
 import CtaBanner from "@/components/CtaBanner";
 import SectionHead from "@/components/SectionHead";
 import ProjectCard from "@/components/work/ProjectCard";
+import WorkFilter from "@/components/work/WorkFilter";
 import JsonLd from "@/components/JsonLd";
-import { portfolio } from "@/lib/data";
+import { portfolio, workFilters } from "@/lib/data";
 import { pageMeta } from "@/lib/site";
 
 export const metadata = pageMeta({
-  title: "Our Work — Live Products and Concept Demos",
+  title: "Our Work — Live Products and Industry Demonstrations",
   description:
-    "Live products in the Siddhi Info portfolio — AskReview, PrizeWheel, Vyapari Chat and Magic Scratch — and clearly labelled concept demos for e-commerce, restaurants, clinics, coaching, NGOs and business software.",
+    "Live products in the Siddhi Info portfolio — AskReview, PrizeWheel, Vyapari Chat and Magic Scratch — and clearly labelled industry demonstrations for e-commerce, restaurants, clinics, coaching, NGOs and business software.",
   path: "/work/",
 });
 
@@ -32,40 +33,27 @@ export default function WorkPage() {
       />
       <PageHero
         eyebrow="Our work"
-        title="Live products and concept demos"
-        text="Two separate lists: working products you can open today, and concept demos — illustrative designs with fictional brands and sample data that show what we can build."
+        title="Real projects. Practical solutions."
+        text={`${live.length} live products you can open today, and ${concepts.length} industry demonstrations — illustrative designs with fictional brands and sample data, each stamped “Concept demo”.`}
         crumbs={[{ label: "Our Work", href: "/work/" }]}
-      >
-        <nav aria-label="Work sections" className="mt-8 flex flex-col gap-3 sm:flex-row">
-          <a href="#live" className="btn btn-light">Live products ({live.length})</a>
-          <a href="#concepts" className="btn btn-glass">Concept demos ({concepts.length})</a>
-        </nav>
-      </PageHero>
+      />
 
-      <section id="live" className="scroll-mt-24 bg-haldi py-16 sm:py-20" aria-labelledby="live-title">
+      <section className="bg-slate-50 py-14 sm:py-20" aria-labelledby="work-title">
         <div className="container-x">
           <SectionHead
-            id="live-title"
-            eyebrow="Live products"
-            title="Products running today"
-            text="Open the live sites to see them working. Results and client details are published only with evidence and permission."
+            id="work-title"
+            eyebrow="Portfolio"
+            title="Browse by type"
+            text="Live products are working platforms. Concept demos are not client projects — names, prices and figures in them are made up. Enterprise case studies will be published here only with client permission."
           />
-          <div className="mt-12 grid gap-8 lg:grid-cols-2">
-            {live.map((p, i) => <ProjectCard key={p.slug} p={p} i={i} dark={false} />)}
-          </div>
-        </div>
-      </section>
-
-      <section id="concepts" className="scroll-mt-24 py-16 sm:py-20" aria-labelledby="concept-title">
-        <div className="container-x">
-          <SectionHead
-            id="concept-title"
-            eyebrow="Concept demos"
-            title="What we could build for your business"
-            text="These are not client projects. Brand names, people, prices, orders and figures in these previews are fictional sample data, and each preview is stamped “Concept demo”."
-          />
-          <div className="mt-12 grid gap-8 lg:grid-cols-2">
-            {concepts.map((p, i) => <ProjectCard key={p.slug} p={p} i={i} dark={false} />)}
+          <div className="mt-10">
+            <WorkFilter filters={workFilters}>
+              {[...live, ...concepts].map((p, i) => (
+                <div key={p.slug} data-tags={(p.tags || []).join(" ")}>
+                  <ProjectCard p={p} i={i} dark={false} />
+                </div>
+              ))}
+            </WorkFilter>
           </div>
         </div>
       </section>

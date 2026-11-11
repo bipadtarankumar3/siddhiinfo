@@ -6,6 +6,7 @@ import { Send, CheckCircle2, AlertCircle, Loader2, Copy, Mail, RefreshCw, Shield
 import { site, whatsappLink, mailHref } from "@/lib/site";
 import { services, plans } from "@/lib/data";
 import WhatsAppIcon from "./WhatsAppIcon";
+import { track } from "./ClickTracker";
 
 /*
   Enquiry form.
@@ -40,6 +41,7 @@ export default function ContactForm() {
   const [options, setOptions] = useState(baseOptions);
   const [captcha, setCaptcha] = useState({ image: "", token: "", loading: true, error: "" });
   const [serverMsg, setServerMsg] = useState("");
+  const [ref, setRef] = useState("");
 
   // Fetch a fresh, single-use security code from the server
   async function loadCaptcha() {
@@ -126,6 +128,8 @@ export default function ContactForm() {
       });
       const data = await res.json().catch(() => ({}));
       if (res.ok) {
+        setRef(data.ref || "");
+        track("contact_submit", { service: values.service });
         setStatus("sent");
         setValues(initial);
         loadCaptcha();
@@ -162,8 +166,9 @@ export default function ContactForm() {
         <CheckCircle2 className="mx-auto size-12 text-mint-600" aria-hidden="true" />
         <h3 className="mt-4 text-xl font-bold text-ink">Thank you — your enquiry has been sent.</h3>
         <p className="mt-2 text-slate-700">
-          It has reached our team&apos;s inbox. We&apos;ll contact you {site.responseTime} on the mobile number you gave.
+          We&apos;ll contact you {site.responseTime} on the mobile number you gave.
         </p>
+        {ref && <p className="mt-3 text-slate-700">Your reference: <strong className="font-mono text-brand-800">{ref}</strong></p>}
         <button type="button" onClick={() => setStatus("idle")} className="btn btn-outline mt-6">Send another enquiry</button>
       </div>
     );
@@ -175,7 +180,7 @@ export default function ContactForm() {
   return (
     <form onSubmit={onSubmit} noValidate className="space-y-5" aria-describedby="form-how">
       <p id="form-how" className="rounded-xl bg-slate-50 p-4 text-sm leading-relaxed text-slate-700 ring-1 ring-slate-200">
-        <strong className="text-ink">What happens when you send:</strong> your details are emailed to our team at{" "}
+        <strong className="text-ink">What happens when you send:</strong> your details are saved securely and emailed to our team at{" "}
         <span className="break-all font-semibold">{site.email}</span>. We reply {site.responseTime} by phone or WhatsApp.
         Fields marked <span aria-hidden="true">*</span><span className="sr-only">with an asterisk</span> are required.
       </p>
@@ -319,8 +324,8 @@ export default function ContactForm() {
       <p className="sr-only" role="status">{status === "sending" ? "Sending your enquiry" : ""}</p>
 
       <p className="text-sm leading-relaxed text-slate-600">
-        <strong className="text-slate-700">Privacy:</strong> we use these details only to reply to your enquiry. They are sent by email
-        to our inbox and are not stored on this website or shared with anyone else.{" "}
+        <strong className="text-slate-700">Privacy:</strong> we use these details only to reply to your enquiry. They are stored securely for our team
+        and emailed to our inbox; they are not shared with anyone else.{" "}
         <Link href="/privacy-policy/" className="font-semibold text-brand-700 underline">Privacy policy</Link>
       </p>
     </form>

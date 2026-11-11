@@ -6,7 +6,7 @@ import ColorIcon from "./ColorIcon";
 import Toran from "./india/Toran";
 import Skyline from "./india/Skyline";
 import { site, whatsappLink, telHref, mailHref } from "@/lib/site";
-import { smallBusinessServices, enterpriseServices, portfolio } from "@/lib/data";
+import { smallBusinessServices, enterpriseServices, portfolio, featuredIndustries, getIndustry } from "@/lib/data";
 
 const columns = (smallOnly) => [
   {
@@ -20,15 +20,20 @@ const columns = (smallOnly) => [
     links: [["Enterprise & Custom Projects", "/enterprise/"], ...enterpriseServices.map((s) => [s.title, `/services/${s.slug}/`])],
   },
   {
+    title: "Industries",
+    color: "#FBBF24",
+    links: [["All industries", "/industries/"], ...featuredIndustries.map((slug) => { const i = getIndustry(slug); return [i.title, `/industries/${i.slug}/`]; })],
+  },
+  {
     title: "Company",
     color: "#F472B6",
     links: [
+      ["Get a quote", "/get-a-quote/"],
       ["About", "/about/"],
       ["Our work", "/work/"],
       ["Pricing", "/pricing/"],
       ["Custom development pricing", "/pricing/#custom"],
-      ["Industries", "/industries/"],
-      ["Blog", "/blog/"],
+      ["Resources", "/blog/"],
       ["Contact", "/contact/"],
     ],
   },
@@ -125,7 +130,7 @@ export default function Footer() {
           </div>
 
           {/* Link columns */}
-          <div className="grid gap-x-8 gap-y-10 sm:grid-cols-3 lg:col-span-8 xl:col-span-9 xl:pl-6">
+          <div className="grid gap-x-8 gap-y-10 sm:grid-cols-2 md:grid-cols-4 lg:col-span-8 xl:col-span-9 xl:pl-6">
             {columns(smallOnly).map((col) => (
               <nav key={col.title} aria-label={`${col.title} links`}>
                 <h2 className="text-sm font-bold uppercase tracking-wider text-white">
@@ -135,7 +140,7 @@ export default function Footer() {
                 <ul className="mt-3 text-[0.95rem]">
                   {col.links.map(([label, href], i) => (
                     <li key={href + label}>
-                      <Link href={href} className={`group inline-flex min-h-10 items-start gap-2 py-2 leading-snug hover:text-white ${i === 0 && col.title !== "Company" ? "font-semibold text-white" : "text-slate-100"}`}>
+                      <Link href={href} className={`group inline-flex min-h-10 items-start gap-2 py-2 leading-snug hover:text-white ${i === 0 ? "font-semibold text-white" : "text-slate-100"}`}>
                         <span aria-hidden="true" className="mt-1.5 size-1.5 shrink-0 rotate-45 transition group-hover:scale-150" style={{ background: col.color }} />
                         {label}
                       </Link>

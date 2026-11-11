@@ -13,23 +13,25 @@ export default function PrivacyPage() {
       <PageHero title="Privacy Policy" crumbs={[{ label: "Privacy Policy", href: "/privacy-policy/" }]} />
       <section className="container-x py-12 sm:py-16">
         <div className="prose-post mx-auto max-w-3xl text-slate-700">
-          <p>Last updated: 11 November 2026</p>
+          <p>Last updated: 11 November 2026 (enquiry storage added)</p>
           <p>
             This website is operated by {site.legalName} (“we”, “us”), based in {site.address.city}, India. We handle
             personal data in line with applicable Indian law, including the Digital Personal Data Protection Act, 2023.
           </p>
 
-          <h2>Enquiry form</h2>
-          <p>When you send the contact form, we receive:</p>
+          <h2>Enquiry and quote forms</h2>
+          <p>When you send the contact form or the Get a Quote form, we receive:</p>
           <ul>
-            <li>your name, mobile number, city, the service you chose and your project description;</li>
+            <li>your name, mobile number, city and project description, and the service you chose;</li>
+            <li>on the quote form, also your email, state, budget range, customer type and preferred contact method;</li>
             <li>your business name, if you give it.</li>
           </ul>
           <p>
-            The form sends these details as an email to our inbox ({site.email}) using Google&apos;s Gmail service. They are
-            not saved in a database on this website. We use them only to reply to your enquiry and, if you go ahead, to
-            prepare a quote. We keep enquiry emails for as long as needed to respond and for our ordinary business records,
-            and delete them on request unless we must keep them by law.
+            These details are stored in our enquiry database (MongoDB, hosted by our cloud provider) and emailed to our
+            inbox ({site.email}) using Google&apos;s Gmail service. Only authorised Siddhi Info staff can see them, through a
+            password-protected dashboard. We use them only to reply to your enquiry and, if you go ahead, to prepare a
+            quotation. We keep enquiries for as long as needed to respond and for our ordinary business records, and delete
+            them on request unless we must keep them by law.
           </p>
           <p>
             To stop spam and repeated automated submissions, the form asks you to type a security code drawn by our own

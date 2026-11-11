@@ -1,4 +1,4 @@
-import { services, industries } from "@/lib/data";
+import { services, industries, portfolio } from "@/lib/data";
 import { posts } from "@/lib/blog";
 import { absoluteUrl } from "@/lib/site";
 
@@ -22,6 +22,8 @@ export default function sitemap() {
     page("/industries/", 0.8),
     ...industries.map((i) => page(`/industries/${i.slug}/`, 0.7)),
     page("/work/", 0.8),
+    ...portfolio.map((p) => page(`/work/${p.slug}/`, p.concept ? 0.4 : 0.6)),
+    page("/get-a-quote/", 0.8),
     page("/pricing/", 0.8),
     page("/blog/", 0.7, "weekly"),
     ...posts.map((p) => page(`/blog/${p.slug}/`, 0.6, "yearly", new Date(p.date))),

@@ -12,109 +12,123 @@ export { industries, getIndustry, featuredIndustries } from "./industries";
 /* ───────────────────────── PRICING (single source of truth) ─────────────────────────
    Every price on the site is read from here. Change a number once and the
    homepage, pricing page, service pages, metadata and JSON-LD all follow.
-
-   ⚠️ OWNER TO VERIFY: the live site showed Digital Dukaan at both ₹4,999 (package
-   card, hero, page metadata) and ₹3,999 (one WhatsApp button). ₹4,999 is kept
-   here because it is the package price; confirm it before launch. */
+   Prices confirmed by the owner on 11 Nov 2026 (replaces the old ₹3,999 / ₹4,999
+   Digital Dukaan conflict). ⚠️ OWNER TO VERIFY: the scope, limits and renewal
+   wording of each package below. */
 export const plans = [
-  {
-    id: "digital-dukaan",
-    name: "Digital Dukaan",
-    hi: "डिजिटल दुकान",
-    bn: "ডিজিটাল দোকান",
-    audience: "small",
-    badge: "For local shops",
-    price: 4999,
-    bestFor: "Kirana, clothing, sweet shops, boutiques and home businesses that take orders on WhatsApp",
-    description: "Take direct orders on WhatsApp with a product catalogue and UPI payments to your own bank account.",
-    delivery: "Typically 3–5 working days after we receive your product list and photos",
-    features: [
-      "WhatsApp Business catalogue — up to 40 products",
-      "UPI QR / payment details linked to your own bank account",
-      "Print-ready QR stand design for your counter",
-      "Google Business Profile setup or clean-up",
-      "Click-to-order WhatsApp button with a pre-filled message",
-      "Training in Hindi, Bengali or English",
-    ],
-    limits: ["Up to 40 products", "One WhatsApp Business number", "Printing of the QR stand is not included"],
-    youProvide: ["Product names, prices and photos", "A WhatsApp Business number", "Your UPI ID or bank QR"],
-    renewal: "No yearly fee from us for the setup itself. Any domain or hosting you choose to add is quoted separately.",
-    cta: "Ask about Digital Dukaan",
-  },
   {
     id: "starter-website",
     name: "Starter Website",
     hi: "स्टार्टर वेबसाइट",
     bn: "স্টার্টার ওয়েবসাইট",
     audience: "small",
-    price: 7999,
-    bestFor: "Shops, clinics, freelancers and local service providers",
-    description: "A fast, mobile-friendly website that tells customers who you are and how to reach you.",
-    delivery: "Typically 7–10 working days after content is final",
+    badge: "Get online",
+    price: 4999,
+    bestFor: "Shops, home businesses and freelancers who need a simple, professional online presence",
+    description: "A one-page mobile website with your services, photos, location and WhatsApp/call buttons.",
+    delivery: "Typically 3–5 working days after content is ready",
+    pages: "1 page (up to 6 sections)",
+    domain: "Not included — registered in your name at cost",
+    hosting: "Not included — quoted separately",
+    maintenance: "1 month of post-launch support",
     features: [
-      "Up to 5 pages, mobile-first",
+      "1-page responsive website (up to 6 sections)",
+      "Contact form delivered to your email",
       "WhatsApp and click-to-call buttons",
-      "Google Map and enquiry form (sent to your email)",
-      "Basic on-page SEO: titles, descriptions, sitemap",
+      "Google Map and business hours",
+      "SEO basics: title, description, sitemap",
       "SSL certificate (https)",
-      "First year of hosting included",
-      "Google Business Profile setup",
     ],
-    limits: ["Up to 5 pages", "2 rounds of design changes", "Copywriting beyond basic editing is extra"],
-    youProvide: ["Logo, photos and business details", "Text for each page (we can edit it)", "Domain login, if you already own one"],
-    renewal: "Hosting and domain renew yearly from the second year; the renewal rate is written in your quote.",
-    cta: "Get a Starter Website quote",
+    limits: ["1 page", "1 round of design changes", "Text and photos supplied by you"],
+    youProvide: ["Logo, photos and business details", "Short text about your services", "Domain login, if you already own one"],
+    renewal: "Domain and hosting are quoted separately and renew yearly at the provider's rate.",
+    cta: "Get a Starter Website",
   },
   {
-    id: "business-growth",
-    name: "Business Growth",
-    hi: "बिज़नेस ग्रोथ",
-    bn: "বিজনেস গ্রোথ",
+    id: "business-website",
+    name: "Business Website",
+    hi: "बिज़नेस वेबसाइट",
+    bn: "বিজনেস ওয়েবসাইট",
     audience: "small",
+    badge: "Most chosen",
     featured: true,
+    price: 9999,
+    bestFor: "Shops, clinics, coaching centres and local service providers",
+    description: "A multi-page website that explains your services and makes it easy for customers to contact you.",
+    delivery: "Typically 7–10 working days after content is final",
+    pages: "Up to 5 pages",
+    domain: "Registered in your name; registration fee at cost",
+    hosting: "First year included",
+    maintenance: "1 month of post-launch support",
+    features: [
+      "Up to 5 responsive pages",
+      "Contact form + WhatsApp and call buttons",
+      "Google Map, hours and directions",
+      "SEO basics on every page",
+      "Google Business Profile set-up",
+      "SSL certificate and first year of hosting",
+    ],
+    limits: ["Up to 5 pages", "2 rounds of design changes", "Copywriting beyond basic editing is extra"],
+    youProvide: ["Logo, photos and business details", "Text for each page (we can edit it)", "Access to your Google account for the Business Profile"],
+    renewal: "Hosting and domain renew yearly from the second year; the renewal rate is written in your quote.",
+    cta: "Get a Business Website",
+  },
+  {
+    id: "professional-website",
+    name: "Professional Website",
+    hi: "प्रोफ़ेशनल वेबसाइट",
+    bn: "প্রফেশনাল ওয়েবসাইট",
+    audience: "small",
     badge: "For growing businesses",
     price: 19999,
     bestFor: "Businesses that want to be found on Google for their services and areas",
     description: "A larger website with service and location pages, a blog and the tracking you need to see where enquiries come from.",
     delivery: "Timeline confirmed in your written quote",
+    pages: "Up to 12 pages + blog",
+    domain: "Registered in your name; registration fee at cost",
+    hosting: "First year included",
+    maintenance: "3 months of post-launch support",
     features: [
       "Up to 12 pages plus a blog",
       "On-page and technical SEO set-up",
       "Service and location pages written with you",
       "Business email set-up (you@yourbrand.in)",
-      "WhatsApp auto-reply set-up on WhatsApp Business",
-      "Google Analytics and Search Console set-up",
-      "3 months of post-launch support",
+      "Google Analytics and Search Console",
+      "WhatsApp auto-reply set-up",
     ],
-    limits: ["Up to 12 pages", "Business email subscription billed by Google/Zoho", "SEO results depend on competition and are not guaranteed"],
+    limits: ["Up to 12 pages", "Business email is billed per user by Google/Zoho", "SEO results depend on competition and are not guaranteed"],
     youProvide: ["Details of each service and area you cover", "Photos of your work", "Access to your Google Business Profile"],
     renewal: "Hosting and domain renew yearly; business email is billed by the provider per user.",
-    cta: "Get a Business Growth quote",
+    cta: "Get a Professional Website",
   },
   {
     id: "ecommerce",
-    name: "Complete E‑commerce",
-    hi: "फुल ई-कॉमर्स",
-    bn: "ফুল ই-কমার্স",
+    name: "E-commerce Website",
+    hi: "ई-कॉमर्स वेबसाइट",
+    bn: "ই-কমার্স ওয়েবসাইট",
     audience: "small",
-    badge: "Sell across India",
-    price: 34999,
-    bestFor: "Brands, manufacturers and retailers shipping orders across India",
+    badge: "Sell online",
+    price: 29999,
+    priceSuffix: "onwards",
+    bestFor: "Retailers, brands and manufacturers selling online across India",
     description: "Your own online store with payment gateway, courier integration and GST invoices.",
     delivery: "Timeline confirmed in your written quote",
+    pages: "Store + up to 8 content pages",
+    domain: "Registered in your name; registration fee at cost",
+    hosting: "First year included (store-grade hosting)",
+    maintenance: "3 months of post-launch support",
     features: [
-      "Up to 100 products with variants and categories",
+      "Product catalogue with variants (up to 100 products loaded)",
       "Payment gateway: UPI, cards, net-banking, COD",
       "Courier aggregator integration (e.g. Shiprocket)",
       "GST invoices and discount coupons",
-      "Order notifications by email (WhatsApp/SMS via a paid provider)",
-      "Product SEO and Google Merchant feed",
-      "Admin training in Hindi or English",
+      "Order emails; WhatsApp/SMS via a paid provider",
+      "Admin training in Hindi, Bengali or English",
     ],
     limits: ["Up to 100 products loaded by us", "One payment gateway and one courier integration"],
     youProvide: ["Product data and photos", "Business KYC for the payment gateway", "Courier account (we help set it up)"],
     renewal: "Hosting, domain and any paid plugins renew yearly; amounts are listed in your quote.",
-    cta: "Get an e-commerce quote",
+    cta: "Get an E-commerce quote",
   },
 ];
 
@@ -159,7 +173,7 @@ export const customTypes = [
     icon: "LayoutDashboard",
     color: "#4338CA",
     title: "CRM / ERP System",
-    service: "crm-erp-software",
+    service: "crm-erp-development",
     scope: "Leads, quotations, orders, inventory, purchase and staff in one system.",
     pricedAs: "Quote per module, after discovery",
     costFactors: ["Modules required", "Existing data to import", "Ready-made vs fully custom"],
@@ -169,10 +183,10 @@ export const customTypes = [
     icon: "Puzzle",
     color: "#C2410C",
     title: "Industry Software",
-    service: "custom-software-crm",
+    service: "custom-software-development",
     scope: "School, coaching, clinic, NGO and franchise management systems.",
     pricedAs: "Fixed quote after discovery",
-    fromKey: "custom-software-crm",
+    fromKey: "custom-software-development",
     costFactors: ["Workflows and approvals", "Reports and dashboards", "Integrations (Tally, Zoho, Sheets)"],
   },
   {
@@ -180,7 +194,7 @@ export const customTypes = [
     icon: "Zap",
     color: "#B45309",
     title: "Integrations & Automation",
-    service: "ai-business-automation",
+    service: "ai-automation",
     scope: "Connect Tally, Zoho, Google Sheets, gateways and WhatsApp; automate reports and data entry.",
     pricedAs: "Per integration or automation",
     costFactors: ["API access on each system", "Volume of data / documents", "Human review steps"],
@@ -210,7 +224,7 @@ export const getPlan = (id) => plans.find((p) => p.id === id);
 export const pricingTerms = [
   {
     title: "GST",
-    text: "Prices are shown without GST. If GST applies, it is added at the prevailing rate and shown on your invoice.",
+    text: "Prices are shown without GST. If GST applies, it is added at the prevailing rate and shown on your invoice. Whether you can claim input tax credit depends on your own GST registration and the applicable rules — check with your CA.",
   },
   {
     title: "Starting prices",
@@ -285,7 +299,7 @@ const allServices = [
     thirdParty: ["Domain registration and renewal", "Hosting renewal from the second year"],
     timeline: "Typically 7–10 working days for a 5-page site once content is final.",
     timelineFactors: ["How quickly text, logo and photos are ready", "Number of pages and languages", "Rounds of changes"],
-    example: "business-website",
+    example: "nirmaan-interiors",
     planId: "starter-website",
     outcomes: ["A professional first impression", "Easier for customers to call or message you", "A base you can grow with more pages later"],
     faqs: [
@@ -295,10 +309,10 @@ const allServices = [
     ],
   },
   {
-    slug: "ecommerce-store",
+    slug: "ecommerce-development",
     audience: "small",
     art: "ecommerce", accent: "saffron", icon: "ShoppingBag",
-    title: "Online Store & E‑commerce",
+    title: "E-commerce Development",
     hi: "ऑनलाइन स्टोर",
     bn: "অনলাইন স্টোর",
     short: "Your own online store with UPI, cards and COD, courier integration and GST invoices.",
@@ -326,11 +340,11 @@ const allServices = [
       "Marketplace listing management (quoted separately)",
     ],
     suitableFor: ["Retailers and D2C brands shipping across India", "Manufacturers selling direct", "Shops with repeat customers"],
-    notFor: ["A few products sold over WhatsApp — Digital Dukaan is simpler", "Complex B2B pricing and dealer logins — see Web Applications"],
+    notFor: ["A few products sold over WhatsApp — WhatsApp automation is simpler", "Complex B2B pricing and dealer logins — see Web Applications"],
     thirdParty: ["Payment gateway transaction fees", "Courier charges and COD fees", "SMS / WhatsApp message charges", "Domain, hosting and any paid plugins"],
     timeline: "Confirmed in your quote. Gateway KYC approval and product data are the usual deciding factors.",
     timelineFactors: ["Payment gateway KYC approval time", "Number of products and variants", "Custom features beyond the standard store"],
-    example: "ecommerce-store",
+    example: "desi-basket",
     planId: "ecommerce",
     outcomes: ["Take orders 24×7 on your own site", "Set your own prices and offers", "Keep customer details for repeat sales"],
     faqs: [
@@ -412,7 +426,7 @@ const allServices = [
     thirdParty: ["Google Play registration and Apple developer fees", "Push notification / backend hosting", "Payment gateway fees"],
     timeline: "Usually several weeks or more; confirmed in your milestone plan.",
     timelineFactors: ["Number of screens and user types", "Backend work needed", "App store review time"],
-    example: "custom-web-app",
+    example: "fieldpro",
     outcomes: ["Faster repeat orders and bookings", "Real-time updates from your team", "Notifications that reach customers directly"],
     faqs: [
       { q: "Do I need an app or is a website enough?", a: "Most businesses should start with a mobile-friendly website. An app makes sense when customers order frequently or staff need a tool on the move." },
@@ -420,10 +434,10 @@ const allServices = [
     ],
   },
   {
-    slug: "crm-erp-software",
+    slug: "crm-erp-development",
     audience: "enterprise",
     art: "crm", accent: "indigo", icon: "LayoutDashboard",
-    title: "CRM & ERP Software",
+    title: "CRM & ERP Development",
     hi: "CRM और ERP",
     bn: "CRM ও ERP",
     short: "Leads, customers, orders, stock and staff in one system with an owner dashboard.",
@@ -453,7 +467,7 @@ const allServices = [
     thirdParty: ["Licence fees (if a ready-made product fits)", "Cloud hosting", "SMS / WhatsApp sending charges"],
     timeline: "Confirmed after discovery; depends heavily on modules and data migration.",
     timelineFactors: ["Number of modules", "Quality and volume of existing data", "Integrations with Tally or other tools", "Staff availability for training"],
-    example: "crm-erp-dashboard",
+    example: "vyapardesk",
     outcomes: ["Leads followed up on time", "Stock, sales and dues visible at a glance", "Less dependence on paper and memory"],
     faqs: [
       { q: "Isn't ready-made CRM software enough?", a: "Often it is, and we will recommend one if it fits. Custom CRM/ERP makes sense when your process is unusual or several tools don't talk to each other." },
@@ -461,10 +475,10 @@ const allServices = [
     ],
   },
   {
-    slug: "billing-gst-software",
+    slug: "gst-billing-inventory",
     audience: "small",
     art: "billing", accent: "emerald", icon: "ReceiptIndianRupee",
-    title: "GST Billing & Inventory Software",
+    title: "Inventory & GST Billing Software",
     hi: "GST बिलिंग",
     bn: "GST বিলিং",
     short: "GST invoices, stock and customer khata — set up and trained for your counter.",
@@ -492,7 +506,7 @@ const allServices = [
     thirdParty: ["Software licence (if ready-made)", "Hardware purchase", "GSP charges for e-invoicing, if applicable"],
     timeline: "Ready-made set-ups are usually quick; custom billing is scoped and quoted.",
     timelineFactors: ["Ready-made vs custom", "Number of products to load", "Hardware availability"],
-    example: "crm-erp-dashboard",
+    example: "vyapardesk",
     outcomes: ["Faster billing at the counter", "Clearer stock picture", "Easier follow-up of pending payments"],
     faqs: [
       { q: "Does it work without internet?", a: "Some billing systems work offline and sync later. We'll recommend one that does if your connection is unreliable." },
@@ -501,7 +515,7 @@ const allServices = [
     ],
   },
   {
-    slug: "whatsapp-business-automation",
+    slug: "whatsapp-automation",
     audience: "both",
     art: "whatsapp", accent: "green", icon: "MessageCircle",
     title: "WhatsApp Business Automation",
@@ -579,10 +593,10 @@ const allServices = [
     ],
   },
   {
-    slug: "local-seo-google-business",
+    slug: "seo-google-business",
     audience: "small",
     art: "maps", accent: "rose", icon: "MapPin",
-    title: "Local SEO & Google Business Profile",
+    title: "SEO & Google Business Profile",
     hi: "लोकल SEO",
     bn: "লোকাল SEO",
     short: "Set up and improve your Google Business Profile so nearby customers can find, call and visit you.",
@@ -656,10 +670,10 @@ const allServices = [
     ],
   },
   {
-    slug: "ai-business-automation",
+    slug: "ai-automation",
     audience: "enterprise",
     art: "ai", accent: "saffron", icon: "Bot",
-    title: "AI & Business Process Automation",
+    title: "AI & Business Automation",
     hi: "AI ऑटोमेशन",
     bn: "AI অটোমেশন",
     short: "Automate repetitive work — replies, data entry, document reading, reports and reminders.",
@@ -697,10 +711,10 @@ const allServices = [
     ],
   },
   {
-    slug: "custom-software-crm",
+    slug: "custom-software-development",
     audience: "enterprise",
     art: "custom", accent: "slate", icon: "Puzzle",
-    title: "Custom Software Solutions",
+    title: "Custom Software Development",
     hi: "कस्टम सॉफ़्टवेयर",
     bn: "কাস্টম সফটওয়্যার",
     short: "Management software, booking systems and internal tools built around how you already work.",
@@ -730,7 +744,7 @@ const allServices = [
     thirdParty: ["Cloud hosting", "Payment gateway fees", "SMS / WhatsApp / email sending charges"],
     timeline: "Scoped in a milestone plan after discovery.",
     timelineFactors: ["Number of modules and roles", "Integrations", "Data migration", "Feedback and testing time"],
-    example: "ngo-csr-platform",
+    example: "seva-setu",
     planFrom: 40000, // ⚠️ OWNER TO VERIFY (carried over from the existing site FAQ)
     outcomes: ["Less paperwork and fewer mistakes", "A real-time view of operations", "Software that fits your process"],
     faqs: [
@@ -738,24 +752,137 @@ const allServices = [
       { q: "Who owns the code?", a: "You do. On full payment, the source code and data belong to your organisation." },
     ],
   },
+  {
+    slug: "cloud-devops-infrastructure",
+    audience: "enterprise",
+    art: "cloud", accent: "sky", icon: "Cloud",
+    title: "Cloud & DevOps",
+    hi: "क्लाउड और DevOps",
+    bn: "ক্লাউড ও DevOps",
+    short: "AWS deployment, Docker, automated releases, databases, backups and monitoring for your applications.",
+    benefits: ["AWS deployment", "Docker & CI/CD", "Backups & monitoring"],
+    metaTitle: "Cloud, AWS & DevOps Services in India",
+    metaDescription:
+      "AWS deployment, Docker containers, CI/CD pipelines, PostgreSQL/MySQL databases, backups, SSL and monitoring for Indian businesses' web applications. Cloud bills are paid directly to the provider.",
+    problem:
+      "Applications running on one manually-managed server go down without warning, deployments are risky, backups are uncertain and the monthly cloud bill keeps growing without anyone knowing why.",
+    intro:
+      "We set up dependable hosting for your web applications on AWS (or another provider you prefer), automate deployments, and put backups and monitoring in place — documented and in your account.",
+    distinction:
+      "Choose this for applications and APIs. For a simple website with business email, Domain, Hosting & Business Email is enough.",
+    features: [
+      "AWS set-up in your own account (EC2, RDS, S3, CloudFront and similar)",
+      "Docker containers for consistent deployments",
+      "CI/CD pipelines: test and deploy on every release",
+      "PostgreSQL / MySQL database set-up and migration",
+      "Automated backups with restore testing",
+      "Uptime and error monitoring with alerts",
+      "SSL, firewall and access-control basics",
+      "Cost review and right-sizing",
+    ],
+    excluded: ["Cloud provider bills (paid by you to AWS or others)", "24×7 on-call support unless agreed in a support contract", "Compliance certification audits"],
+    suitableFor: ["Businesses running a web app, portal or API", "Startups preparing to scale", "Teams moving off a single shared server"],
+    notFor: ["Static brochure websites — simpler hosting is cheaper"],
+    thirdParty: ["AWS or other cloud provider usage charges", "Monitoring / error-tracking subscriptions, if used", "Domain and DNS provider fees"],
+    timeline: "Set-up is scoped after reviewing your application; migrations are planned to avoid downtime.",
+    timelineFactors: ["Size and age of the current set-up", "Database size", "Downtime window available"],
+    example: null,
+    outcomes: ["Fewer surprise outages", "Safer, repeatable releases", "A cloud bill you understand"],
+    faqs: [
+      { q: "Will the AWS account be in our name?", a: "Yes. Everything is set up in your own cloud account, and you pay the provider directly. We get access only for the work agreed." },
+      { q: "Can you move our existing app to AWS?", a: "Usually yes. We review the app and database first, then plan the migration with a rollback option." },
+    ],
+  },
+  {
+    slug: "maintenance-support",
+    audience: "both",
+    art: "custom", accent: "emerald", icon: "Wrench",
+    title: "Maintenance & Support",
+    hi: "मेंटेनेंस और सपोर्ट",
+    bn: "মেইনটেন্যান্স ও সাপোর্ট",
+    short: "Updates, fixes, backups, security patches and small improvements for your website or software.",
+    benefits: ["Updates & security patches", "Backups checked", "Small changes included"],
+    metaTitle: "Website & Software Maintenance and Support in India",
+    metaDescription:
+      "Monthly or yearly maintenance for websites and business software: updates, security patches, backup checks, uptime monitoring, bug fixes and small changes, with agreed response times.",
+    problem:
+      "Websites and apps stop working after updates, plugins become insecure, backups quietly fail, and small changes wait for weeks because nobody is responsible.",
+    intro:
+      "A simple maintenance agreement gives you a named contact, a set number of change hours each month and regular checks — for sites and software we built, or others after a short audit.",
+    features: [
+      "Software, plugin and dependency updates",
+      "Security patches",
+      "Backup checks and restore tests",
+      "Uptime monitoring",
+      "Bug fixes",
+      "Agreed hours of small changes each month",
+      "Monthly summary of work done",
+      "Agreed response times",
+    ],
+    excluded: ["New features beyond the included hours (quoted separately)", "Third-party licence and hosting fees", "Fixing code damaged by others outside the agreement"],
+    suitableFor: ["Businesses without an in-house developer", "Websites and apps built by us or others", "Organisations needing predictable support costs"],
+    notFor: ["One-off changes — ask for a fixed quote instead"],
+    thirdParty: ["Hosting and domain renewals", "Paid plugin / licence renewals"],
+    timeline: "Starts after a short review of the site or software (for systems built by others).",
+    timelineFactors: ["Condition of the existing code", "Hosting access", "Number of systems covered"],
+    example: null,
+    outcomes: ["Fewer breakdowns", "Up-to-date, safer software", "Changes done without long waits"],
+    faqs: [
+      { q: "Do you maintain websites built by someone else?", a: "Yes, after a short audit so we know what we're taking on. The audit tells you about any urgent issues first." },
+      { q: "How is maintenance priced?", a: "As a monthly or yearly agreement based on the size of the system, response time and change hours you need. You get a written quote." },
+    ],
+  },
 ];
 
 const serviceOrder = [
   "website-development",
-  "ecommerce-store",
-  "billing-gst-software",
-  "whatsapp-business-automation",
-  "local-seo-google-business",
+  "ecommerce-development",
+  "custom-software-development",
+  "web-application-development",
+  "mobile-app-development",
+  "crm-erp-development",
+  "gst-billing-inventory",
+  "whatsapp-automation",
+  "ai-automation",
+  "seo-google-business",
+  "cloud-devops-infrastructure",
+  "maintenance-support",
+  // additional existing pages (kept so their URLs keep working)
   "digital-marketing",
   "domain-hosting-email",
-  "web-application-development",
-  "crm-erp-software",
-  "custom-software-crm",
-  "mobile-app-development",
-  "ai-business-automation",
 ];
 
 export const services = serviceOrder.map((slug) => allServices.find((s) => s.slug === slug));
+
+// "Why choose Siddhi Info" — practices the business follows (not outcome claims).
+export const whyChoose = [
+  { icon: "Puzzle", title: "Solutions designed around your business", text: "We start from your process and customers, then choose the technology — not the other way round." },
+  { icon: "IndianRupee", title: "Affordable options for growing businesses", text: `Clear starting prices from ${formatINR(4999)}, so small businesses can start small and add more later.` },
+  { icon: "Code2", title: "Custom development capabilities", text: "When ready-made tools don't fit, we build web apps, CRM/ERP, mobile apps and integrations." },
+  { icon: "Cloud", title: "Modern technology stack", text: "React, Next.js, Node.js, Laravel, Python, PostgreSQL, MySQL, Docker and AWS." },
+  { icon: "MessagesSquare", title: "Transparent communication", text: "Written scope and milestones, regular updates, and plain language in English, Hindi or Bengali." },
+  { icon: "Rocket", title: "Reliable deployment and support", text: "Tested releases, backups and a support period after launch, with optional maintenance." },
+  { icon: "TrendingUp", title: "Scalable solutions", text: "Built so features, users and integrations can be added without starting over." },
+  { icon: "KeyRound", title: "Long-term technical partnership", text: "You own your code, domain and accounts — and we stay available as your business grows." },
+];
+
+// Technologies the team delivers with (confirmed by the owner, Nov 2026).
+// `icon` = simple-icons export name (null → text badge).
+export const techStack = [
+  { name: "React", icon: "siReact" },
+  { name: "Next.js", icon: "siNextdotjs" },
+  { name: "Node.js", icon: "siNodedotjs" },
+  { name: "Laravel", icon: "siLaravel" },
+  { name: "PHP", icon: "siPhp" },
+  { name: "Python", icon: "siPython" },
+  { name: "PostgreSQL", icon: "siPostgresql" },
+  { name: "MySQL", icon: "siMysql" },
+  { name: "MongoDB", icon: "siMongodb" },
+  { name: "Docker", icon: "siDocker" },
+  { name: "AWS", icon: null },
+  { name: "AI & LLM APIs", icon: null },
+  { name: "REST APIs", icon: null },
+];
 
 export function getService(slug) {
   return services.find((s) => s.slug === slug);
@@ -763,6 +890,17 @@ export function getService(slug) {
 
 export const smallBusinessServices = services.filter((s) => s.audience !== "enterprise");
 export const enterpriseServices = services.filter((s) => s.audience !== "small");
+
+// Maps a service page to the matching Get-a-Quote option.
+const quoteServiceFor = {
+  "website-development": "website", "ecommerce-development": "ecommerce", "custom-software-development": "custom-software",
+  "web-application-development": "custom-software", "mobile-app-development": "mobile-app", "crm-erp-development": "crm-erp",
+  "gst-billing-inventory": "custom-software", "whatsapp-automation": "whatsapp-automation", "ai-automation": "ai-automation",
+  "seo-google-business": "website", "cloud-devops-infrastructure": "cloud-devops", "maintenance-support": "other",
+  "digital-marketing": "other", "domain-hosting-email": "website",
+};
+export const quoteLink = (s) =>
+  `/get-a-quote/?service=${quoteServiceFor[s.slug] || "other"}${s.audience === "enterprise" ? "&type=enterprise" : ""}`;
 
 // Starting price shown on a service page, if any.
 export function servicePrice(s) {
@@ -774,29 +912,24 @@ export function servicePrice(s) {
 /* ───────────────────────── PROCESS ───────────────────────── */
 export const steps = [
   {
-    title: "Discovery",
+    title: "Understand your requirements",
     icon: "MessagesSquare",
-    text: "A free call or WhatsApp chat about your business, customers, budget and what isn't working today.",
+    text: "A free call or meeting about your business, users, budget and what isn't working today.",
   },
   {
-    title: "Scope & quote",
+    title: "Plan and design your solution",
     icon: "ClipboardCheck",
-    text: "A written scope — what's included, what isn't — with price, milestones and an estimated timeline.",
+    text: "A written scope — what's included and what isn't — with price, milestones, timeline and designs to review.",
   },
   {
-    title: "Design & build",
+    title: "Develop and test",
     icon: "Code2",
-    text: "We design and build in stages and share progress on a link you can open on your phone.",
+    text: "We build in stages, share progress on a link you can open on your phone, and test on real devices.",
   },
   {
-    title: "Launch",
+    title: "Deploy and support",
     icon: "Rocket",
-    text: "You test and approve, we go live on your domain or app store account and train your team.",
-  },
-  {
-    title: "Support",
-    icon: "LifeBuoy",
-    text: "Fixes and help during the support period in your package; optional maintenance after that.",
+    text: "We go live on your domain or cloud account, train your team and stay available for fixes and improvements.",
   },
 ];
 
@@ -818,14 +951,17 @@ export const benefits = [
 
 /* ───────────────────────── FAQ ───────────────────────── */
 export const homeFaqs = [
-  { q: "How much does a business website cost?", a: `Websites start at ${formatINR(getPlan("starter-website").price)} for up to 5 pages including the first year of hosting. Larger websites start at ${formatINR(getPlan("business-growth").price)} and online stores at ${formatINR(getPlan("ecommerce").price)}. These are starting prices; GST and third-party fees are extra, and you get a written quote before work begins.` },
-  { q: "Do you work with larger companies?", a: "Yes. For custom software, integrations, automation and ongoing support we start with a discovery call and give you a written scope and milestone plan." },
-  { q: "Will my website work on mobile phones?", a: "Yes. We design for phones first and test on small Android screens and slower connections." },
-  { q: "Can I manage my website myself?", a: "Yes. We can give you a simple editor, or you can send changes to us." },
-  { q: "Who owns the website and code?", a: "Your business. Domains are registered in your name, and on full payment the website, code and data are yours." },
-  { q: "Do you provide support after launch?", a: "Yes. Each package includes a post-launch support period. Ongoing maintenance plans are optional." },
-  { q: "Can I pay in instalments?", a: "Projects are paid in milestones — usually an advance to start and the balance on approval and launch." },
-  { q: "Do you work with businesses outside Kolkata?", a: "Yes. We are based in Kolkata and work with businesses elsewhere in India over phone, WhatsApp and video calls." },
+  { q: "How much does a business website cost?", a: `A one-page Starter Website starts at ${formatINR(getPlan("starter-website").price)}, a Business Website at ${formatINR(getPlan("business-website").price)}, a Professional Website at ${formatINR(getPlan("professional-website").price)} and an online store at ${formatINR(getPlan("ecommerce").price)} onwards. These are starting prices; GST and third-party fees are extra, and you get a written quote before work begins.` },
+  { q: "How long does website development take?", a: "A Starter Website typically takes 3–5 working days and a Business Website 7–10 working days once your content is ready. Larger websites, online stores and software projects get a timeline in the written quote." },
+  { q: "Do you provide domain and hosting?", a: "Yes. Domains are registered in your business name. Hosting is included for the first year on the Business, Professional and E-commerce packages; renewals are listed in your quote." },
+  { q: "Can I update my website myself?", a: "Yes. We can give you a simple editor, or you can send changes to us — small changes during the support period are included." },
+  { q: "Do you develop custom software?", a: "Yes — web applications, CRM/ERP, portals and industry-specific systems, built with React, Next.js, Node.js, Laravel or Python. Each project starts with discovery and a written scope." },
+  { q: "Do you develop mobile applications?", a: "Yes, Android and iOS apps from one codebase, with an admin panel. If a mobile-friendly website will do the job, we'll say so." },
+  { q: "Can you automate WhatsApp communication?", a: "Yes. We set up WhatsApp Business or the official WhatsApp Business Platform (API) for auto-replies, catalogues, reminders and order updates. Meta's message charges apply." },
+  { q: "Do you provide AWS cloud services?", a: "Yes. We deploy and manage applications on AWS — Docker, CI/CD, databases, backups and monitoring — in your own cloud account. Cloud bills are paid directly to the provider." },
+  { q: "Do you provide maintenance?", a: "Yes. Every package includes a post-launch support period, and ongoing maintenance is available as a monthly or yearly agreement." },
+  { q: "Do you work with customers outside Kolkata?", a: "Yes. We are based in Kolkata and work with businesses across India over phone, WhatsApp and video calls." },
+  { q: "How can I request a quotation?", a: "Use the Get a Quote form — it takes about two minutes and gives you a reference number. We then call you to understand your requirements and send a written proposal." },
 ];
 
 /* ───────────────────────── PORTFOLIO ─────────────────────────
@@ -840,6 +976,9 @@ export const homeFaqs = [
 export const portfolio = [
   {
     slug: "askreview",
+    tags: ["live","saas"],
+    problem: "Businesses want more Google reviews and customer feedback, but asking each customer manually is awkward and most never leave one.",
+    solution: "A QR/NFC review stand that opens one page where customers can review on Google, follow on social media, record a video testimonial or send private feedback — with a dashboard for the business.",
     concept: false,
     ownership: null,
     category: "SaaS • Reviews & feedback",
@@ -854,6 +993,9 @@ export const portfolio = [
   },
   {
     slug: "prizewheel",
+    tags: ["live","saas"],
+    problem: "Shops and brands want walk-in customers to share their contact details, but a plain sign-up form gives people no reason to do it.",
+    solution: "A spin-the-wheel promotion: customers enter their details, spin for an offer and get the coupon on WhatsApp, while the business collects verified leads in a dashboard.",
     concept: false,
     ownership: null,
     category: "SaaS • Customer engagement",
@@ -868,6 +1010,9 @@ export const portfolio = [
   },
   {
     slug: "vyaparichat",
+    tags: ["live","saas","ai-automation"],
+    problem: "Small businesses message customers from personal WhatsApp numbers, which doesn't scale, can't be shared across a team and risks the number being restricted.",
+    solution: 'A WhatsApp marketing panel on the official WhatsApp Cloud API with embedded sign-up, a shared team inbox, chatbot flows and template campaigns.',
     concept: false,
     ownership: null,
     category: "WhatsApp marketing platform",
@@ -878,10 +1023,13 @@ export const portfolio = [
     description: "A WhatsApp marketing panel on the WhatsApp Cloud API — embedded sign-up, shared team chat, chatbots, template campaigns and a reseller plan.",
     features: ["WhatsApp Cloud API", "Embedded sign-up", "Team chat & agent assignment", "Chatbot flow builder", "Reseller plans"],
     tech: [],
-    service: "whatsapp-business-automation",
+    service: "whatsapp-automation",
   },
   {
     slug: "magicscratch",
+    tags: ["live","saas"],
+    problem: "Businesses want a simple, low-cost way to run reward campaigns that bring customers back.",
+    solution: "Digital scratch-and-win cards with a secure business dashboard to create and manage campaigns.",
     concept: false,
     ownership: null,
     category: "SaaS • Rewards",
@@ -897,7 +1045,10 @@ export const portfolio = [
 
   // ---- Concept demos: fictional brands, sample data, reserved .example domains ----
   {
-    slug: "business-website",
+    slug: "nirmaan-interiors",
+    tags: ["websites","concept"],
+    problem: "(Fictional scenario) An interior studio gets enquiries only through referrals and has no place to show finished projects.",
+    solution: "A portfolio-led website with service and location pages, WhatsApp/call buttons and a local-SEO structure.",
     concept: true,
     category: "Business website",
     name: "Nirmaan Interiors",
@@ -909,7 +1060,10 @@ export const portfolio = [
     service: "website-development",
   },
   {
-    slug: "ecommerce-store",
+    slug: "desi-basket",
+    tags: ["ecommerce","concept"],
+    problem: "(Fictional scenario) A grocery seller relies on marketplaces and can't build a list of repeat customers.",
+    solution: 'An online store with UPI/card/COD checkout, courier integration, GST invoices and order updates.',
     concept: true,
     category: "E-commerce",
     name: "Desi Basket",
@@ -918,10 +1072,13 @@ export const portfolio = [
     features: ["Catalogue & search", "UPI / cards / COD", "Courier integration", "Order updates"],
     tech: ["Next.js", "Node.js", "Razorpay"],
     variant: "ecommerce",
-    service: "ecommerce-store",
+    service: "ecommerce-development",
   },
   {
-    slug: "restaurant-website",
+    slug: "spice-route-kitchen",
+    tags: ["websites","concept"],
+    problem: "(Fictional scenario) A restaurant depends on delivery apps for online orders and has an outdated menu online.",
+    solution: "A restaurant website with a QR digital menu, direct ordering and table booking.",
     concept: true,
     category: "Restaurant website",
     name: "Spice Route Kitchen",
@@ -933,7 +1090,10 @@ export const portfolio = [
     service: "website-development",
   },
   {
-    slug: "coaching-website",
+    slug: "gyan-academy",
+    tags: ["enterprise","concept"],
+    problem: "(Fictional scenario) A coaching institute tracks admission enquiries and fees on paper and loses follow-ups.",
+    solution: "An admissions website with course pages, enquiry tracking, online fee payment and a student portal.",
     concept: true,
     category: "Coaching institute",
     name: "Gyan Academy",
@@ -942,10 +1102,13 @@ export const portfolio = [
     features: ["Course & batch pages", "Admission enquiry tracking", "Online fee payment", "Student portal"],
     tech: ["Next.js", "Node.js", "PostgreSQL"],
     variant: "education",
-    service: "custom-software-crm",
+    service: "custom-software-development",
   },
   {
-    slug: "healthcare-website",
+    slug: "careplus-clinic",
+    tags: ["websites","concept"],
+    problem: "(Fictional scenario) A clinic's phone line is busy with appointment calls and patients miss follow-ups.",
+    solution: 'A clinic website with doctor profiles, appointment requests and WhatsApp reminders.',
     concept: true,
     category: "Clinic website",
     name: "CarePlus Clinic",
@@ -957,7 +1120,10 @@ export const portfolio = [
     service: "website-development",
   },
   {
-    slug: "ngo-csr-platform",
+    slug: "seva-setu",
+    tags: ["enterprise","concept"],
+    problem: "(Fictional scenario) An NGO collects donations manually and takes days to prepare CSR reports.",
+    solution: "A donations, project, beneficiary and volunteer platform with CSR reporting.",
     concept: true,
     category: "NGO & CSR platform",
     name: "Seva Setu",
@@ -966,10 +1132,13 @@ export const portfolio = [
     features: ["Online donations & receipts", "Project & beneficiary tracking", "Volunteer management", "CSR reports"],
     tech: ["React", "Node.js", "PostgreSQL"],
     variant: "ngo",
-    service: "custom-software-crm",
+    service: "custom-software-development",
   },
   {
-    slug: "crm-erp-dashboard",
+    slug: "vyapardesk",
+    tags: ["enterprise","concept"],
+    problem: "(Fictional scenario) A distributor's leads, orders, stock and dues are spread across registers and spreadsheets.",
+    solution: 'A CRM + ERP dashboard covering leads, orders, GST invoices, stock and dues.',
     concept: true,
     category: "CRM & ERP dashboard",
     name: "VyaparDesk",
@@ -978,10 +1147,13 @@ export const portfolio = [
     features: ["Lead & follow-up tracking", "Orders & GST invoices", "Stock & dues", "Owner dashboard"],
     tech: ["React", "Laravel", "MySQL"],
     variant: "dashboard",
-    service: "crm-erp-software",
+    service: "crm-erp-development",
   },
   {
-    slug: "custom-web-app",
+    slug: "fieldpro",
+    tags: ["enterprise","concept","ai-automation"],
+    problem: "(Fictional scenario) An appliance-repair company assigns technicians by phone and can't see job status.",
+    solution: 'A booking and field-service app with technician assignment, live job status and UPI payment links.',
     concept: true,
     category: "Field service app",
     name: "FieldPro",
@@ -995,6 +1167,17 @@ export const portfolio = [
 ];
 
 export const getProject = (slug) => portfolio.find((p) => p.slug === slug);
+
+export const workFilters = [
+  ["all", "All projects"],
+  ["live", "Live products"],
+  ["websites", "Websites"],
+  ["ecommerce", "E-commerce"],
+  ["saas", "SaaS"],
+  ["enterprise", "Enterprise software"],
+  ["ai-automation", "AI & automation"],
+  ["concept", "Concept demos"],
+];
 
 export const ownershipLabel = {
   "siddhi-info": "Siddhi Info's own product",

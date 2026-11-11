@@ -9,7 +9,7 @@ import { getService, servicePrice } from "@/lib/data";
 import { pageMeta } from "@/lib/site";
 
 export const metadata = pageMeta({
-  title: "Services — Websites, E-commerce, Apps, CRM/ERP, Billing & Automation",
+  title: "Services — Websites, E-commerce, Custom Software, Apps, AI & Cloud",
   description:
     "Website development, online stores, GST billing, WhatsApp automation, local SEO and digital marketing for small businesses; web applications, CRM/ERP, custom software, mobile apps and AI automation for growing organisations.",
   path: "/services/",
@@ -20,23 +20,25 @@ const groups = [
     id: "small-business",
     eyebrow: "Small Business Solutions",
     title: "Get online, take orders, bill faster",
-    slugs: ["website-development", "ecommerce-store", "billing-gst-software", "whatsapp-business-automation", "local-seo-google-business", "digital-marketing", "domain-hosting-email"],
+    slugs: ["website-development", "ecommerce-development", "gst-billing-inventory", "whatsapp-automation", "seo-google-business", "digital-marketing", "domain-hosting-email", "maintenance-support"],
   },
   {
     id: "enterprise",
     eyebrow: "Enterprise & Custom Projects",
     title: "Custom software, integrations and automation",
-    slugs: ["web-application-development", "crm-erp-software", "custom-software-crm", "mobile-app-development", "ai-business-automation"],
+    slugs: ["custom-software-development", "web-application-development", "crm-erp-development", "mobile-app-development", "ai-automation", "cloud-devops-infrastructure"],
   },
 ];
 
 // Clarifies the services that sound similar
 const compare = [
   ["Web Applications", "/services/web-application-development/", "Portals and products used by customers, dealers or partners who log in."],
-  ["CRM & ERP", "/services/crm-erp-software/", "Your internal sales, stock, purchase and staff operations in one system."],
-  ["Custom Software", "/services/custom-software-crm/", "Industry-specific management systems — school, clinic, NGO, franchise."],
-  ["AI & Automation", "/services/ai-business-automation/", "Connecting and automating tools you already use, without a new system."],
-  ["GST Billing", "/services/billing-gst-software/", "Counter billing, stock and khata — simpler than a full ERP."],
+  ["CRM & ERP", "/services/crm-erp-development/", "Your internal sales, stock, purchase and staff operations in one system."],
+  ["Custom Software", "/services/custom-software-development/", "Industry-specific management systems — school, clinic, NGO, franchise."],
+  ["AI & Automation", "/services/ai-automation/", "Connecting and automating tools you already use, without a new system."],
+  ["Inventory & GST Billing", "/services/gst-billing-inventory/", "Counter billing, stock and khata — simpler than a full ERP."],
+  ["Cloud & DevOps", "/services/cloud-devops-infrastructure/", "Hosting, deployment, backups and monitoring for applications."],
+  ["Maintenance & Support", "/services/maintenance-support/", "Ongoing updates and fixes for a website or software you already have."],
 ];
 
 const faqs = [

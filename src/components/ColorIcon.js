@@ -191,6 +191,18 @@ const icons = {
     <circle cx="18" cy="18" r="5" fill={C.teal} /><path d="M9 36a9 9 0 0 1 18 0z" fill={C.teal} />
     <circle cx="31" cy="20" r="4.5" fill={C.saffron} /><path d="M24 37a8 8 0 0 1 16 0z" fill={C.saffron} />
   </>],
+  Cloud: ["#E0F2FE", <>
+    <path d="M15 34a8 8 0 0 1-1-15.9A11 11 0 0 1 35 16a9 9 0 0 1-1 18z" fill={C.sky} />
+    <path d="M18 30h14M18 25h9" stroke={C.white} strokeWidth="2.4" strokeLinecap="round" />
+    <circle cx="34" cy="34" r="6" fill={C.saffron} stroke={C.white} strokeWidth="2" />
+    <path d="M34 31v6M31 34h6" stroke={C.white} strokeWidth="2" strokeLinecap="round" />
+  </>],
+  Wrench: ["#DCFCE7", <>
+    <path d="M30 10a8 8 0 0 0-7.6 10.4L11 31.8a3 3 0 0 0 4.2 4.2l11.4-11.4A8 8 0 0 0 37 17l-4.6 4.6-4-1-1-4L32 12a8 8 0 0 0-2-2z" fill={C.leaf} />
+    <circle cx="13.5" cy="33.5" r="1.6" fill={C.white} />
+    <circle cx="36" cy="36" r="5" fill={C.marigold} />
+    <path d="M33.8 36l1.6 1.6 3-3.2" fill="none" stroke={C.white} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+  </>],
   Mail: ["#FFE4E6", <>
     <rect x="9" y="13" width="30" height="22" rx="3" fill={C.rose} />
     <path d="M9.8 15l14.2 10 14.2-10" fill="none" stroke={C.white} strokeWidth="2.2" strokeLinejoin="round" />

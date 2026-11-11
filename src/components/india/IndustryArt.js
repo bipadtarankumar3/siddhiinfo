@@ -2,7 +2,7 @@
 const Bg = ({ c }) => <rect width="64" height="64" rx="16" fill={c} />;
 
 const art = {
-  "retail-kirana": (
+  "retail-wholesale": (
     <>
       <Bg c="#fff7ed" />
       <rect x="12" y="24" width="40" height="28" fill="#fef3c7" />
@@ -17,7 +17,7 @@ const art = {
       <rect x="37" y="41" width="8" height="1.5" fill="#12936a" />
     </>
   ),
-  "restaurants-cafes": (
+  "restaurants": (
     <>
       <Bg c="#fef9c3" />
       <circle cx="32" cy="34" r="22" fill="#cbd5e1" />
@@ -30,7 +30,7 @@ const art = {
       <circle cx="28" cy="34" r="3" fill="#f97316" />
     </>
   ),
-  "clinics-healthcare": (
+  "healthcare": (
     <>
       <Bg c="#ecfdf5" />
       <rect x="14" y="14" width="36" height="36" rx="10" fill="#fff" stroke="#bbf7d0" />
@@ -38,7 +38,7 @@ const art = {
       <path d="M8 46 h12 l4 -6 l5 10 l4 -14 l4 10 h19" stroke="#ef4444" strokeWidth="2.5" fill="none" strokeLinejoin="round" />
     </>
   ),
-  "schools-coaching": (
+  "education": (
     <>
       <Bg c="#eef7ff" />
       <rect x="10" y="14" width="44" height="32" rx="3" fill="#92400e" />
@@ -75,7 +75,7 @@ const art = {
       <path d="M40 50 h-12 m4 0 v3 m4 -3 v3" stroke="#facc15" strokeWidth="2.5" strokeLinecap="round" />
     </>
   ),
-  "manufacturers-wholesalers": (
+  "manufacturing": (
     <>
       <Bg c="#f1f5f9" />
       <path d="M8 52 V30 l10 6 v-6 l10 6 v-6 l10 6 V18 h8 v34 Z" fill="#475569" />
@@ -92,7 +92,7 @@ const art = {
       </g>
     </>
   ),
-  "professionals-ca-consultants": (
+  "professional-services": (
     <>
       <Bg c="#fef2f2" />
       <rect x="14" y="10" width="34" height="44" rx="3" fill="#b91c1c" />
@@ -107,7 +107,7 @@ const art = {
   ),
 };
 
-art["ngos-csr"] = (
+art["ngo-csr"] = (
   <>
     <Bg c="#fff7ed" />
     <path d="M32 50 C18 40 12 32 12 25 a9 9 0 0 1 20 -4 a9 9 0 0 1 20 4 c0 7 -6 15 -20 25 Z" fill="#f97316" />
@@ -115,7 +115,7 @@ art["ngos-csr"] = (
     <path d="M8 48 q8 -6 16 -2 l8 4 q4 2 6 0 l12 -6 q4 -2 6 2 l-16 10 q-6 3 -12 0 l-8 -4 Z" fill="#16a34a" />
   </>
 );
-art["startups-entrepreneurs"] = (
+art["startups"] = (
   <>
     <Bg c="#f0efff" />
     <path d="M32 8 c10 6 14 18 12 30 l-6 6 h-12 l-6 -6 c-2 -12 2 -24 12 -30 Z" fill="#1668b5" />
@@ -130,7 +130,7 @@ art["startups-entrepreneurs"] = (
 export default function IndustryArt({ slug, className = "size-14" }) {
   return (
     <svg viewBox="0 0 64 64" className={className} aria-hidden="true">
-      {art[slug] ?? art["retail-kirana"]}
+      {art[slug] ?? art["retail-wholesale"]}
     </svg>
   );
 }

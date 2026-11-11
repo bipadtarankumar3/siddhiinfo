@@ -1,34 +1,20 @@
-import nodemailer from "nodemailer";
-import { site } from "@/lib/site";
 import { verifyCaptcha, rateLimit, clientIp } from "@/lib/captcha";
+import { hasDatabase } from "@/lib/server/mongodb";
+import { saveLead, newRef } from "@/lib/server/leads";
+import { hasMailer, sendLeadEmail } from "@/lib/server/mailer";
+import { clean, cleanText, normaliseIndianMobile } from "@/lib/server/validate";
 
-// Sends website enquiries to the Siddhi Info inbox through Gmail SMTP.
-// Needs GMAIL_USER and GMAIL_APP_PASSWORD (a Google "App password") in the
-// environment — .env.local locally, Project Settings → Environment Variables on Vercel.
+/*
+  Contact form endpoint (short form on /contact/).
+  Saves the enquiry to MongoDB (if configured) and emails the business inbox
+  (Gmail SMTP, if configured). Succeeds when at least one of them worked.
+  Env: GMAIL_USER, GMAIL_APP_PASSWORD, MONGODB_URI, CAPTCHA_SECRET.
+*/
 export const runtime = "nodejs";
 
-const clean = (v, max = 200) => String(v ?? "").replace(/[\r\n]+/g, " ").trim().slice(0, max);
-const escapeHtml = (s) =>
-  s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
-
-function normaliseIndianMobile(value) {
-  const digits = String(value ?? "").replace(/[^\d]/g, "");
-  const ten = digits.replace(/^(91|0)(?=\d{10}$)/, "");
-  return /^[6-9]\d{9}$/.test(ten) ? ten : null;
-}
-
-let transporter;
-function getTransporter() {
-  transporter ??= nodemailer.createTransport({
-    service: "gmail",
-    auth: { user: process.env.GMAIL_USER, pass: process.env.GMAIL_APP_PASSWORD },
-  });
-  return transporter;
-}
-
 export async function POST(request) {
-  if (!process.env.GMAIL_USER || !process.env.GMAIL_APP_PASSWORD) {
-    console.error("Contact form: GMAIL_USER / GMAIL_APP_PASSWORD not set");
+  if (!hasMailer() && !hasDatabase()) {
+    console.error("Contact form: neither Gmail nor MONGODB_URI is configured");
     return Response.json({ ok: false, error: "Email is not configured." }, { status: 500 });
   }
 
@@ -69,43 +55,46 @@ export async function POST(request) {
   const mobile = normaliseIndianMobile(body.phone);
   const city = clean(body.city, 100);
   const service = clean(body.service, 150);
-  const message = String(body.message ?? "").trim().slice(0, 2000);
+  const message = cleanText(body.message, 2000);
   if (name.length < 2 || !mobile || city.length < 2 || !service || message.length < 10) {
     return Response.json({ ok: false, error: "Please fill in all required fields." }, { status: 400 });
   }
+  const business = clean(body.business, 150);
 
-  const fields = [
-    ["Name", name],
-    ["Mobile", `+91 ${mobile}`],
-    ["Business", clean(body.business, 150)],
-    ["City", city],
-    ["Service", service],
-  ].filter(([, v]) => v);
+  let ref = newRef();
+  let saved = false;
+  let emailed = false;
 
-  const text = [...fields.map(([k, v]) => `${k}: ${v}`), message && `\nProject:\n${message}`].filter(Boolean).join("\n");
-  const html = `
-    <h2 style="font-family:system-ui,sans-serif">New enquiry from ${escapeHtml(site.url.replace("https://", ""))}</h2>
-    <table style="font-family:system-ui,sans-serif;border-collapse:collapse">
-      ${fields
-        .map(([k, v]) => `<tr><td style="padding:4px 12px 4px 0;color:#64748b">${k}</td><td style="padding:4px 0"><strong>${escapeHtml(v)}</strong></td></tr>`)
-        .join("")}
-    </table>
-    ${message ? `<p style="font-family:system-ui,sans-serif;white-space:pre-wrap;margin-top:16px">${escapeHtml(message)}</p>` : ""}
-    <p style="font-family:system-ui,sans-serif;margin-top:16px">
-      <a href="https://wa.me/91${mobile}">Reply on WhatsApp</a> · <a href="tel:+91${mobile}">Call +91 ${mobile}</a>
-    </p>`;
-
-  try {
-    await getTransporter().sendMail({
-      from: `"${site.name} Website" <${process.env.GMAIL_USER}>`,
-      to: site.email,
-      subject: `New enquiry: ${name} — ${service.slice(0, 80)}`,
-      text,
-      html,
-    });
-    return Response.json({ ok: true });
-  } catch (err) {
-    console.error("Contact form: failed to send email", err);
-    return Response.json({ ok: false, error: "Could not send email." }, { status: 502 });
+  if (hasDatabase()) {
+    try {
+      ref = await saveLead({ ref, source: "contact", name, phone: mobile, businessName: business, city, serviceLabel: service, description: message });
+      saved = true;
+    } catch (err) {
+      console.error("Contact form: could not save lead", err);
+    }
   }
+
+  if (hasMailer()) {
+    try {
+      await sendLeadEmail({
+        subject: `New enquiry: ${name} — ${service.slice(0, 80)}`,
+        ref,
+        fields: [
+          ["Name", name],
+          ["Mobile", `+91 ${mobile}`],
+          ["Business", business],
+          ["City", city],
+          ["Service", service],
+        ],
+        message,
+        mobile,
+      });
+      emailed = true;
+    } catch (err) {
+      console.error("Contact form: failed to send email", err);
+    }
+  }
+
+  if (!saved && !emailed) return Response.json({ ok: false, error: "Could not send email." }, { status: 502 });
+  return Response.json({ ok: true, ref });
 }

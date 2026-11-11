@@ -9,8 +9,8 @@ import ServiceCard from "@/components/ServiceCard";
 import JsonLd from "@/components/JsonLd";
 import ColorIcon from "@/components/ColorIcon";
 import ProjectCard from "@/components/work/ProjectCard";
-import { ConsultButton, WhatsAppButton } from "@/components/ContactButtons";
-import { services, getService, getProject, steps, servicePrice } from "@/lib/data";
+import { WhatsAppButton } from "@/components/ContactButtons";
+import { services, getService, getProject, steps, servicePrice, quoteLink } from "@/lib/data";
 import { absoluteUrl, pageMeta } from "@/lib/site";
 
 export const dynamicParams = false;
@@ -75,7 +75,7 @@ export default async function ServicePage({ params }) {
         </div>
         {s.hi && <p className="mt-3 text-lg font-semibold text-marigold-400" lang="hi">{s.hi}{s.bn && <span lang="bn" className="text-slate-300"> · {s.bn}</span>}</p>}
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-          <ConsultButton label="Enquire about this service" className="btn-light" service={s.title} />
+          <Link href={quoteLink(s)} className="btn btn-cta">Get a quote</Link>
           <WhatsAppButton onDark text={`Hi Siddhi Info, I'm interested in ${s.title}.`} label="Ask on WhatsApp" />
         </div>
       </PageHero>
@@ -122,11 +122,24 @@ export default async function ServicePage({ params }) {
             </p>
             <p className="mt-1 text-slate-700">{s.timeline}</p>
             <div className="mt-6 flex flex-col gap-2">
-              <ConsultButton label="Get a quote" service={s.title} />
+              <Link href={quoteLink(s)} className="btn btn-cta">Get a quote</Link>
               {price && <Link href="/pricing/" className="btn btn-outline">See pricing terms</Link>}
             </div>
           </div>
         </aside>
+      </section>
+
+      {/* Business benefits */}
+      <section className="container-x pb-16 sm:pb-20" aria-labelledby="benefits-title">
+        <h2 id="benefits-title" className="section-title">Business benefits</h2>
+        <ul className="mt-8 grid gap-4 sm:grid-cols-3">
+          {s.outcomes.map((o, idx) => (
+            <li key={o} className="card flex items-start gap-3 p-5">
+              <ColorIcon name={["TrendingUp", "Zap", "KeyRound"][idx % 3]} className="size-10" />
+              <span className="pt-1.5 font-semibold text-ink">{o}</span>
+            </li>
+          ))}
+        </ul>
       </section>
 
       {/* Included / excluded */}

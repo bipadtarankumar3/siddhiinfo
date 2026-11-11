@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { whatsappLink } from "@/lib/site";
@@ -31,10 +32,10 @@ export default function Hero({ smallFrom }) {
           <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-slate-600 lg:[@media(max-height:860px)]:mt-3 lg:[@media(max-height:860px)]:max-w-3xl lg:[@media(max-height:860px)]:text-base">{h.sub}</p>
 
           <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row lg:[@media(max-height:860px)]:mt-5">
-            <Link href="/contact/#enquiry" className="btn bg-brand-700 px-7 py-3.5 text-base text-white hover:bg-brand-800">
+            <Link href="/get-a-quote/" className="btn btn-cta px-7 py-3.5 text-base">
               {h.ctaConsult} <ArrowRight className="size-4" aria-hidden="true" />
             </Link>
-            <Link href="/work/" className="btn bg-white px-7 py-3.5 text-base text-ink ring-1 ring-slate-300 hover:ring-ink">
+            <Link href="/services/" className="btn bg-white px-7 py-3.5 text-base text-ink ring-1 ring-slate-300 hover:ring-ink">
               {h.ctaWork}
             </Link>
           </div>
@@ -76,6 +77,9 @@ export default function Hero({ smallFrom }) {
             text={h.smallText}
             points={h.smallPoints}
             pointIcons={["Globe", "MessageCircle", "ReceiptIndianRupee"]}
+            image="/images/industry-kirana-retail.webp"
+            imageAlt="Shop owner at the counter of an Indian retail store"
+            links={[["Website Development", "/services/website-development/"], ["E-commerce", "/services/ecommerce-development/"], ["Billing & GST", "/services/gst-billing-inventory/"], ["Google Business", "/services/seo-google-business/"]]}
             price={smallFrom}
             priceLabel={h.from}
             href="/small-business/"
@@ -89,6 +93,9 @@ export default function Hero({ smallFrom }) {
             text={h.entText}
             points={h.entPoints}
             pointIcons={["AppWindow", "Puzzle", "Bot"]}
+            image="/images/industry-manufacturing.webp"
+            imageAlt="Worker operating machinery in an Indian manufacturing unit"
+            links={[["Custom Software", "/services/custom-software-development/"], ["CRM & ERP", "/services/crm-erp-development/"], ["AI Automation", "/services/ai-automation/"], ["Cloud & DevOps", "/services/cloud-devops-infrastructure/"]]}
             price={h.quote}
             href="/enterprise/"
             cta={h.entCta}
@@ -99,11 +106,11 @@ export default function Hero({ smallFrom }) {
   );
 }
 
-function PathCard({ variant, badge, emblem, title, text, points, pointIcons, price, priceLabel, href, cta }) {
+function PathCard({ variant, badge, emblem, title, text, points, pointIcons, image, imageAlt, links, price, priceLabel, href, cta }) {
   const dark = variant === "dark";
   return (
     <article
-      className={`relative isolate flex flex-col overflow-hidden rounded-[2rem] p-7 sm:p-9 ${
+      className={`relative isolate flex flex-col overflow-hidden rounded-[2rem] ${
         dark
           ? "bg-[#0b1d47] text-slate-200 shadow-[0_30px_60px_-30px_rgb(7_22_54/0.8)]"
           : "bg-gradient-to-br from-amber-50 via-orange-50 to-rose-50 text-slate-700 ring-1 ring-orange-100"
@@ -116,6 +123,12 @@ function PathCard({ variant, badge, emblem, title, text, points, pointIcons, pri
       />
       <ColorIcon name={emblem} className="absolute -bottom-8 -right-8 -z-10 size-48 rotate-[-8deg] opacity-[0.12]" />
 
+      <div className="relative aspect-[16/7] overflow-hidden">
+        <Image src={image} alt={imageAlt} fill sizes="(min-width: 1024px) 45vw, 92vw" className="object-cover" />
+        <div aria-hidden="true" className={`absolute inset-0 ${dark ? "bg-gradient-to-t from-[#0b1d47] via-[#0b1d47]/30 to-transparent" : "bg-gradient-to-t from-orange-50 via-transparent to-transparent"}`} />
+      </div>
+
+      <div className="flex flex-1 flex-col p-7 pt-2 sm:p-9 sm:pt-3">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <span className={`rounded-full px-3 py-1 text-xs font-bold ${dark ? "bg-teal-400/15 text-teal-200 ring-1 ring-teal-300/30" : "bg-white text-saffron-700 ring-1 ring-orange-200"}`}>
           {badge}
@@ -138,12 +151,23 @@ function PathCard({ variant, badge, emblem, title, text, points, pointIcons, pri
         ))}
       </ul>
 
+      <ul className="mt-6 flex flex-wrap gap-2 text-sm">
+        {links.map(([l, u]) => (
+          <li key={u}>
+            <Link href={u} className={`inline-flex min-h-9 items-center rounded-full px-3 font-semibold ${dark ? "bg-white/10 text-white hover:bg-white/20" : "bg-white text-brand-800 ring-1 ring-orange-200 hover:ring-brand-400"}`}>
+              {l}
+            </Link>
+          </li>
+        ))}
+      </ul>
+
       <Link
         href={href}
-        className={`btn mt-8 self-start px-6 ${dark ? "bg-teal-400 text-ink hover:bg-teal-300" : "bg-saffron-600 text-white hover:bg-saffron-700"}`}
+        className={`btn mt-7 self-start px-6 ${dark ? "bg-teal-400 text-ink hover:bg-teal-300" : "btn-cta"}`}
       >
         {cta} <ArrowRight className="size-4" aria-hidden="true" />
       </Link>
+      </div>
     </article>
   );
 }

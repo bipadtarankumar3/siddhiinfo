@@ -13,8 +13,8 @@ import { absoluteUrl, pageMeta } from "@/lib/site";
 const price = (id) => formatINR(getPlan(id).price);
 
 export const metadata = pageMeta({
-  title: "Pricing — Website, Online Store & Digital Dukaan Packages",
-  description: `Custom development quotes for web apps, mobile apps, CRM/ERP and integrations. Starting prices: Digital Dukaan from ${price("digital-dukaan")}, websites from ${price("starter-website")}, online stores from ${price("ecommerce")}. GST, renewals and third-party fees explained.`,
+  title: "Pricing — Website, E-commerce & Custom Software Development",
+  description: `Custom development quotes for web apps, mobile apps, CRM/ERP and integrations. Websites from ${price("starter-website")}, online stores from ${price("ecommerce")}. GST, renewals and third-party fees explained.`,
   path: "/pricing/",
 });
 
@@ -97,10 +97,10 @@ export default function PricingPage() {
             <p className="eyebrow">For shops on delivery apps</p>
             <h2 id="calc-title" className="section-title mt-3">What does marketplace commission cost you?</h2>
             <p className="mt-4 text-lg leading-relaxed text-slate-700">
-              Digital Dukaan ({price("digital-dukaan")} starting price) lets regular customers order directly on WhatsApp and pay by UPI.
+              Your own website or online store (from {price("starter-website")}) lets regular customers order from you directly — by WhatsApp, phone or online checkout.
               Siddhi Info takes no commission on those direct orders. Use the estimator to see what commission costs you today — with your own numbers.
             </p>
-            <Link href="#digital-dukaan" className="btn btn-outline mt-6">See what Digital Dukaan includes</Link>
+            <Link href="#ecommerce" className="btn btn-outline mt-6">See the E-commerce package</Link>
           </div>
           <CommissionCalculator />
         </div>

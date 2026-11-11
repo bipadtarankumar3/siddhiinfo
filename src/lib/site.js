@@ -66,12 +66,34 @@ export const telHref = hasPhone ? `tel:${site.phone.replace(/[^\d+]/g, "")}` : n
 export const mailHref = `mailto:${site.email}`;
 
 // Main navigation. Labels come from translations (src/lib/translations.js) by key.
+// Items with `children` render as dropdowns (desktop) / accordions (mobile).
 export const nav = [
-  { key: "services", href: "/services/" },
-  { key: "smallBusiness", href: "/small-business/" },
-  { key: "enterprise", href: "/enterprise/" },
-  { key: "pricing", href: "/pricing/" },
+  { key: "home", href: "/" },
+  {
+    key: "solutions",
+    href: "/small-business/",
+    children: [
+      { key: "smallBusiness", href: "/small-business/", desc: "smallBusinessDesc" },
+      { key: "enterprise", href: "/enterprise/", desc: "enterpriseDesc" },
+    ],
+  },
+  {
+    key: "services",
+    href: "/services/",
+    children: [
+      { label: "Website Development", href: "/services/website-development/" },
+      { label: "E-commerce", href: "/services/ecommerce-development/" },
+      { label: "Custom Software", href: "/services/custom-software-development/" },
+      { label: "Mobile Applications", href: "/services/mobile-app-development/" },
+      { label: "CRM & ERP", href: "/services/crm-erp-development/" },
+      { label: "AI Automation", href: "/services/ai-automation/" },
+      { label: "Cloud & DevOps", href: "/services/cloud-devops-infrastructure/" },
+      { key: "allServices", href: "/services/" },
+    ],
+  },
+  { key: "industries", href: "/industries/" },
   { key: "work", href: "/work/" },
+  { key: "pricing", href: "/pricing/" },
   { key: "about", href: "/about/" },
   { key: "contact", href: "/contact/" },
 ];

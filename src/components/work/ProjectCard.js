@@ -93,18 +93,17 @@ export default function ProjectCard({ p, i = 0, dark = true }) {
         </ul>
       )}
       <div className="mt-6 flex flex-wrap gap-3">
-        <DialogButton target={`project-${p.slug}`} className={`btn !py-2.5 ${dark ? "btn-light" : "btn-primary"}`}>
-          <Eye className="size-4" aria-hidden="true" /> View Project
+        <Link href={`/work/${p.slug}/`} className={`btn !py-2.5 ${dark ? "btn-light" : "btn-primary"}`}>
+          {live ? "Project details" : "Demo details"} <ArrowRight className="size-4" aria-hidden="true" />
+          <span className="sr-only"> for {p.name}</span>
+        </Link>
+        <DialogButton target={`project-${p.slug}`} className={`btn !py-2.5 ${dark ? "btn-glass" : "btn-outline"}`}>
+          <Eye className="size-4" aria-hidden="true" /> Quick view
         </DialogButton>
-        {live ? (
-          <a href={p.liveUrl} target="_blank" rel="noopener noreferrer" className={`btn !py-2.5 ${dark ? "btn-glass" : "btn-outline"}`}>
+        {live && (
+          <a href={p.liveUrl} target="_blank" rel="noopener noreferrer" data-track="demo_click" className={`btn !py-2.5 ${dark ? "btn-glass" : "btn-outline"}`}>
             Visit live site <ArrowUpRight className="size-4" aria-hidden="true" />
           </a>
-        ) : (
-          <Link href={`/services/${p.service}/`} className={`btn !py-2.5 ${dark ? "btn-glass" : "btn-outline"}`}>
-            View Details <ArrowRight className="size-4" aria-hidden="true" />
-            <span className="sr-only"> about {p.category}</span>
-          </Link>
         )}
       </div>
 

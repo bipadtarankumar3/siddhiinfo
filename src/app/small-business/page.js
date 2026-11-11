@@ -22,10 +22,10 @@ export const metadata = pageMeta({
 });
 
 const needs = [
-  { icon: "MapPin", q: "“Customers can't find us online.”", a: "Starter Website + Google Business Profile", href: "/services/local-seo-google-business/" },
-  { icon: "MessageCircle", q: "“We take orders on WhatsApp and lose track.”", a: "Digital Dukaan or WhatsApp automation", href: "/services/whatsapp-business-automation/" },
-  { icon: "ShoppingBag", q: "“We want to ship orders across India.”", a: "Complete E-commerce store", href: "/services/ecommerce-store/" },
-  { icon: "ReceiptIndianRupee", q: "“Billing at the counter is slow.”", a: "GST billing & inventory set-up", href: "/services/billing-gst-software/" },
+  { icon: "MapPin", q: "“Customers can't find us online.”", a: "Starter Website + Google Business Profile", href: "/services/seo-google-business/" },
+  { icon: "MessageCircle", q: "“We take orders on WhatsApp and lose track.”", a: "WhatsApp automation or a Starter Website", href: "/services/whatsapp-automation/" },
+  { icon: "ShoppingBag", q: "“We want to ship orders across India.”", a: "Complete E-commerce store", href: "/services/ecommerce-development/" },
+  { icon: "ReceiptIndianRupee", q: "“Billing at the counter is slow.”", a: "GST billing & inventory set-up", href: "/services/gst-billing-inventory/" },
 ];
 
 const faqs = [
