@@ -49,7 +49,8 @@ export default function Header() {
   }, [open]);
 
   // Home and inner pages start with a dark hero, so the bar is transparent until scrolled
-  const solid = scrolled || open;
+  // The homepage hero is light, so the bar is always solid there
+  const solid = scrolled || open || pathname === "/";
   const isActive = (href) => pathname?.startsWith(href);
 
   return (

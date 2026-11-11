@@ -38,7 +38,7 @@ export default function Home() {
       <Hero smallFrom={smallFrom} />
 
       {/* Benefits in plain language */}
-      <section className="container-x py-16 sm:py-20" aria-labelledby="benefits-title">
+      <section className="container-x border-t border-slate-200 py-16 sm:py-20" aria-labelledby="benefits-title">
         <SectionHead
           id="benefits-title"
           eyebrow="What changes for you"
