@@ -1,4 +1,5 @@
 import { Plus_Jakarta_Sans, Mukta } from "next/font/google";
+import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -163,6 +164,7 @@ export default function RootLayout({ children }) {
           <RevealObserver />
           <NamasteModal />
         </LanguageProvider>
+        <GoogleTagManager gtmId="GTM-PNTGKWRK" />
       </body>
     </html>
   );
